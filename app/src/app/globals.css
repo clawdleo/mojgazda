@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 249 250 251;
+    --foreground: 17 24 39;
+  }
+
+  .dark {
+    --background: 17 24 39;
+    --foreground: 243 244 246;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  /* GAZDA Score Ring */
+  .gazda-score-ring {
+    @apply relative flex items-center justify-center w-20 h-20 rounded-full;
+    background: conic-gradient(
+      var(--score-color) calc(var(--score-pct) * 1%),
+      theme(colors.gray.200) 0
+    );
+  }
+
+  .gazda-score-ring::before {
+    content: "";
+    @apply absolute w-16 h-16 bg-white dark:bg-gray-800 rounded-full;
+  }
+
+  .gazda-score-number {
+    @apply relative z-10 text-2xl font-bold;
+    color: var(--score-color);
+  }
+}
