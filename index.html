@@ -1,0 +1,3019 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAZDA — Saznaj istinu o poslodavcima</title>
+<style>
+/* ============================================
+   GAZDA - Complete Stylesheet
+   ============================================ */
+
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #F8F9FA;
+  color: #2C3E50;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #0D7377; text-decoration: none; transition: color 0.2s; }
+a:hover { color: #0a5c5f; }
+img { max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; font-size: 1rem; }
+ul { list-style: none; }
+h1, h2, h3, h4, h5 { line-height: 1.3; }
+
+/* === VARIABLES === */
+:root {
+  --primary: #0D7377;
+  --primary-dark: #0a5c5f;
+  --primary-light: #e0f2f2;
+  --secondary: #F5A623;
+  --secondary-dark: #d4900e;
+  --accent: #E74C3C;
+  --success: #27AE60;
+  --bg: #F8F9FA;
+  --text: #2C3E50;
+  --text-light: #6c7a89;
+  --card: #FFFFFF;
+  --border: #e1e5e9;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --max-width: 1200px;
+  --header-h: 64px;
+}
+
+/* === LAYOUT === */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; width: 100%; }
+.main-content { flex: 1; padding-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+/* === HEADER / NAV === */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--card); border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05); height: var(--header-h);
+}
+.header .container {
+  display: flex; align-items: center; justify-content: space-between; height: 100%;
+}
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+.logo-icon {
+  width: 36px; height: 36px; background: var(--primary); color: white;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 900;
+}
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a {
+  padding: 8px 14px; border-radius: var(--radius-sm); font-size: 0.9rem;
+  font-weight: 500; color: var(--text); transition: all 0.2s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--primary-light); color: var(--primary); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.lang-switcher { display: flex; gap: 2px; background: #f0f2f5; border-radius: var(--radius-sm); padding: 2px; }
+.lang-btn {
+  padding: 5px 10px; border: none; background: transparent; border-radius: 6px;
+  font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--text-light);
+}
+.lang-btn.active { background: var(--card); color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.employer-btn {
+  padding: 8px 16px; background: var(--secondary); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.85rem; transition: all 0.2s;
+}
+.employer-btn:hover { background: var(--secondary-dark); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer;
+}
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu {
+  display: none; position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0;
+  background: var(--card); z-index: 999; padding: 20px; flex-direction: column; gap: 4px;
+  overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 14px 16px; font-size: 1.05rem; font-weight: 500; color: var(--text);
+  border-radius: var(--radius-sm); display: block;
+}
+.mobile-menu a:hover, .mobile-menu a.active { background: var(--primary-light); color: var(--primary); }
+.mobile-lang { display: flex; gap: 8px; padding: 14px 16px; }
+.mobile-lang .lang-btn { padding: 8px 16px; font-size: 0.9rem; }
+
+/* === HERO === */
+.hero {
+  background: linear-gradient(135deg, #0D7377 0%, #0a5c5f 60%, #074d50 100%);
+  color: white; padding: 80px 0 60px; text-align: center; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+.hero .tagline { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; font-weight: 300; }
+.hero-search {
+  display: flex; gap: 0; max-width: 700px; margin: 0 auto 20px;
+  background: white; border-radius: 50px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.hero-search input, .hero-search select {
+  border: none; padding: 16px 20px; font-size: 1rem; outline: none; background: white; color: var(--text);
+}
+.hero-search input { flex: 1; min-width: 0; }
+.hero-search select { border-left: 1px solid var(--border); min-width: 140px; cursor: pointer; color: var(--text-light); }
+.hero-search button {
+  padding: 16px 32px; background: var(--secondary); color: white; border: none;
+  font-weight: 700; font-size: 1rem; transition: background 0.2s; white-space: nowrap;
+}
+.hero-search button:hover { background: var(--secondary-dark); }
+
+/* === STATS BAR === */
+.stats-bar {
+  display: flex; justify-content: center; gap: 48px; padding: 32px 0;
+  background: white; border-bottom: 1px solid var(--border);
+}
+.stat-item { text-align: center; }
+.stat-number { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.stat-label { font-size: 0.9rem; color: var(--text-light); margin-top: 2px; }
+
+/* === SECTION === */
+.section { padding: 60px 0; }
+.section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.section-subtitle { font-size: 1rem; color: var(--text-light); margin-bottom: 32px; }
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+.section-header .section-title { margin-bottom: 0; }
+.view-all { color: var(--primary); font-weight: 600; font-size: 0.95rem; }
+
+/* === HOW IT WORKS === */
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.how-card {
+  text-align: center; padding: 40px 24px; background: var(--card); border-radius: var(--radius);
+  box-shadow: var(--shadow); transition: transform 0.2s;
+}
+.how-card:hover { transform: translateY(-4px); }
+.how-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+.how-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--text); }
+.how-card p { font-size: 0.9rem; color: var(--text-light); }
+.step-number {
+  width: 32px; height: 32px; background: var(--primary); color: white;
+  border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem; margin-bottom: 12px;
+}
+
+/* === COMPANY CARDS === */
+.companies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.company-card {
+  background: var(--card); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); transition: all 0.25s; border: 1px solid transparent; cursor: pointer;
+}
+.company-card:hover { box-shadow: var(--shadow-hover); border-color: var(--primary); transform: translateY(-2px); }
+.company-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.company-logo {
+  width: 50px; height: 50px; border-radius: var(--radius-sm); display: flex;
+  align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; color: white; flex-shrink: 0;
+}
+.company-card-info h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.company-card-info .company-meta { font-size: 0.8rem; color: var(--text-light); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.company-card-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.stars { color: var(--secondary); font-size: 0.95rem; letter-spacing: 1px; }
+.rating-num { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+.review-count { font-size: 0.8rem; color: var(--text-light); }
+.industry-tag {
+  display: inline-block; padding: 3px 10px; background: var(--primary-light); color: var(--primary);
+  border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px;
+}
+.company-card-excerpt { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.company-card-footer { display: flex; justify-content: space-between; align-items: center; }
+.view-profile-btn {
+  padding: 7px 16px; background: var(--primary); color: white; border: none;
+  border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; transition: background 0.2s;
+}
+.view-profile-btn:hover { background: var(--primary-dark); }
+
+/* === WORST RATED SECTION === */
+.worst-section { background: #FFF5F5; }
+.worst-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.worst-card {
+  background: var(--card); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); border-left: 4px solid var(--accent);
+}
+.worst-card .company-card-rating .stars { color: var(--accent); }
+
+/* === CTA SECTION === */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white; text-align: center; padding: 60px 0;
+}
+.cta-section h2 { font-size: 2rem; margin-bottom: 12px; }
+.cta-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 28px; }
+.cta-btn {
+  display: inline-block; padding: 14px 36px; background: var(--secondary); color: white;
+  border: none; border-radius: 50px; font-size: 1.05rem; font-weight: 700;
+  transition: all 0.2s; box-shadow: 0 4px 16px rgba(245,166,35,0.4);
+}
+.cta-btn:hover { background: var(--secondary-dark); transform: translateY(-2px); color: white; }
+
+/* === FOOTER === */
+.footer { background: #1a2332; color: #aab4c0; padding: 50px 0 24px; }
+.footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px; }
+.footer-col h4 { color: white; font-size: 1rem; margin-bottom: 16px; }
+.footer-col a { display: block; color: #aab4c0; font-size: 0.9rem; margin-bottom: 8px; }
+.footer-col a:hover { color: white; }
+.footer-col p { font-size: 0.85rem; line-height: 1.7; }
+.footer-bottom { border-top: 1px solid #2c3a4a; padding-top: 20px; text-align: center; font-size: 0.85rem; }
+.footer-countries { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-countries span { font-size: 0.9rem; }
+
+/* === GAZDA SCORE BADGE === */
+.gazda-score-badge {
+  width: 80px; height: 80px; border-radius: 50%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; font-weight: 800; color: white;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15); position: relative;
+}
+.gazda-score-badge .score-num { font-size: 1.8rem; line-height: 1; }
+.gazda-score-badge .score-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; margin-top: 2px; }
+.gazda-score-badge.score-bad { background: linear-gradient(135deg, #E74C3C, #c0392b); }
+.gazda-score-badge.score-caution { background: linear-gradient(135deg, #E67E22, #d35400); }
+.gazda-score-badge.score-ok { background: linear-gradient(135deg, #F5A623, #e09100); }
+.gazda-score-badge.score-good { background: linear-gradient(135deg, #27AE60, #1e8449); }
+
+.gazda-score-badge-sm {
+  width: 44px; height: 44px; border-radius: 50%; display: inline-flex; flex-direction: column;
+  align-items: center; justify-content: center; font-weight: 800; color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15); flex-shrink: 0;
+}
+.gazda-score-badge-sm .score-num { font-size: 1rem; line-height: 1; }
+
+.gazda-label {
+  display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.gazda-label.label-bad { background: #fde8e5; color: #E74C3C; }
+.gazda-label.label-caution { background: #fef3e5; color: #E67E22; }
+.gazda-label.label-ok { background: #fef9e5; color: #c68a00; }
+.gazda-label.label-good { background: #e8f8ef; color: #27AE60; }
+
+/* === COMPANY PROFILE === */
+.profile-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white; padding: 40px 0 30px;
+}
+.profile-header-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.profile-logo {
+  width: 80px; height: 80px; border-radius: var(--radius); display: flex;
+  align-items: center; justify-content: center; font-weight: 700; font-size: 1.6rem; color: white;
+  border: 3px solid rgba(255,255,255,0.3); flex-shrink: 0;
+}
+.profile-info { flex: 1; }
+.profile-info h1 { font-size: 1.8rem; margin-bottom: 4px; }
+.profile-info .profile-meta { font-size: 0.95rem; opacity: 0.85; display: flex; gap: 16px; flex-wrap: wrap; }
+.profile-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.profile-rating-big { text-align: center; }
+.profile-rating-big .big-num { font-size: 2.5rem; font-weight: 800; }
+.profile-rating-big .big-stars { font-size: 1.1rem; color: var(--secondary); }
+.profile-rating-big .big-count { font-size: 0.85rem; opacity: 0.8; }
+.write-review-btn {
+  padding: 12px 24px; background: var(--secondary); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 700; font-size: 0.95rem; transition: all 0.2s;
+}
+.write-review-btn:hover { background: var(--secondary-dark); }
+
+/* === PROFILE TABS === */
+.profile-tabs { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: var(--header-h); z-index: 100; }
+.profile-tabs .container { display: flex; gap: 0; overflow-x: auto; }
+.profile-tab {
+  padding: 16px 24px; font-weight: 600; font-size: 0.9rem; color: var(--text-light);
+  border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.profile-tab:hover { color: var(--primary); }
+.profile-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* === RATINGS BREAKDOWN === */
+.ratings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+.ratings-breakdown { background: var(--card); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+.rating-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.rating-row:last-child { margin-bottom: 0; }
+.rating-row .label { width: 140px; font-size: 0.9rem; color: var(--text); font-weight: 500; flex-shrink: 0; }
+.rating-bar-bg { flex: 1; height: 10px; background: #eef0f2; border-radius: 5px; overflow: hidden; }
+.rating-bar { height: 100%; border-radius: 5px; transition: width 0.5s ease; }
+.rating-row .val { font-weight: 700; font-size: 0.9rem; min-width: 28px; text-align: right; }
+.gazda-score-section {
+  background: var(--card); border-radius: var(--radius); padding: 28px;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; gap: 12px;
+}
+.gazda-score-section .gazda-score-badge { width: 120px; height: 120px; }
+.gazda-score-section .gazda-score-badge .score-num { font-size: 2.8rem; }
+.gazda-score-section .gazda-score-badge .score-label { font-size: 0.7rem; }
+.gazda-score-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+.gazda-score-desc { font-size: 0.85rem; color: var(--text-light); }
+
+/* === REVIEWS LIST === */
+.review-card {
+  background: var(--card); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); margin-bottom: 16px;
+}
+.review-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.review-card-header h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+.review-card-header .review-date { font-size: 0.8rem; color: var(--text-light); }
+.review-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; font-size: 0.85rem; flex-wrap: wrap; }
+.review-meta .stars { font-size: 0.9rem; }
+.review-meta .position { color: var(--text-light); }
+.review-meta .employment-badge {
+  padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.badge-current { background: #e8f8ef; color: #27AE60; }
+.badge-former { background: #fef3e5; color: #E67E22; }
+.review-section { margin-bottom: 12px; }
+.review-section-label { font-weight: 600; font-size: 0.85rem; color: var(--primary); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.review-section p { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+.review-helpful { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+.helpful-btn {
+  padding: 5px 14px; border: 1px solid var(--border); background: var(--card);
+  border-radius: 20px; font-size: 0.8rem; color: var(--text-light); transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.helpful-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+/* === FILTERS === */
+.filters-bar {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; padding: 20px;
+  background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.filter-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; }
+.filter-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.filter-group select, .filter-group input {
+  padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 0.9rem; color: var(--text); background: white; outline: none; transition: border 0.2s;
+}
+.filter-group select:focus, .filter-group input:focus { border-color: var(--primary); }
+.search-bar-inline {
+  display: flex; gap: 12px; margin-bottom: 24px;
+}
+.search-bar-inline input {
+  flex: 1; padding: 12px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 1rem; outline: none; transition: border 0.2s;
+}
+.search-bar-inline input:focus { border-color: var(--primary); }
+.search-bar-inline button {
+  padding: 12px 28px; background: var(--primary); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 600; transition: background 0.2s;
+}
+.search-bar-inline button:hover { background: var(--primary-dark); }
+
+/* === JOBS PAGE === */
+.jobs-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+.jobs-sidebar {
+  background: var(--card); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); height: fit-content; position: sticky; top: calc(var(--header-h) + 20px);
+}
+.jobs-sidebar h3 { font-size: 1rem; margin-bottom: 16px; color: var(--text); }
+.sidebar-group { margin-bottom: 20px; }
+.sidebar-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.sidebar-group select, .sidebar-group input {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 0.9rem; outline: none;
+}
+.job-card {
+  background: var(--card); border-radius: var(--radius); padding: 22px;
+  box-shadow: var(--shadow); margin-bottom: 16px; transition: all 0.2s;
+  border: 1px solid transparent; cursor: pointer;
+}
+.job-card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); }
+.job-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+.job-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+.job-card .company-link { font-size: 0.9rem; color: var(--primary); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.job-card .job-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; }
+.job-card .job-desc { font-size: 0.9rem; color: var(--text); line-height: 1.5; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.job-card-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.job-type-badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+}
+.type-fulltime { background: #e8f8ef; color: #27AE60; }
+.type-parttime { background: #eee8f8; color: #8E44AD; }
+.type-contract { background: #e8f0f8; color: #2980B9; }
+.salary-range { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+.apply-btn {
+  padding: 8px 20px; background: var(--primary); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.85rem; transition: all 0.2s;
+}
+.apply-btn:hover { background: var(--primary-dark); }
+
+/* === JOB DETAIL MODAL === */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5);
+  z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-content {
+  background: var(--card); border-radius: var(--radius); max-width: 700px; width: 100%;
+  max-height: 85vh; overflow-y: auto; padding: 32px; position: relative;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px; background: none; border: none;
+  font-size: 1.5rem; color: var(--text-light); cursor: pointer; padding: 4px;
+}
+.modal-close:hover { color: var(--text); }
+
+/* === SALARIES PAGE === */
+.salary-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.salary-card {
+  background: var(--card); border-radius: var(--radius); padding: 22px;
+  box-shadow: var(--shadow); text-align: center; transition: transform 0.2s;
+}
+.salary-card:hover { transform: translateY(-3px); }
+.salary-card h3 { font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+.salary-card .salary-avg { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 8px 0; }
+.salary-card .salary-meta { font-size: 0.8rem; color: var(--text-light); }
+.salary-table-wrap { overflow-x: auto; }
+.salary-table {
+  width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.salary-table th { padding: 14px 18px; text-align: left; background: var(--primary); color: white; font-size: 0.85rem; font-weight: 600; }
+.salary-table td { padding: 12px 18px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.salary-table tr:last-child td { border-bottom: none; }
+.salary-table tr:hover td { background: var(--primary-light); }
+
+/* === REVIEW FORM === */
+.review-form-container {
+  max-width: 680px; margin: 40px auto; background: var(--card); border-radius: var(--radius);
+  padding: 36px; box-shadow: var(--shadow);
+}
+.form-progress { display: flex; justify-content: space-between; margin-bottom: 36px; position: relative; }
+.form-progress::before {
+  content: ''; position: absolute; top: 18px; left: 40px; right: 40px; height: 2px;
+  background: var(--border); z-index: 0;
+}
+.progress-step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; z-index: 1;
+}
+.progress-circle {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem; background: var(--card); color: var(--text-light);
+  transition: all 0.3s;
+}
+.progress-step.active .progress-circle { border-color: var(--primary); background: var(--primary); color: white; }
+.progress-step.done .progress-circle { border-color: var(--success); background: var(--success); color: white; }
+.progress-label { font-size: 0.7rem; color: var(--text-light); font-weight: 500; }
+.progress-step.active .progress-label { color: var(--primary); font-weight: 600; }
+.form-step { display: none; }
+.form-step.active { display: block; }
+.form-step h2 { font-size: 1.3rem; margin-bottom: 24px; color: var(--text); }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 0.95rem; outline: none; transition: border 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+.form-group textarea { min-height: 100px; resize: vertical; }
+.form-buttons { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
+.btn-back {
+  padding: 12px 28px; background: #eef0f2; color: var(--text); border: none;
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.95rem; transition: background 0.2s;
+}
+.btn-back:hover { background: #dfe2e6; }
+.btn-next {
+  padding: 12px 28px; background: var(--primary); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.95rem; transition: background 0.2s;
+}
+.btn-next:hover { background: var(--primary-dark); }
+.btn-submit {
+  padding: 12px 28px; background: var(--success); color: white; border: none;
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.95rem; transition: background 0.2s;
+}
+.btn-submit:hover { background: #1e8449; }
+
+/* === STAR RATING INPUT === */
+.star-rating-input { display: flex; gap: 4px; font-size: 1.8rem; cursor: pointer; }
+.star-rating-input .star { color: #ddd; transition: color 0.15s; }
+.star-rating-input .star.filled { color: var(--secondary); }
+.star-rating-input .star:hover ~ .star { color: #ddd !important; }
+.rating-input-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.rating-input-row .label { width: 150px; font-size: 0.9rem; font-weight: 500; flex-shrink: 0; }
+.rating-input-row .value { min-width: 30px; font-weight: 700; color: var(--primary); }
+
+/* === GAZDA SLIDER === */
+.gazda-slider-section { margin: 24px 0; padding: 20px; background: #f9fafb; border-radius: var(--radius); border: 2px solid var(--border); }
+.gazda-slider-section h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.gazda-slider-section p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px; }
+.gazda-slider { width: 100%; -webkit-appearance: none; height: 8px; background: linear-gradient(to right, #E74C3C, #E67E22, #F5A623, #27AE60); border-radius: 4px; outline: none; }
+.gazda-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: white; border: 3px solid var(--primary); box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer; }
+.gazda-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: white; border: 3px solid var(--primary); box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer; }
+.gazda-slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); margin-top: 6px; }
+.gazda-slider-value { text-align: center; margin-top: 12px; }
+.gazda-slider-value .num { font-size: 2rem; font-weight: 800; }
+
+/* === POST JOB FORM === */
+.post-job-container {
+  max-width: 680px; margin: 40px auto; background: var(--card); border-radius: var(--radius);
+  padding: 36px; box-shadow: var(--shadow);
+}
+.post-job-container h1 { font-size: 1.5rem; margin-bottom: 8px; }
+.post-job-container .subtitle { font-size: 0.9rem; color: var(--text-light); margin-bottom: 28px; }
+.sponsor-note {
+  background: #fef9e5; border: 1px solid #f5e6b0; border-radius: var(--radius-sm);
+  padding: 14px 18px; font-size: 0.85rem; color: #8a6d0a; margin-top: 20px;
+}
+.preview-box {
+  background: #f9fafb; border-radius: var(--radius); padding: 24px; margin: 20px 0;
+  border: 1px solid var(--border);
+}
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* === ABOUT PAGE === */
+.about-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white; padding: 60px 0; text-align: center;
+}
+.about-hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+.about-hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+.about-section { padding: 50px 0; }
+.about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; align-items: center; }
+.about-text h2 { font-size: 1.5rem; margin-bottom: 12px; color: var(--text); }
+.about-text p { font-size: 0.95rem; color: var(--text-light); line-height: 1.8; margin-bottom: 12px; }
+.about-emoji { font-size: 6rem; text-align: center; }
+.countries-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+.country-card {
+  background: var(--card); border-radius: var(--radius); padding: 28px 20px;
+  box-shadow: var(--shadow);
+}
+.country-card .flag { font-size: 3rem; margin-bottom: 8px; }
+.country-card h3 { font-size: 1rem; color: var(--text); }
+.future-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.future-card {
+  background: var(--card); border-radius: var(--radius); padding: 24px;
+  box-shadow: var(--shadow); text-align: center;
+}
+.future-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+.future-card h3 { font-size: 1rem; margin-bottom: 8px; }
+.future-card p { font-size: 0.85rem; color: var(--text-light); }
+
+/* === PAGINATION === */
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 32px; }
+.page-btn {
+  width: 40px; height: 40px; border: 1px solid var(--border); background: var(--card);
+  border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; color: var(--text);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
+}
+.page-btn:hover { border-color: var(--primary); color: var(--primary); }
+.page-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* === AUTOCOMPLETE === */
+.autocomplete-wrap { position: relative; }
+.autocomplete-list {
+  position: absolute; top: 100%; left: 0; right: 0; background: var(--card);
+  border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  max-height: 200px; overflow-y: auto; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+}
+.autocomplete-list.show { display: block; }
+.autocomplete-item {
+  padding: 10px 14px; cursor: pointer; font-size: 0.9rem; transition: background 0.15s;
+  display: flex; align-items: center; gap: 10px;
+}
+.autocomplete-item:hover { background: var(--primary-light); }
+.autocomplete-item .ac-logo {
+  width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center;
+  justify-content: center; font-weight: 700; font-size: 0.7rem; color: white; flex-shrink: 0;
+}
+
+/* === SUCCESS STATE === */
+.success-state { text-align: center; padding: 60px 20px; }
+.success-icon { font-size: 4rem; margin-bottom: 16px; }
+.success-state h2 { font-size: 1.5rem; margin-bottom: 8px; color: var(--text); }
+.success-state p { font-size: 1rem; color: var(--text-light); margin-bottom: 24px; }
+
+/* === TOP RATED SCROLL === */
+.top-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+.top-scroll::-webkit-scrollbar { height: 6px; }
+.top-scroll::-webkit-scrollbar-track { background: #eee; border-radius: 3px; }
+.top-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+.top-card {
+  min-width: 220px; background: var(--card); border-radius: var(--radius); padding: 20px;
+  box-shadow: var(--shadow); scroll-snap-align: start; flex-shrink: 0; cursor: pointer;
+  transition: all 0.2s; border: 1px solid transparent;
+}
+.top-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.top-card .top-rank { font-size: 0.75rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+/* === SALARY FORM MODAL === */
+.salary-form-card {
+  background: var(--card); border-radius: var(--radius); padding: 28px;
+  box-shadow: var(--shadow); max-width: 500px; margin: 0 auto 32px;
+}
+
+/* === COMPANY PROFILE SALARY & JOBS TABS === */
+.profile-salaries-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.profile-salary-card {
+  background: #f9fafb; border-radius: var(--radius-sm); padding: 18px; text-align: center;
+}
+.profile-salary-card h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 4px; }
+.profile-salary-card .avg { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+.profile-salary-card .range { font-size: 0.8rem; color: var(--text-light); }
+
+/* === EMPTY STATE === */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-light); }
+.empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+.empty-state p { font-size: 1rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .companies-grid, .worst-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .ratings-grid { grid-template-columns: 1fr; }
+  .jobs-layout { grid-template-columns: 1fr; }
+  .jobs-sidebar { position: static; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-emoji { display: none; }
+  .countries-grid { grid-template-columns: repeat(2, 1fr); }
+  .future-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .employer-btn { display: none; }
+  .hamburger { display: flex; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero .tagline { font-size: 1rem; }
+  .hero-search {
+    flex-direction: column; border-radius: var(--radius);
+  }
+  .hero-search input, .hero-search select {
+    border-left: none; border-bottom: 1px solid var(--border);
+  }
+  .hero-search button { border-radius: 0 0 var(--radius) var(--radius); }
+  .stats-bar { gap: 20px; flex-wrap: wrap; }
+  .stat-number { font-size: 1.4rem; }
+  .how-grid { grid-template-columns: 1fr; gap: 16px; }
+  .companies-grid, .worst-grid { grid-template-columns: 1fr; }
+  .section { padding: 40px 0; }
+  .section-title { font-size: 1.4rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .profile-header-inner { flex-direction: column; text-align: center; }
+  .profile-actions { justify-content: center; }
+  .profile-info .profile-meta { justify-content: center; }
+  .profile-tab { padding: 14px 16px; font-size: 0.8rem; }
+  .filters-bar { flex-direction: column; }
+  .filter-group { min-width: 100%; }
+  .two-cols { grid-template-columns: 1fr; }
+  .countries-grid { grid-template-columns: 1fr 1fr; }
+  .future-grid { grid-template-columns: 1fr; }
+  .form-progress { gap: 0; }
+  .progress-label { font-size: 0.6rem; }
+  .review-form-container, .post-job-container { margin: 20px auto; padding: 24px; }
+  .rating-input-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .rating-input-row .label { width: auto; }
+  .about-hero h1 { font-size: 1.8rem; }
+}
+@media (max-width: 375px) {
+  .container { padding: 0 14px; }
+  .hero { padding: 50px 0 40px; }
+  .hero h1 { font-size: 1.5rem; }
+  .stats-bar { gap: 12px; padding: 20px 0; }
+  .stat-number { font-size: 1.2rem; }
+  .stat-label { font-size: 0.75rem; }
+  .search-bar-inline { flex-direction: column; }
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.3s ease; }
+@keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+
+/* === SCROLL === */
+.top-scroll { scrollbar-width: thin; }
+
+/* Utilities */
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+.hidden { display: none !important; }
+
+/* === HERO (override for JS) === */
+.hero { background: linear-gradient(135deg, #0D7377 0%, #0a5c5f 60%, #085a5d 100%); color: white; padding: 80px 0 60px; text-align: center; position: relative; }
+.hero h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 10px; }
+.hero-sub { font-size: 1.15rem; opacity: 0.85; margin-bottom: 32px; }
+.hero-search { display: flex; background: white; border-radius: var(--radius); overflow: hidden; max-width: 700px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.hero-input { flex: 1; padding: 14px 18px; border: none; outline: none; font-size: 1rem; min-width: 0; }
+.hero-select { padding: 14px 12px; border: none; border-left: 1px solid var(--border); outline: none; background: white; cursor: pointer; color: var(--text-light); min-width: 130px; }
+.hero-btn { padding: 14px 28px; background: var(--secondary); color: white; border: none; font-weight: 700; font-size: 1rem; transition: background 0.2s; }
+.hero-btn:hover { background: var(--secondary-dark); }
+
+/* === STATS === */
+.stats-bar { background: white; padding: 24px 0; border-bottom: 1px solid var(--border); }
+.stats-row { display: flex; justify-content: center; gap: 60px; }
+.stat { text-align: center; }
+.stat-num { font-size: 2rem; font-weight: 800; color: var(--primary); display: block; }
+.stat-label { font-size: 0.9rem; color: var(--text-light); }
+
+/* === SECTIONS === */
+.section { padding: 50px 0; }
+.section-alt { background: white; }
+.section-worst { background: #fff5f5; }
+.section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; text-align: center; }
+.section-sub { font-size: 1rem; color: var(--text-light); text-align: center; margin-bottom: 32px; }
+
+/* === HOW IT WORKS === */
+.how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.how-card { background: white; border-radius: var(--radius); padding: 30px 24px; text-align: center; box-shadow: var(--shadow); }
+.how-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.how-card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+.how-card p { font-size: 0.9rem; color: var(--text-light); }
+
+/* === CARDS GRID === */
+.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* === COMPANY CARD (JS classes) === */
+a.company-card { display: block; background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 2px solid transparent; transition: all 0.25s; text-decoration: none; color: inherit; }
+a.company-card:hover { box-shadow: var(--shadow-hover); border-color: var(--primary); transform: translateY(-3px); }
+.cc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.cc-logo { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+.cc-logo-lg { width: 64px; height: 64px; font-size: 1.3rem; border-radius: 14px; }
+.cc-logo-sm { width: 36px; height: 36px; font-size: 0.8rem; border-radius: 8px; }
+.cc-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; color: var(--text); }
+.cc-industry { font-size: 0.8rem; color: var(--text-light); display: block; }
+.cc-loc { font-size: 0.8rem; color: var(--text-light); }
+.cc-ratings { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.cc-stars { font-size: 0.95rem; }
+.cc-stars strong { margin-left: 4px; }
+.cc-reviews { font-size: 0.8rem; color: var(--text-light); }
+.cc-gazda { display: flex; align-items: center; gap: 8px; }
+
+/* === GAZDA BADGE & SCORE === */
+.gazda-badge { padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; color: white; }
+.score-bad, .gazda-badge.score-bad { background: var(--accent); }
+.score-caution, .gazda-badge.score-caution { background: #E67E22; }
+.score-ok, .gazda-badge.score-ok { background: #F5A623; }
+.score-good, .gazda-badge.score-good { background: var(--success); }
+.gazda-label { font-size: 0.8rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.label-bad { color: var(--accent); background: #fde8e8; }
+.label-caution { color: #E67E22; background: #fef3e2; }
+.label-ok { color: #d4900e; background: #fef9e7; }
+.label-good { color: var(--success); background: #e8f8ef; }
+.gazda-label-lg { font-size: 0.9rem; font-weight: 700; padding: 4px 12px; border-radius: 6px; display: inline-block; }
+
+/* === GAZDA CIRCLE (big score) === */
+.gazda-score-box { display: flex; align-items: center; gap: 20px; padding: 20px; background: var(--bg); border-radius: var(--radius); margin-bottom: 24px; }
+.gazda-circle { width: 80px; height: 80px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+.gazda-circle.score-bad { background: linear-gradient(135deg, #E74C3C, #c0392b); }
+.gazda-circle.score-caution { background: linear-gradient(135deg, #E67E22, #d35400); }
+.gazda-circle.score-ok { background: linear-gradient(135deg, #F5A623, #d4900e); }
+.gazda-circle.score-good { background: linear-gradient(135deg, #27AE60, #1e8449); }
+.gazda-num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+.gazda-of { font-size: 0.75rem; opacity: 0.8; }
+.gazda-info { display: flex; flex-direction: column; gap: 4px; }
+.gazda-info strong { font-size: 1.1rem; }
+.gazda-info span { font-size: 0.9rem; color: var(--text-light); }
+
+/* === CTA === */
+.cta-section { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 60px 20px; }
+.cta-section h2 { font-size: 2rem; margin-bottom: 10px; }
+.cta-section p { opacity: 0.9; margin-bottom: 24px; font-size: 1.1rem; }
+.cta-btn { display: inline-block; padding: 14px 36px; background: var(--secondary); color: white; border-radius: var(--radius-sm); font-weight: 700; font-size: 1.05rem; transition: all 0.2s; text-decoration: none; }
+.cta-btn:hover { background: var(--secondary-dark); color: white; transform: translateY(-2px); }
+
+/* === PAGE HEADER === */
+.page-header { background: white; padding: 40px 0 30px; border-bottom: 1px solid var(--border); }
+.page-header h1 { font-size: 1.8rem; margin-bottom: 6px; }
+.page-header p { color: var(--text-light); }
+
+/* === FILTERS === */
+.filters-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.filter-input { padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); flex: 1; min-width: 180px; outline: none; transition: border 0.2s; }
+.filter-input:focus { border-color: var(--primary); }
+.filter-select { padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: white; cursor: pointer; outline: none; min-width: 140px; }
+
+/* === COMPANY HEADER (profile) === */
+.company-header { background: white; padding: 30px 0; border-bottom: 1px solid var(--border); }
+.ch-top { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 24px; flex-wrap: wrap; }
+.ch-info { flex: 1; }
+.ch-info h1 { font-size: 1.6rem; margin-bottom: 6px; }
+.ch-meta { display: flex; gap: 12px; font-size: 0.9rem; color: var(--text-light); flex-wrap: wrap; margin-bottom: 8px; }
+.ch-meta span { display: flex; align-items: center; gap: 4px; }
+.ch-rating-row { display: flex; align-items: center; gap: 8px; }
+.ch-stars { font-size: 1.1rem; }
+.ch-stars strong { font-size: 1.2rem; }
+.ch-scores { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+
+/* === RATING BARS === */
+.rating-bars { display: flex; flex-direction: column; gap: 10px; }
+.rb-row { display: flex; align-items: center; gap: 10px; }
+.rb-label { width: 120px; font-size: 0.85rem; flex-shrink: 0; }
+.rb-bar { flex: 1; height: 8px; background: #e8eaed; border-radius: 4px; overflow: hidden; }
+.rb-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+.rb-val { width: 28px; font-weight: 600; font-size: 0.85rem; text-align: right; }
+
+/* === TABS === */
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+.tab { padding: 12px 20px; border: none; background: none; font-size: 0.95rem; font-weight: 500; color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+.tab:hover { color: var(--primary); }
+
+/* === REVIEW CARD === */
+.review-card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; border: 1px solid var(--border); }
+.rc-header { margin-bottom: 14px; }
+.rc-header h3 { font-size: 1.05rem; margin: 4px 0; }
+.rc-stars { font-size: 1rem; }
+.rc-meta { font-size: 0.8rem; color: var(--text-light); }
+.rc-body { display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px; }
+.rc-section strong { display: block; margin-bottom: 4px; font-size: 0.9rem; }
+.rc-section p { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+.rc-footer { border-top: 1px solid var(--border); padding-top: 10px; }
+.helpful-btn { padding: 6px 12px; border: 1px solid var(--border); background: white; border-radius: var(--radius-sm); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+.helpful-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* === SALARY TABLE === */
+.salary-table { width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.salary-table th { background: var(--primary); color: white; padding: 12px 16px; text-align: left; font-size: 0.85rem; font-weight: 600; }
+.salary-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.salary-table tr:hover { background: var(--primary-light); }
+
+/* === JOB CARD === */
+.jobs-list { display: flex; flex-direction: column; gap: 16px; }
+.job-card { background: white; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); border: 2px solid transparent; transition: all 0.2s; }
+.job-card:hover { border-color: var(--primary); }
+.jc-header { margin-bottom: 8px; }
+.jc-header h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+.jc-company { font-size: 0.9rem; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.jc-rating { font-size: 0.85rem; }
+.jc-meta { display: flex; gap: 14px; font-size: 0.85rem; color: var(--text-light); flex-wrap: wrap; margin-bottom: 10px; }
+.jc-type { padding: 2px 8px; background: var(--primary-light); color: var(--primary); border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.jc-desc { font-size: 0.9rem; color: var(--text); margin-bottom: 12px; line-height: 1.5; }
+.jc-details { font-size: 0.85rem; margin-bottom: 6px; color: var(--text-light); }
+
+/* === BUTTONS === */
+.btn-primary { display: inline-block; padding: 10px 24px; background: var(--primary); color: white; border: none; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-primary:hover { background: var(--primary-dark); color: white; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { display: inline-block; padding: 10px 24px; background: white; color: var(--primary); border: 2px solid var(--primary); border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.btn-secondary:hover { background: var(--primary-light); }
+
+/* === FORM === */
+.form-card { background: white; border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
+.form-input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none; transition: border 0.2s; }
+.form-input:focus { border-color: var(--primary); }
+textarea.form-input { resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+.sponsor-note { background: #fef9e7; border: 1px solid #f5e6a3; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.9rem; margin-bottom: 20px; }
+
+/* === STEPPER === */
+.stepper { display: flex; align-items: center; justify-content: center; margin-bottom: 30px; gap: 0; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.step span { width: 32px; height: 32px; border-radius: 50%; background: #e1e5e9; color: var(--text-light); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem; }
+.step.active span { background: var(--primary); color: white; }
+.step.done span { background: var(--success); color: white; }
+.step label { font-size: 0.75rem; color: var(--text-light); }
+.step.active label { color: var(--primary); font-weight: 600; }
+.step-line { width: 40px; height: 2px; background: #e1e5e9; margin-bottom: 18px; }
+
+/* === COMPANY LIST (review form) === */
+.company-list { max-height: 300px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 12px 0; }
+.cl-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid #f0f2f5; }
+.cl-item:hover { background: var(--primary-light); }
+.cl-item.selected { background: var(--primary-light); border-left: 3px solid var(--primary); }
+.cl-loc { margin-left: auto; font-size: 0.8rem; color: var(--text-light); }
+
+/* === RATING INPUT (review form) === */
+.rating-input { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.rating-input label { width: 140px; font-size: 0.9rem; flex-shrink: 0; }
+.star-select { display: flex; gap: 2px; }
+.ss { font-size: 1.5rem; color: #ddd; cursor: pointer; transition: color 0.15s; }
+.ss.active { color: var(--secondary); }
+.ss:hover { color: var(--secondary); }
+.ri-val { font-weight: 700; font-size: 0.9rem; width: 20px; }
+
+/* === GAZDA SLIDER === */
+.gazda-slider-section { margin: 24px 0; padding: 20px; background: var(--bg); border-radius: var(--radius); }
+.gs-row { display: flex; align-items: center; gap: 20px; margin: 16px 0; }
+.gazda-range { flex: 1; -webkit-appearance: none; height: 8px; border-radius: 4px; background: #e1e5e9; outline: none; }
+.gazda-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; }
+
+/* === CONFIRM === */
+.confirm-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.cg-row { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f2f5; }
+.cg-row strong { width: 120px; flex-shrink: 0; font-size: 0.9rem; }
+.cg-section { padding: 10px 0; }
+.cg-section strong { display: block; margin-bottom: 4px; }
+.cg-section p { font-size: 0.9rem; color: var(--text); }
+
+/* === SUCCESS === */
+.success-box { max-width: 500px; margin: 0 auto; padding: 40px; background: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+.success-icon { font-size: 3rem; margin-bottom: 16px; }
+.success-msg { color: var(--success); font-weight: 600; padding: 12px; background: #e8f8ef; border-radius: var(--radius-sm); text-align: center; margin-top: 12px; }
+
+/* === ABOUT === */
+.about-block { margin-bottom: 36px; }
+.about-block h2 { font-size: 1.4rem; margin-bottom: 12px; }
+.about-block p { font-size: 1rem; line-height: 1.7; color: var(--text); }
+.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+.about-meta { background: var(--bg); border-radius: var(--radius); padding: 20px; }
+.am-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.country-flags { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 12px; }
+.cf-item { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+.cf-flag { font-size: 2rem; }
+.contribute-list { list-style: none; padding: 0; }
+.contribute-list li { padding: 10px 0; font-size: 1rem; border-bottom: 1px solid #f0f2f5; }
+.future-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 16px; }
+.future-card { background: white; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.future-card h3 { margin-bottom: 8px; font-size: 1.05rem; }
+.future-card p { font-size: 0.9rem; color: var(--text-light); }
+
+/* === FOOTER === */
+.footer { background: #1a2a32; color: #ccc; padding: 40px 0 0; margin-top: auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+.footer-col { display: flex; flex-direction: column; gap: 8px; }
+.footer-col h4 { color: white; margin-bottom: 8px; }
+.footer-col a { color: #aaa; font-size: 0.9rem; text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: var(--secondary); }
+.footer-col span { font-size: 0.9rem; }
+.footer .logo { color: white; }
+.footer-bottom { border-top: 1px solid #2a3a42; padding: 16px 0; text-align: center; font-size: 0.85rem; color: #777; }
+
+/* === PAGINATION === */
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 24px; }
+.pag-btn { width: 36px; height: 36px; border: 1px solid var(--border); background: white; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.pag-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.pag-btn:hover { border-color: var(--primary); }
+
+/* === NO RESULTS === */
+.no-results { text-align: center; padding: 40px; color: var(--text-light); font-size: 1rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8rem; }
+  .hero-search { flex-direction: column; }
+  .hero-select { border-left: none; border-top: 1px solid var(--border); }
+  .stats-row { gap: 30px; }
+  .how-grid, .future-grid { grid-template-columns: 1fr; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu.show, .mobile-menu[style*="flex"] { display: flex !important; }
+  .ch-scores { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .tabs { overflow-x: auto; }
+  .filters-bar { flex-direction: column; }
+  .filter-input, .filter-select { min-width: auto; }
+  .form-row { grid-template-columns: 1fr; }
+  .rating-input { flex-wrap: wrap; }
+  .rating-input label { width: 100%; }
+  .country-flags { gap: 16px; }
+  .employer-btn { display: none; }
+  .stepper { gap: 0; }
+  .step label { display: none; }
+  .step-line { width: 20px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem; }
+  .stat-num { font-size: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .gs-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container">
+    <a href="#/home" class="logo">
+      <div class="logo-icon">G</div>
+      <span>GAZDA</span>
+    </a>
+    <nav class="nav-links" id="navLinks"></nav>
+    <div class="nav-right">
+      <div class="lang-switcher" id="langSwitcher"></div>
+      <a href="#/post-job" class="employer-btn" data-t="nav_employers"></a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu"></div>
+
+<!-- MAIN -->
+<main class="main-content" id="app"></main>
+
+<!-- FOOTER -->
+<footer class="footer" id="footerEl"></footer>
+
+<script>
+/* ============================================
+   GAZDA — Complete Application JavaScript
+   ============================================ */
+
+// ===========================================
+// TRANSLATIONS
+// ===========================================
+const T = {
+hr: {
+  // Nav
+  nav_home: 'Početna',
+  nav_companies: 'Tvrtke',
+  nav_jobs: 'Poslovi',
+  nav_salaries: 'Plaće',
+  nav_review: 'Napiši recenziju',
+  nav_employers: 'Za poslodavce',
+  // Hero
+  hero_title: 'Saznaj istinu o poslodavcima',
+  hero_tagline: 'Saznaj istinu prije nego prihvatiš posao',
+  hero_search_placeholder: 'Pronađi firmu ili posao...',
+  hero_search_btn: 'Traži',
+  hero_location_all: 'Svi gradovi',
+  // Stats
+  stat_reviews: 'recenzija',
+  stat_companies: 'tvrtki',
+  stat_countries: 'države',
+  // How it works
+  how_title: 'Kako funkcionira?',
+  how_subtitle: 'Tri jednostavna koraka do informirane odluke',
+  how_step1_title: 'Pronađi firmu',
+  how_step1_desc: 'Pretraži bazu od preko 3.000 tvrtki iz regije',
+  how_step2_title: 'Čitaj recenzije',
+  how_step2_desc: 'Saznaj što zaposlenici misle o plaći, kulturi i gazdi',
+  how_step3_title: 'Odluči pametno',
+  how_step3_desc: 'Prihvati posao s punim znanjem o poslodavcu',
+  // Sections
+  recent_title: 'Nedavno recenzirane tvrtke',
+  recent_subtitle: 'Pogledaj što zaposlenici kažu',
+  top_title: 'Najbolje ocijenjene tvrtke',
+  top_subtitle: 'Tvrtke koje brinu o zaposlenicima',
+  worst_title: 'Kompanije s najgorim ocjenama',
+  worst_subtitle: 'Transparentnost je naša misija — znaj koga izbjegavati',
+  view_all: 'Pogledaj sve',
+  view_profile: 'Pogledaj profil',
+  // CTA
+  cta_title: 'Podijeli svoje iskustvo',
+  cta_subtitle: 'Tvoja recenzija pomaže tisućama radnika da donesu bolju odluku',
+  cta_btn: 'Napiši recenziju',
+  // Company page
+  reviews_tab: 'Recenzije',
+  salaries_tab: 'Plaće',
+  jobs_tab: 'Poslovi',
+  about_tab: 'O firmi',
+  write_review: 'Napiši recenziju',
+  rating_overall: 'Ukupno',
+  rating_management: 'Upravljanje',
+  rating_culture: 'Kultura',
+  rating_salary: 'Plaća',
+  rating_balance: 'Ravnoteža',
+  rating_growth: 'Razvoj karijere',
+  gazda_score_title: 'GAZDA Ocjena',
+  gazda_score_question: 'Kako se gazda ponaša?',
+  gazda_avoid: 'IZBJEGAVAJ',
+  gazda_caution: 'OPREZ',
+  gazda_ok: 'OK',
+  gazda_recommended: 'PREPORUČENO',
+  // Reviews
+  review_pros: '👍 Prednosti',
+  review_cons: '👎 Nedostaci',
+  review_advice: '💡 Savjet upravi',
+  review_helpful: 'Korisno',
+  review_current: 'Trenutni zaposlenik',
+  review_former: 'Bivši zaposlenik',
+  // Companies page
+  companies_title: 'Sve tvrtke',
+  companies_subtitle: 'Pretraži i filtriraj tvrtke iz regije',
+  filter_country: 'Država',
+  filter_city: 'Grad',
+  filter_industry: 'Industrija',
+  filter_rating: 'Ocjena',
+  filter_sort: 'Sortiraj',
+  filter_all: 'Sve',
+  sort_rating: 'Po ocjeni',
+  sort_reviews: 'Po broju recenzija',
+  sort_newest: 'Najnovije',
+  sort_name: 'Po imenu',
+  search_companies: 'Pretraži tvrtke...',
+  // Jobs page
+  jobs_title: 'Oglasi za posao',
+  jobs_subtitle: 'Pronađi posao u regiji s transparentnim ocjenama poslodavaca',
+  search_jobs: 'Pretraži poslove...',
+  filter_job_type: 'Tip posla',
+  filter_salary_range: 'Raspon plaće',
+  filter_min_rating: 'Min. ocjena',
+  filter_posted: 'Objavljeno',
+  type_all: 'Svi tipovi',
+  type_fulltime: 'Puno radno vrijeme',
+  type_parttime: 'Nepuno radno vrijeme',
+  type_contract: 'Ugovor',
+  apply: 'Prijavi se',
+  posted: 'Objavljeno',
+  jobs_filters: 'Filteri',
+  // Salaries page
+  salaries_title: 'Plaće u regiji',
+  salaries_subtitle: 'Usporedi plaće po pozicijama i lokacijama',
+  popular_roles: 'Popularne pozicije',
+  salary_avg: 'Prosječna plaća',
+  salary_range: 'Raspon',
+  salary_reports: 'prijava',
+  salary_table_role: 'Pozicija',
+  salary_table_avg: 'Prosjek',
+  salary_table_range: 'Raspon',
+  salary_table_reports: 'Prijave',
+  salary_table_location: 'Lokacija',
+  report_salary: 'Prijavi plaću',
+  search_salaries: 'Pretraži pozicije...',
+  salary_all_title: 'Sve plaće',
+  // Review form
+  review_form_title: 'Napiši recenziju',
+  step1_title: 'Odaberi tvrtku',
+  step2_title: 'Tvoji podaci',
+  step3_title: 'Ocjene',
+  step4_title: 'Recenzija',
+  step5_title: 'Potvrda',
+  step_company: 'Tvrtka',
+  step_info: 'Podaci',
+  step_ratings: 'Ocjene',
+  step_review: 'Recenzija',
+  step_confirm: 'Potvrda',
+  search_company: 'Pretraži tvrtku...',
+  your_position: 'Tvoja pozicija',
+  employment_status: 'Status zaposlenja',
+  status_current: 'Trenutni zaposlenik',
+  status_former: 'Bivši zaposlenik',
+  employment_start: 'Početak rada',
+  employment_end: 'Kraj rada',
+  rate_categories: 'Ocijeni kategorije (1-5)',
+  gazda_slider_title: '🎯 GAZDA Ocjena',
+  gazda_slider_desc: 'Kako se gazda/šef ponaša? Koliko poštuje zaposlenike?',
+  review_title_label: 'Naslov recenzije',
+  review_pros_label: 'Prednosti (što je dobro?)',
+  review_cons_label: 'Nedostaci (što je loše?)',
+  review_advice_label: 'Savjet upravi',
+  confirm_title: 'Pregled i potvrda',
+  confirm_company: 'Tvrtka',
+  confirm_position: 'Pozicija',
+  confirm_status: 'Status',
+  confirm_ratings: 'Ocjene',
+  confirm_gazda: 'GAZDA Ocjena',
+  confirm_review: 'Recenzija',
+  btn_next: 'Dalje',
+  btn_back: 'Natrag',
+  btn_submit: 'Pošalji recenziju',
+  success_title: 'Hvala!',
+  success_msg: 'Tvoja recenzija pomaže drugima da donesu bolju odluku.',
+  success_btn: 'Pogledaj tvrtku',
+  // Post job
+  post_job_title: 'Objavi oglas za posao',
+  post_job_subtitle: 'Doseži tisuće kandidata u regiji',
+  pj_company: 'Naziv tvrtke',
+  pj_title: 'Naziv pozicije',
+  pj_location: 'Lokacija',
+  pj_type: 'Tip posla',
+  pj_salary_min: 'Minimalna plaća (€)',
+  pj_salary_max: 'Maksimalna plaća (€)',
+  pj_description: 'Opis posla',
+  pj_requirements: 'Zahtjevi',
+  pj_benefits: 'Beneficije',
+  pj_contact: 'Kontakt email',
+  pj_preview: 'Pregled',
+  pj_publish: 'Objavi oglas',
+  pj_sponsor_note: '💡 Sponzorirani oglas? Kontaktirajte nas za premium vidljivost i bolje pozicioniranje.',
+  pj_success_title: 'Oglas objavljen!',
+  pj_success_msg: 'Vaš oglas je sada vidljiv kandidatima.',
+  // About
+  about_title: 'O platformi GAZDA',
+  about_subtitle: 'Borimo se za transparentnost na radnom mjestu u regiji',
+  about_problem_title: '🚨 Problem',
+  about_problem_text: 'U Balkanskoj regiji mnogi poslodavci igraju po vlastitim pravilima. Neplaćeni prekovremeni, nepotizam, mobbing, „gazda" mentalitet — radnici nemaju glasa. Informacije o tvrtkama se šire samo usmenom predajom.',
+  about_solution_title: '💡 Rješenje',
+  about_solution_text: 'GAZDA platforma daje zaposlenicima anonimni glas. Transparentne recenzije, podatci o plaćama i jedinstvena GAZDA Ocjena — sve na jednom mjestu. Znanje je moć.',
+  about_countries_title: 'Pokrivamo regiju',
+  about_contribute_title: 'Kako možeš pomoći?',
+  about_contribute_1: '✍️ Napiši recenziju svog poslodavca',
+  about_contribute_2: '💰 Prijavi svoju plaću anonimno',
+  about_contribute_3: '📢 Podijeli GAZDA s prijateljima i kolegama',
+  about_future_title: 'Planovi za budućnost',
+  about_future_1_title: '📱 Mobilna aplikacija',
+  about_future_1_desc: 'GAZDA u džepu — native app za iOS i Android',
+  about_future_2_title: '🌍 Više država',
+  about_future_2_desc: 'Širenje na Sjevernu Makedoniju, Crnu Goru i Kosovo',
+  about_future_3_title: '✅ Verificirane recenzije',
+  about_future_3_desc: 'Potvrda zaposlenja za još veću vjerodostojnost',
+  // Footer
+  footer_about: 'O nama',
+  footer_about_desc: 'GAZDA je platforma za transparentnost na radnom mjestu. Pomažemo radnicima da donesu informirane odluke o poslodavcima.',
+  footer_links: 'Poveznice',
+  footer_countries: 'Države',
+  footer_contact: 'Kontakt',
+  footer_contact_email: 'info@gazda.io',
+  footer_copyright: '© 2025 GAZDA. Sva prava pridržana.',
+  // Industries
+  ind_retail: 'Maloprodaja',
+  ind_pharma: 'Farmacija',
+  ind_appliances: 'Kućanski aparati',
+  ind_energy: 'Energetika',
+  ind_automotive: 'Automobilska ind.',
+  ind_tech: 'Tehnologija',
+  ind_food: 'Prehrambena ind.',
+  ind_industrial: 'Industrija',
+  ind_telecom: 'Telekomunikacije',
+  ind_distribution: 'Distribucija',
+  ind_gaming: 'Gaming',
+  ind_agri: 'Poljoprivreda',
+  ind_textile: 'Tekstil',
+  ind_manufacturing: 'Proizvodnja',
+  // Countries
+  country_si: 'Slovenija',
+  country_hr: 'Hrvatska',
+  country_rs: 'Srbija',
+  country_ba: 'Bosna i Hercegovina',
+  // Misc
+  no_results: 'Nema rezultata',
+  reviews_word: 'recenzija',
+  employees: 'zaposlenika',
+  founded: 'Osnovano',
+  website: 'Web stranica',
+  company_size: 'Veličina tvrtke',
+  industry: 'Industrija',
+  location: 'Lokacija',
+  about_company: 'O tvrtki',
+  open_positions: 'Otvorene pozicije',
+  all_salaries: 'Sve prijavljene plaće',
+  monthly: 'mj.',
+  page_prev: '←',
+  page_next: '→',
+  job_detail_title: 'Detalji posla',
+  requirements: 'Zahtjevi',
+  benefits: 'Beneficije',
+  description: 'Opis',
+  close: 'Zatvori',
+  salary_report_title: 'Prijavi svoju plaću',
+  sr_company: 'Tvrtka',
+  sr_position: 'Pozicija',
+  sr_salary: 'Mjesečna neto plaća (€)',
+  sr_city: 'Grad',
+  sr_submit: 'Prijavi anonimno',
+  sr_success: 'Hvala! Plaća uspješno prijavljena.',
+},
+si: {
+  nav_home: 'Domov',
+  nav_companies: 'Podjetja',
+  nav_jobs: 'Službe',
+  nav_salaries: 'Plače',
+  nav_review: 'Napiši oceno',
+  nav_employers: 'Za delodajalce',
+  hero_title: 'Spoznaj resnico o delodajalcih',
+  hero_tagline: 'Spoznaj resnico preden sprejmeš službo',
+  hero_search_placeholder: 'Poišči podjetje ali službo...',
+  hero_search_btn: 'Išči',
+  hero_location_all: 'Vsa mesta',
+  stat_reviews: 'ocen',
+  stat_companies: 'podjetij',
+  stat_countries: 'držav',
+  how_title: 'Kako deluje?',
+  how_subtitle: 'Trije preprosti koraki do informirane odločitve',
+  how_step1_title: 'Poišči podjetje',
+  how_step1_desc: 'Preišči bazo z več kot 3.000 podjetji iz regije',
+  how_step2_title: 'Preberi ocene',
+  how_step2_desc: 'Spoznaj, kaj zaposleni menijo o plači, kulturi in šefu',
+  how_step3_title: 'Odloči se pametno',
+  how_step3_desc: 'Sprejmi službo s polnim znanjem o delodajalcu',
+  recent_title: 'Nedavno ocenjena podjetja',
+  recent_subtitle: 'Poglej, kaj pravijo zaposleni',
+  top_title: 'Najbolje ocenjena podjetja',
+  top_subtitle: 'Podjetja, ki skrbijo za zaposlene',
+  worst_title: 'Podjetja z najslabšimi ocenami',
+  worst_subtitle: 'Transparentnost je naše poslanstvo — vedi, koga se izogibati',
+  view_all: 'Poglej vse',
+  view_profile: 'Poglej profil',
+  cta_title: 'Deli svojo izkušnjo',
+  cta_subtitle: 'Tvoja ocena pomaga tisočim delavcem pri boljši odločitvi',
+  cta_btn: 'Napiši oceno',
+  reviews_tab: 'Ocene',
+  salaries_tab: 'Plače',
+  jobs_tab: 'Službe',
+  about_tab: 'O podjetju',
+  write_review: 'Napiši oceno',
+  rating_overall: 'Skupno',
+  rating_management: 'Vodstvo',
+  rating_culture: 'Kultura',
+  rating_salary: 'Plača',
+  rating_balance: 'Ravnovesje',
+  rating_growth: 'Karierni razvoj',
+  gazda_score_title: 'GAZDA Ocena',
+  gazda_score_question: 'Kako se šef obnaša?',
+  gazda_avoid: 'IZOGIBAJ SE',
+  gazda_caution: 'PREVIDNO',
+  gazda_ok: 'OK',
+  gazda_recommended: 'PRIPOROČENO',
+  review_pros: '👍 Prednosti',
+  review_cons: '👎 Slabosti',
+  review_advice: '💡 Nasvet vodstvu',
+  review_helpful: 'Koristno',
+  review_current: 'Trenutni zaposleni',
+  review_former: 'Bivši zaposleni',
+  companies_title: 'Vsa podjetja',
+  companies_subtitle: 'Preišči in filtriraj podjetja iz regije',
+  filter_country: 'Država',
+  filter_city: 'Mesto',
+  filter_industry: 'Panoga',
+  filter_rating: 'Ocena',
+  filter_sort: 'Razvrsti',
+  filter_all: 'Vse',
+  sort_rating: 'Po oceni',
+  sort_reviews: 'Po številu ocen',
+  sort_newest: 'Najnovejše',
+  sort_name: 'Po imenu',
+  search_companies: 'Preišči podjetja...',
+  jobs_title: 'Oglasi za delo',
+  jobs_subtitle: 'Poišči službo v regiji s transparentnimi ocenami delodajalcev',
+  search_jobs: 'Preišči službe...',
+  filter_job_type: 'Tip zaposlitve',
+  filter_salary_range: 'Razpon plače',
+  filter_min_rating: 'Min. ocena',
+  filter_posted: 'Objavljeno',
+  type_all: 'Vsi tipi',
+  type_fulltime: 'Polni delovni čas',
+  type_parttime: 'Krajši delovni čas',
+  type_contract: 'Pogodba',
+  apply: 'Prijavi se',
+  posted: 'Objavljeno',
+  jobs_filters: 'Filtri',
+  salaries_title: 'Plače v regiji',
+  salaries_subtitle: 'Primerjaj plače po delovnih mestih in lokacijah',
+  popular_roles: 'Priljubljena delovna mesta',
+  salary_avg: 'Povprečna plača',
+  salary_range: 'Razpon',
+  salary_reports: 'prijav',
+  salary_table_role: 'Delovno mesto',
+  salary_table_avg: 'Povprečje',
+  salary_table_range: 'Razpon',
+  salary_table_reports: 'Prijave',
+  salary_table_location: 'Lokacija',
+  report_salary: 'Prijavi plačo',
+  search_salaries: 'Preišči delovna mesta...',
+  salary_all_title: 'Vse plače',
+  review_form_title: 'Napiši oceno',
+  step1_title: 'Izberi podjetje',
+  step2_title: 'Tvoji podatki',
+  step3_title: 'Ocene',
+  step4_title: 'Ocena',
+  step5_title: 'Potrditev',
+  step_company: 'Podjetje',
+  step_info: 'Podatki',
+  step_ratings: 'Ocene',
+  step_review: 'Ocena',
+  step_confirm: 'Potrditev',
+  search_company: 'Preišči podjetje...',
+  your_position: 'Tvoje delovno mesto',
+  employment_status: 'Status zaposlitve',
+  status_current: 'Trenutni zaposleni',
+  status_former: 'Bivši zaposleni',
+  employment_start: 'Začetek dela',
+  employment_end: 'Konec dela',
+  rate_categories: 'Oceni kategorije (1-5)',
+  gazda_slider_title: '🎯 GAZDA Ocena',
+  gazda_slider_desc: 'Kako se šef obnaša? Koliko spoštuje zaposlene?',
+  review_title_label: 'Naslov ocene',
+  review_pros_label: 'Prednosti (kaj je dobro?)',
+  review_cons_label: 'Slabosti (kaj je slabo?)',
+  review_advice_label: 'Nasvet vodstvu',
+  confirm_title: 'Pregled in potrditev',
+  confirm_company: 'Podjetje',
+  confirm_position: 'Delovno mesto',
+  confirm_status: 'Status',
+  confirm_ratings: 'Ocene',
+  confirm_gazda: 'GAZDA Ocena',
+  confirm_review: 'Ocena',
+  btn_next: 'Naprej',
+  btn_back: 'Nazaj',
+  btn_submit: 'Pošlji oceno',
+  success_title: 'Hvala!',
+  success_msg: 'Tvoja ocena pomaga drugim pri boljši odločitvi.',
+  success_btn: 'Poglej podjetje',
+  post_job_title: 'Objavi oglas za delo',
+  post_job_subtitle: 'Doseži tisoče kandidatov v regiji',
+  pj_company: 'Ime podjetja',
+  pj_title: 'Naziv delovnega mesta',
+  pj_location: 'Lokacija',
+  pj_type: 'Tip zaposlitve',
+  pj_salary_min: 'Minimalna plača (€)',
+  pj_salary_max: 'Maksimalna plača (€)',
+  pj_description: 'Opis dela',
+  pj_requirements: 'Zahteve',
+  pj_benefits: 'Ugodnosti',
+  pj_contact: 'Kontaktni email',
+  pj_preview: 'Predogled',
+  pj_publish: 'Objavi oglas',
+  pj_sponsor_note: '💡 Sponzoriran oglas? Kontaktirajte nas za premium vidljivost in boljše pozicioniranje.',
+  pj_success_title: 'Oglas objavljen!',
+  pj_success_msg: 'Vaš oglas je zdaj viden kandidatom.',
+  about_title: 'O platformi GAZDA',
+  about_subtitle: 'Borimo se za transparentnost na delovnem mestu v regiji',
+  about_problem_title: '🚨 Problem',
+  about_problem_text: 'V Balkanski regiji mnogi delodajalci igrajo po svojih pravilih. Neplačane nadure, nepotizem, mobing, „gazda" mentaliteta — delavci nimajo glasu. Informacije o podjetjih se širijo samo od ust do ust.',
+  about_solution_title: '💡 Rešitev',
+  about_solution_text: 'GAZDA platforma daje zaposlenim anonimni glas. Transparentne ocene, podatki o plačah in edinstvena GAZDA Ocena — vse na enem mestu. Znanje je moč.',
+  about_countries_title: 'Pokrivamo regijo',
+  about_contribute_title: 'Kako lahko pomagaš?',
+  about_contribute_1: '✍️ Napiši oceno svojega delodajalca',
+  about_contribute_2: '💰 Prijavi svojo plačo anonimno',
+  about_contribute_3: '📢 Deli GAZDA s prijatelji in kolegi',
+  about_future_title: 'Načrti za prihodnost',
+  about_future_1_title: '📱 Mobilna aplikacija',
+  about_future_1_desc: 'GAZDA v žepu — native app za iOS in Android',
+  about_future_2_title: '🌍 Več držav',
+  about_future_2_desc: 'Širjenje na Severno Makedonijo, Črno Goro in Kosovo',
+  about_future_3_title: '✅ Verificirane ocene',
+  about_future_3_desc: 'Potrditev zaposlitve za še večjo verodostojnost',
+  footer_about: 'O nas',
+  footer_about_desc: 'GAZDA je platforma za transparentnost na delovnem mestu. Pomagamo delavcem pri informiranih odločitvah o delodajalcih.',
+  footer_links: 'Povezave',
+  footer_countries: 'Države',
+  footer_contact: 'Kontakt',
+  footer_contact_email: 'info@gazda.io',
+  footer_copyright: '© 2025 GAZDA. Vse pravice pridržane.',
+  ind_retail: 'Maloprodaja',
+  ind_pharma: 'Farmacija',
+  ind_appliances: 'Gospodinjski aparati',
+  ind_energy: 'Energetika',
+  ind_automotive: 'Avtomobilska ind.',
+  ind_tech: 'Tehnologija',
+  ind_food: 'Prehrambena ind.',
+  ind_industrial: 'Industrija',
+  ind_telecom: 'Telekomunikacije',
+  ind_distribution: 'Distribucija',
+  ind_gaming: 'Gaming',
+  ind_agri: 'Kmetijstvo',
+  ind_textile: 'Tekstil',
+  ind_manufacturing: 'Proizvodnja',
+  country_si: 'Slovenija',
+  country_hr: 'Hrvaška',
+  country_rs: 'Srbija',
+  country_ba: 'Bosna in Hercegovina',
+  no_results: 'Ni rezultatov',
+  reviews_word: 'ocen',
+  employees: 'zaposlenih',
+  founded: 'Ustanovljeno',
+  website: 'Spletna stran',
+  company_size: 'Velikost podjetja',
+  industry: 'Panoga',
+  location: 'Lokacija',
+  about_company: 'O podjetju',
+  open_positions: 'Odprta delovna mesta',
+  all_salaries: 'Vse prijavljene plače',
+  monthly: 'mes.',
+  page_prev: '←',
+  page_next: '→',
+  job_detail_title: 'Podrobnosti službe',
+  requirements: 'Zahteve',
+  benefits: 'Ugodnosti',
+  description: 'Opis',
+  close: 'Zapri',
+  salary_report_title: 'Prijavi svojo plačo',
+  sr_company: 'Podjetje',
+  sr_position: 'Delovno mesto',
+  sr_salary: 'Mesečna neto plača (€)',
+  sr_city: 'Mesto',
+  sr_submit: 'Prijavi anonimno',
+  sr_success: 'Hvala! Plača uspešno prijavljena.',
+},
+sr: {
+  nav_home: 'Početna',
+  nav_companies: 'Kompanije',
+  nav_jobs: 'Poslovi',
+  nav_salaries: 'Plate',
+  nav_review: 'Napiši recenziju',
+  nav_employers: 'Za poslodavce',
+  hero_title: 'Saznaj istinu o poslodavcima',
+  hero_tagline: 'Saznaj istinu pre nego što prihvatiš posao',
+  hero_search_placeholder: 'Pronađi firmu ili posao...',
+  hero_search_btn: 'Traži',
+  hero_location_all: 'Svi gradovi',
+  stat_reviews: 'recenzija',
+  stat_companies: 'kompanija',
+  stat_countries: 'države',
+  how_title: 'Kako funkcioniše?',
+  how_subtitle: 'Tri jednostavna koraka do informisane odluke',
+  how_step1_title: 'Pronađi firmu',
+  how_step1_desc: 'Pretraži bazu od preko 3.000 kompanija iz regiona',
+  how_step2_title: 'Čitaj recenzije',
+  how_step2_desc: 'Saznaj šta zaposleni misle o plati, kulturi i gazdi',
+  how_step3_title: 'Odluči pametno',
+  how_step3_desc: 'Prihvati posao sa punim znanjem o poslodavcu',
+  recent_title: 'Nedavno recenzirane kompanije',
+  recent_subtitle: 'Pogledaj šta zaposleni kažu',
+  top_title: 'Najbolje ocenjene kompanije',
+  top_subtitle: 'Kompanije koje brinu o zaposlenima',
+  worst_title: 'Kompanije sa najgorim ocenama',
+  worst_subtitle: 'Transparentnost je naša misija — znaj koga izbegavati',
+  view_all: 'Pogledaj sve',
+  view_profile: 'Pogledaj profil',
+  cta_title: 'Podeli svoje iskustvo',
+  cta_subtitle: 'Tvoja recenzija pomaže hiljadama radnika da donesu bolju odluku',
+  cta_btn: 'Napiši recenziju',
+  reviews_tab: 'Recenzije',
+  salaries_tab: 'Plate',
+  jobs_tab: 'Poslovi',
+  about_tab: 'O firmi',
+  write_review: 'Napiši recenziju',
+  rating_overall: 'Ukupno',
+  rating_management: 'Upravljanje',
+  rating_culture: 'Kultura',
+  rating_salary: 'Plata',
+  rating_balance: 'Ravnoteža',
+  rating_growth: 'Razvoj karijere',
+  gazda_score_title: 'GAZDA Ocena',
+  gazda_score_question: 'Kako se gazda ponaša?',
+  gazda_avoid: 'IZBEGAVAJ',
+  gazda_caution: 'OPREZ',
+  gazda_ok: 'OK',
+  gazda_recommended: 'PREPORUČENO',
+  review_pros: '👍 Prednosti',
+  review_cons: '👎 Mane',
+  review_advice: '💡 Savet upravi',
+  review_helpful: 'Korisno',
+  review_current: 'Trenutni zaposleni',
+  review_former: 'Bivši zaposleni',
+  companies_title: 'Sve kompanije',
+  companies_subtitle: 'Pretraži i filtriraj kompanije iz regiona',
+  filter_country: 'Država',
+  filter_city: 'Grad',
+  filter_industry: 'Industrija',
+  filter_rating: 'Ocena',
+  filter_sort: 'Sortiraj',
+  filter_all: 'Sve',
+  sort_rating: 'Po oceni',
+  sort_reviews: 'Po broju recenzija',
+  sort_newest: 'Najnovije',
+  sort_name: 'Po imenu',
+  search_companies: 'Pretraži kompanije...',
+  jobs_title: 'Oglasi za posao',
+  jobs_subtitle: 'Pronađi posao u regionu sa transparentnim ocenama poslodavaca',
+  search_jobs: 'Pretraži poslove...',
+  filter_job_type: 'Tip posla',
+  filter_salary_range: 'Raspon plate',
+  filter_min_rating: 'Min. ocena',
+  filter_posted: 'Objavljeno',
+  type_all: 'Svi tipovi',
+  type_fulltime: 'Puno radno vreme',
+  type_parttime: 'Nepuno radno vreme',
+  type_contract: 'Ugovor',
+  apply: 'Prijavi se',
+  posted: 'Objavljeno',
+  jobs_filters: 'Filteri',
+  salaries_title: 'Plate u regionu',
+  salaries_subtitle: 'Uporedi plate po pozicijama i lokacijama',
+  popular_roles: 'Popularne pozicije',
+  salary_avg: 'Prosečna plata',
+  salary_range: 'Raspon',
+  salary_reports: 'prijava',
+  salary_table_role: 'Pozicija',
+  salary_table_avg: 'Prosek',
+  salary_table_range: 'Raspon',
+  salary_table_reports: 'Prijave',
+  salary_table_location: 'Lokacija',
+  report_salary: 'Prijavi platu',
+  search_salaries: 'Pretraži pozicije...',
+  salary_all_title: 'Sve plate',
+  review_form_title: 'Napiši recenziju',
+  step1_title: 'Izaberi kompaniju',
+  step2_title: 'Tvoji podaci',
+  step3_title: 'Ocene',
+  step4_title: 'Recenzija',
+  step5_title: 'Potvrda',
+  step_company: 'Kompanija',
+  step_info: 'Podaci',
+  step_ratings: 'Ocene',
+  step_review: 'Recenzija',
+  step_confirm: 'Potvrda',
+  search_company: 'Pretraži kompaniju...',
+  your_position: 'Tvoja pozicija',
+  employment_status: 'Status zaposlenja',
+  status_current: 'Trenutni zaposleni',
+  status_former: 'Bivši zaposleni',
+  employment_start: 'Početak rada',
+  employment_end: 'Kraj rada',
+  rate_categories: 'Oceni kategorije (1-5)',
+  gazda_slider_title: '🎯 GAZDA Ocena',
+  gazda_slider_desc: 'Kako se gazda/šef ponaša? Koliko poštuje zaposlene?',
+  review_title_label: 'Naslov recenzije',
+  review_pros_label: 'Prednosti (šta je dobro?)',
+  review_cons_label: 'Mane (šta je loše?)',
+  review_advice_label: 'Savet upravi',
+  confirm_title: 'Pregled i potvrda',
+  confirm_company: 'Kompanija',
+  confirm_position: 'Pozicija',
+  confirm_status: 'Status',
+  confirm_ratings: 'Ocene',
+  confirm_gazda: 'GAZDA Ocena',
+  confirm_review: 'Recenzija',
+  btn_next: 'Dalje',
+  btn_back: 'Nazad',
+  btn_submit: 'Pošalji recenziju',
+  success_title: 'Hvala!',
+  success_msg: 'Tvoja recenzija pomaže drugima da donesu bolju odluku.',
+  success_btn: 'Pogledaj kompaniju',
+  post_job_title: 'Objavi oglas za posao',
+  post_job_subtitle: 'Doseži hiljade kandidata u regionu',
+  pj_company: 'Naziv kompanije',
+  pj_title: 'Naziv pozicije',
+  pj_location: 'Lokacija',
+  pj_type: 'Tip posla',
+  pj_salary_min: 'Minimalna plata (€)',
+  pj_salary_max: 'Maksimalna plata (€)',
+  pj_description: 'Opis posla',
+  pj_requirements: 'Zahtevi',
+  pj_benefits: 'Beneficije',
+  pj_contact: 'Kontakt email',
+  pj_preview: 'Pregled',
+  pj_publish: 'Objavi oglas',
+  pj_sponsor_note: '💡 Sponzorisani oglas? Kontaktirajte nas za premium vidljivost i bolje pozicioniranje.',
+  pj_success_title: 'Oglas objavljen!',
+  pj_success_msg: 'Vaš oglas je sada vidljiv kandidatima.',
+  about_title: 'O platformi GAZDA',
+  about_subtitle: 'Borimo se za transparentnost na radnom mestu u regionu',
+  about_problem_title: '🚨 Problem',
+  about_problem_text: 'U Balkanskom regionu mnogi poslodavci igraju po sopstvenim pravilima. Neplaćeni prekovremeni, nepotizam, mobing, „gazda" mentalitet — radnici nemaju glasa. Informacije o kompanijama se šire samo usmenim putem.',
+  about_solution_title: '💡 Rešenje',
+  about_solution_text: 'GAZDA platforma daje zaposlenima anonimni glas. Transparentne recenzije, podaci o platama i jedinstvena GAZDA Ocena — sve na jednom mestu. Znanje je moć.',
+  about_countries_title: 'Pokrivamo region',
+  about_contribute_title: 'Kako možeš da pomogneš?',
+  about_contribute_1: '✍️ Napiši recenziju svog poslodavca',
+  about_contribute_2: '💰 Prijavi svoju platu anonimno',
+  about_contribute_3: '📢 Podeli GAZDA sa prijateljima i kolegama',
+  about_future_title: 'Planovi za budućnost',
+  about_future_1_title: '📱 Mobilna aplikacija',
+  about_future_1_desc: 'GAZDA u džepu — native app za iOS i Android',
+  about_future_2_title: '🌍 Više država',
+  about_future_2_desc: 'Širenje na Severnu Makedoniju, Crnu Goru i Kosovo',
+  about_future_3_title: '✅ Verifikovane recenzije',
+  about_future_3_desc: 'Potvrda zaposlenja za još veću verodostojnost',
+  footer_about: 'O nama',
+  footer_about_desc: 'GAZDA je platforma za transparentnost na radnom mestu. Pomažemo radnicima da donesu informisane odluke o poslodavcima.',
+  footer_links: 'Linkovi',
+  footer_countries: 'Države',
+  footer_contact: 'Kontakt',
+  footer_contact_email: 'info@gazda.io',
+  footer_copyright: '© 2025 GAZDA. Sva prava zadržana.',
+  ind_retail: 'Maloprodaja',
+  ind_pharma: 'Farmacija',
+  ind_appliances: 'Kućni aparati',
+  ind_energy: 'Energetika',
+  ind_automotive: 'Automobilska ind.',
+  ind_tech: 'Tehnologija',
+  ind_food: 'Prehrambena ind.',
+  ind_industrial: 'Industrija',
+  ind_telecom: 'Telekomunikacije',
+  ind_distribution: 'Distribucija',
+  ind_gaming: 'Gaming',
+  ind_agri: 'Poljoprivreda',
+  ind_textile: 'Tekstil',
+  ind_manufacturing: 'Proizvodnja',
+  country_si: 'Slovenija',
+  country_hr: 'Hrvatska',
+  country_rs: 'Srbija',
+  country_ba: 'Bosna i Hercegovina',
+  no_results: 'Nema rezultata',
+  reviews_word: 'recenzija',
+  employees: 'zaposlenih',
+  founded: 'Osnovano',
+  website: 'Web sajt',
+  company_size: 'Veličina kompanije',
+  industry: 'Industrija',
+  location: 'Lokacija',
+  about_company: 'O kompaniji',
+  open_positions: 'Otvorene pozicije',
+  all_salaries: 'Sve prijavljene plate',
+  monthly: 'mes.',
+  page_prev: '←',
+  page_next: '→',
+  job_detail_title: 'Detalji posla',
+  requirements: 'Zahtevi',
+  benefits: 'Beneficije',
+  description: 'Opis',
+  close: 'Zatvori',
+  salary_report_title: 'Prijavi svoju platu',
+  sr_company: 'Kompanija',
+  sr_position: 'Pozicija',
+  sr_salary: 'Mesečna neto plata (€)',
+  sr_city: 'Grad',
+  sr_submit: 'Prijavi anonimno',
+  sr_success: 'Hvala! Plata uspešno prijavljena.',
+}
+};
+
+// ===========================================
+// DEMO DATA
+// ===========================================
+const COLORS = ['#0D7377','#E74C3C','#8E44AD','#2980B9','#27AE60','#D35400','#C0392B','#16A085','#2C3E50','#F39C12'];
+function getColor(i) { return COLORS[i % COLORS.length]; }
+function getInitials(name) {
+  return name.split(/[\s.]+/).filter(w=>w.length>1).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+}
+function starsHtml(rating, max=5) {
+  let s = '';
+  for(let i=1;i<=max;i++) s += i<=Math.round(rating) ? '★' : '☆';
+  return s;
+}
+function gazdaClass(score) {
+  if(score<=3) return 'score-bad';
+  if(score<=5) return 'score-caution';
+  if(score<=7) return 'score-ok';
+  return 'score-good';
+}
+function gazdaLabelClass(score) {
+  if(score<=3) return 'label-bad';
+  if(score<=5) return 'label-caution';
+  if(score<=7) return 'label-ok';
+  return 'label-good';
+}
+function gazdaLabelText(score) {
+  const l = lang;
+  if(score<=3) return t('gazda_avoid');
+  if(score<=5) return t('gazda_caution');
+  if(score<=7) return t('gazda_ok');
+  return t('gazda_recommended');
+}
+function ratingColor(r) {
+  if(r<2.5) return '#E74C3C';
+  if(r<3.5) return '#E67E22';
+  if(r<4) return '#F5A623';
+  return '#27AE60';
+}
+
+const companies = [
+  // SLOVENIA
+  {
+    id:'mercator', name:'Mercator d.d.', industry:'ind_retail', city:'Ljubljana', country:'SI', flag:'🇸🇮',
+    rating:3.2, ratings:{management:2.8,culture:3.4,salary:2.9,balance:3.5,growth:2.8}, gazdaScore:4,
+    size:'10.000+', founded:1949, website:'mercator.si', color:'#E74C3C',
+    description: {
+      hr:'Vodeći maloprodajni lanac u Sloveniji i regiji. Mercator upravlja supermarketima, hipermarketima i specijaliziranim trgovinama.',
+      si:'Vodilna maloprodajna veriga v Sloveniji in regiji. Mercator upravlja s supermarketi, hipermarketi in specializiranimi trgovinami.',
+      sr:'Vodeći maloprodajni lanac u Sloveniji i regionu. Mercator upravlja supermarketima, hipermarketima i specijalizovanim prodavnicama.'
+    },
+    reviews: [
+      { id:'r1', title:{hr:'Stabilno ali monotono',si:'Stabilno a monotono',sr:'Stabilno ali monotono'}, date:'2025-01-15', rating:3.0, position:{hr:'Blagajnik/ca',si:'Blagajnik/ca',sr:'Blagajnik/ca'}, status:'former',
+        pros:{hr:'Redovna plaća, sigurno radno mjesto, popusti za zaposlenike.',si:'Redna plača, varna zaposlitev, popusti za zaposlene.',sr:'Redovna plata, sigurno radno mesto, popusti za zaposlene.'},
+        cons:{hr:'Loše plaćeni, prekovremeni se očekuju ali ne plaćaju uvijek. Stara oprema.',si:'Slabo plačani, nadure se pričakujejo a ne plačajo vedno. Stara oprema.',sr:'Loše plaćeni, prekovremeni se očekuju ali ne plaćaju uvek. Stara oprema.'},
+        advice:{hr:'Investirajte u zaposlenike — plaće su ispod tržišnog prosjeka.',si:'Investirajte v zaposlene — plače so pod tržnim povprečjem.',sr:'Investirajte u zaposlene — plate su ispod tržišnog proseka.'},
+        helpful:12 },
+      { id:'r2', title:{hr:'OK za početak karijere',si:'OK za začetek kariere',sr:'OK za početak karijere'}, date:'2025-02-20', rating:3.5, position:{hr:'Voditelj odjela',si:'Vodja oddelka',sr:'Voditelj odeljenja'}, status:'current',
+        pros:{hr:'Dobar tim, mogu se naučiti osnove maloprodaje. Fleksibilan raspored.',si:'Dobra ekipa, lahko se naučiš osnov maloprodaje. Fleksibilen razpored.',sr:'Dobar tim, možeš naučiti osnove maloprodaje. Fleksibilan raspored.'},
+        cons:{hr:'Karijerno napredovanje je sporo. Birokracija.',si:'Karierni napredek je počasen. Birokracija.',sr:'Karierno napredovanje je sporo. Birokratija.'},
+        advice:{hr:'Modernizacija sustava bi pomogla svima.',si:'Modernizacija sistema bi pomagala vsem.',sr:'Modernizacija sistema bi pomogla svima.'},
+        helpful:7 },
+      { id:'r3', title:{hr:'Gazda mentalitet u punom sjaju',si:'Gazda mentaliteta v polnem sijaju',sr:'Gazda mentalitet u punom sjaju'}, date:'2024-11-10', rating:2.5, position:{hr:'Skladištar',si:'Skladiščnik',sr:'Magacioner'}, status:'former',
+        pros:{hr:'Kolege su ok, lokacija je dobra.',si:'Kolegi so ok, lokacija je dobra.',sr:'Kolege su ok, lokacija je dobra.'},
+        cons:{hr:'Šefovi se ponašaju kao da si im dužan. Prekovremeni bez plaće. „Budi zahvalan da imaš posao" atmosfera.',si:'Šefi se obnašajo kot da si jim dolžan. Nadure brez plačila. „Bodi hvaležen da imaš službo" atmosfera.',sr:'Šefovi se ponašaju kao da si im dužan. Prekovremeni bez plate. „Budi zahvalan da imaš posao" atmosfera.'},
+        advice:{hr:'Poštujte radnike — nisu robovi.',si:'Spoštujte delavce — niso sužnji.',sr:'Poštujte radnike — nisu robovi.'},
+        helpful:24 }
+    ],
+    salaries: [
+      {position:{hr:'Blagajnik/ca',si:'Blagajnik/ca',sr:'Blagajnik/ca'}, avg:950, min:850, max:1100, reports:34},
+      {position:{hr:'Voditelj odjela',si:'Vodja oddelka',sr:'Voditelj odeljenja'}, avg:1400, min:1200, max:1600, reports:12},
+      {position:{hr:'Skladištar',si:'Skladiščnik',sr:'Magacioner'}, avg:1050, min:900, max:1200, reports:18},
+      {position:{hr:'IT podrška',si:'IT podpora',sr:'IT podrška'}, avg:1600, min:1300, max:1900, reports:5}
+    ],
+    jobs: [
+      {id:'j1', title:{hr:'Voditelj/ica prodajnog mjesta',si:'Vodja prodajnega mesta',sr:'Voditelj prodajnog mesta'}, type:'fulltime', salary:{min:1300,max:1600}, date:'2025-06-01',
+       desc:{hr:'Tražimo iskusnog voditelja za upravljanje prodajnim mjestom u centru Ljubljane.',si:'Iščemo izkušenega vodjo za upravljanje prodajnega mesta v centru Ljubljane.',sr:'Tražimo iskusnog voditelja za upravljanje prodajnim mestom u centru Ljubljane.'},
+       reqs:{hr:'Min. 3 godine iskustva u maloprodaji. Poznavanje SAP sustava.',si:'Min. 3 leta izkušenj v maloprodaji. Poznavanje SAP sistema.',sr:'Min. 3 godine iskustva u maloprodaji. Poznavanje SAP sistema.'},
+       benefits:{hr:'Popusti za zaposlenike, zdravstveno osiguranje, božićnica.',si:'Popusti za zaposlene, zdravstveno zavarovanje, božičnica.',sr:'Popusti za zaposlene, zdravstveno osiguranje, božićnica.'} }
+    ]
+  },
+  {
+    id:'krka', name:'Krka d.d.', industry:'ind_pharma', city:'Novo Mesto', country:'SI', flag:'🇸🇮',
+    rating:4.1, ratings:{management:3.9,culture:4.2,salary:4.0,balance:4.3,growth:3.8}, gazdaScore:8,
+    size:'5.000+', founded:1954, website:'krka.biz', color:'#27AE60',
+    description: {
+      hr:'Jedan od vodećih generičkih farmaceutskih proizvođača u svijetu. Krka proizvodi lijekove i prodaje ih u više od 70 zemalja.',
+      si:'Eno vodilnih generičnih farmacevtskih podjetij na svetu. Krka proizvaja zdravila in jih prodaja v več kot 70 državah.',
+      sr:'Jedan od vodećih generičkih farmaceutskih proizvođača na svetu. Krka proizvodi lekove i prodaje ih u više od 70 zemalja.'
+    },
+    reviews: [
+      { id:'r4', title:{hr:'Odličan poslodavac',si:'Odličen delodajalec',sr:'Odličan poslodavac'}, date:'2025-03-01', rating:4.5, position:{hr:'Farmaceut',si:'Farmacevt',sr:'Farmaceut'}, status:'current',
+        pros:{hr:'Izvrsne beneficije, moderna oprema, fer plaća. Poštuju work-life balance.',si:'Izvrstne ugodnosti, moderna oprema, poštena plača. Spoštujejo ravnovesje.',sr:'Izvrsne beneficije, moderna oprema, fer plata. Poštuju work-life balance.'},
+        cons:{hr:'Ponekad birokratski procesi. Lokacija u Novom Mestu može biti izazov za one iz Ljubljane.',si:'Včasih birokratski procesi. Lokacija v Novem mestu je lahko izziv za tiste iz Ljubljane.',sr:'Ponekad birokratski procesi. Lokacija u Novom Mestu može biti izazov za one iz Beograda.'},
+        advice:{hr:'Nastavite ovako — primjer ste drugima.',si:'Nadaljujte tako — zgled ste drugim.',sr:'Nastavite ovako — primer ste drugima.'},
+        helpful:31 },
+      { id:'r5', title:{hr:'Stabilna farmaceutska kompanija',si:'Stabilno farmacevtsko podjetje',sr:'Stabilna farmaceutska kompanija'}, date:'2025-01-20', rating:4.0, position:{hr:'Kemijski inženjer',si:'Kemijski inženir',sr:'Hemijski inženjer'}, status:'current',
+        pros:{hr:'Istraživanja su zanimljiva, timski rad je dobar.',si:'Raziskave so zanimive, timsko delo je dobro.',sr:'Istraživanja su zanimljiva, timski rad je dobar.'},
+        cons:{hr:'Napredovanje može biti sporo u nekim odjelima.',si:'Napredovanje je lahko počasno v nekaterih oddelkih.',sr:'Napredovanje može biti sporo u nekim odeljenjima.'},
+        advice:{hr:'Više mogućnosti za mlade istraživače.',si:'Več priložnosti za mlade raziskovalce.',sr:'Više mogućnosti za mlade istraživače.'},
+        helpful:15 },
+      { id:'r6', title:{hr:'Dobro za karijeru u farmaciji',si:'Dobro za kariero v farmaciji',sr:'Dobro za karijeru u farmaciji'}, date:'2024-12-05', rating:3.8, position:{hr:'Prodajni predstavnik',si:'Prodajni predstavnik',sr:'Prodajni predstavnik'}, status:'former',
+        pros:{hr:'Poznata marka, dobri treninzi, služebni auto.',si:'Poznana znamka, dobri treningi, službeni avto.',sr:'Poznata marka, dobri treninzi, službeni auto.'},
+        cons:{hr:'Pritisak za prodajne rezultate može biti velik.',si:'Pritisk za prodajne rezultate je lahko velik.',sr:'Pritisak za prodajne rezultate može biti velik.'},
+        advice:{hr:'Realniji prodajni ciljevi bi smanjili stres.',si:'Realnejši prodajni cilji bi zmanjšali stres.',sr:'Realniji prodajni ciljevi bi smanjili stres.'},
+        helpful:9 }
+    ],
+    salaries: [
+      {position:{hr:'Farmaceut',si:'Farmacevt',sr:'Farmaceut'}, avg:2400, min:2000, max:3000, reports:22},
+      {position:{hr:'Kemijski inženjer',si:'Kemijski inženir',sr:'Hemijski inženjer'}, avg:2200, min:1800, max:2800, reports:15},
+      {position:{hr:'Prodajni predstavnik',si:'Prodajni predstavnik',sr:'Prodajni predstavnik'}, avg:1800, min:1500, max:2200, reports:18},
+      {position:{hr:'Laboratorijski tehničar',si:'Laboratorijski tehnik',sr:'Laboratorijski tehničar'}, avg:1500, min:1200, max:1800, reports:10}
+    ],
+    jobs: [
+      {id:'j2', title:{hr:'Farmaceut u kontroli kvalitete',si:'Farmacevt v kontroli kakovosti',sr:'Farmaceut u kontroli kvaliteta'}, type:'fulltime', salary:{min:2200,max:2800}, date:'2025-05-20',
+       desc:{hr:'Tražimo farmaceuta za odjel kontrole kvalitete. Rad u modernom laboratoriju.',si:'Iščemo farmacevta za oddelek kontrole kakovosti. Delo v modernem laboratoriju.',sr:'Tražimo farmaceuta za odeljenje kontrole kvaliteta. Rad u modernoj laboratoriji.'},
+       reqs:{hr:'Diploma farmacije, min. 2 godine iskustva, poznavanje GMP standarda.',si:'Diploma farmacije, min. 2 leti izkušenj, poznavanje GMP standardov.',sr:'Diploma farmacije, min. 2 godine iskustva, poznavanje GMP standarda.'},
+       benefits:{hr:'Bonus shema, edukacije, zdravstveno osiguranje, prehrana.',si:'Bonus shema, izobraževanja, zdravstveno zavarovanje, prehrana.',sr:'Bonus šema, edukacije, zdravstveno osiguranje, ishrana.'} }
+    ]
+  },
+  {
+    id:'gorenje', name:'Gorenje d.o.o.', industry:'ind_appliances', city:'Velenje', country:'SI', flag:'🇸🇮',
+    rating:3.5, ratings:{management:3.2,culture:3.6,salary:3.3,balance:3.8,growth:3.2}, gazdaScore:5,
+    size:'4.000+', founded:1950, website:'gorenje.com', color:'#2980B9',
+    description: {
+      hr:'Poznati proizvođač kućanskih aparata. Sada dio Hisense grupacije.',
+      si:'Poznani proizvajalec gospodinjskih aparatov. Sedaj del Hisense grupacije.',
+      sr:'Poznati proizvođač kućnih aparata. Sada deo Hisense grupacije.'
+    },
+    reviews: [
+      { id:'r7', title:{hr:'Tradicija, ali treba modernizacije',si:'Tradicija, a potrebna je modernizacija',sr:'Tradicija, ali treba modernizacije'}, date:'2025-02-14', rating:3.5, position:{hr:'Inženjer proizvodnje',si:'Inženir proizvodnje',sr:'Inženjer proizvodnje'}, status:'current',
+        pros:{hr:'Poznata marka, ok kolege, stabilnost.',si:'Poznana znamka, ok kolegi, stabilnost.',sr:'Poznata marka, ok kolege, stabilnost.'},
+        cons:{hr:'Plaće zaostaju za konkurencijom. Hisense integracija donosi neizvjesnost.',si:'Plače zaostajajo za konkurenco. Hisense integracija prinaša negotovost.',sr:'Plate zaostaju za konkurencijom. Hisense integracija donosi neizvesnost.'},
+        advice:{hr:'Transparentnija komunikacija o budućnosti tvrtke.',si:'Transparentnejša komunikacija o prihodnosti podjetja.',sr:'Transparentnija komunikacija o budućnosti firme.'},
+        helpful:14 },
+      { id:'r8', title:{hr:'Solidno radno mjesto',si:'Solidno delovno mesto',sr:'Solidno radno mesto'}, date:'2024-10-30', rating:3.5, position:{hr:'Tehničar',si:'Tehnik',sr:'Tehničar'}, status:'current',
+        pros:{hr:'Organiziran rad, sigurnost posla.',si:'Organizirano delo, varnost zaposlitve.',sr:'Organizovan rad, sigurnost posla.'},
+        cons:{hr:'Male mogućnosti napredovanja za radnike u proizvodnji.',si:'Male možnosti napredovanja za delavce v proizvodnji.',sr:'Male mogućnosti napredovanja za radnike u proizvodnji.'},
+        advice:{hr:'Više pažnje na razvoj zaposlenika.',si:'Več pozornosti na razvoj zaposlenih.',sr:'Više pažnje na razvoj zaposlenih.'},
+        helpful:6 }
+    ],
+    salaries: [
+      {position:{hr:'Inženjer proizvodnje',si:'Inženir proizvodnje',sr:'Inženjer proizvodnje'}, avg:1900, min:1600, max:2300, reports:11},
+      {position:{hr:'Tehničar',si:'Tehnik',sr:'Tehničar'}, avg:1200, min:1000, max:1400, reports:20},
+      {position:{hr:'Dizajner',si:'Oblikovalec',sr:'Dizajner'}, avg:2100, min:1700, max:2500, reports:6}
+    ],
+    jobs: []
+  },
+  {
+    id:'petrol', name:'Petrol d.d.', industry:'ind_energy', city:'Ljubljana', country:'SI', flag:'🇸🇮',
+    rating:3.8, ratings:{management:3.5,culture:3.9,salary:3.7,balance:4.0,growth:3.5}, gazdaScore:7,
+    size:'3.500+', founded:1947, website:'petrol.si', color:'#D35400',
+    description: {
+      hr:'Vodeća energetska kompanija u Sloveniji. Upravlja mrežom benzinskih postaja i trgovina.',
+      si:'Vodilno energetsko podjetje v Sloveniji. Upravlja z mrežo bencinskih postaj in trgovin.',
+      sr:'Vodeća energetska kompanija u Sloveniji. Upravlja mrežom benzinskih pumpi i trgovina.'
+    },
+    reviews: [
+      { id:'r9', title:{hr:'Dobar poslodavac u energetskom sektoru',si:'Dober delodajalec v energetskem sektorju',sr:'Dobar poslodavac u energetskom sektoru'}, date:'2025-04-10', rating:4.0, position:{hr:'Analitičar',si:'Analitik',sr:'Analitičar'}, status:'current',
+        pros:{hr:'Fer plaća, fleksibilno radno vrijeme, mogućnost rada od kuće.',si:'Poštena plača, fleksibilen delovni čas, možnost dela od doma.',sr:'Fer plata, fleksibilno radno vreme, mogućnost rada od kuće.'},
+        cons:{hr:'Hijerarhija može biti rigidna u nekim odjelima.',si:'Hierarhija je lahko toga v nekaterih oddelkih.',sr:'Hijerarhija može biti rigidna u nekim odeljenjima.'},
+        advice:{hr:'Više horizontalne komunikacije.',si:'Več horizontalne komunikacije.',sr:'Više horizontalne komunikacije.'},
+        helpful:10 }
+    ],
+    salaries: [
+      {position:{hr:'Analitičar',si:'Analitik',sr:'Analitičar'}, avg:2100, min:1700, max:2500, reports:9},
+      {position:{hr:'Prodavač na pumpi',si:'Prodajalec na bencinski',sr:'Prodavac na pumpi'}, avg:1000, min:900, max:1150, reports:28}
+    ],
+    jobs: [
+      {id:'j3', title:{hr:'Energetski analitičar',si:'Energetski analitik',sr:'Energetski analitičar'}, type:'fulltime', salary:{min:2000,max:2600}, date:'2025-06-10',
+       desc:{hr:'Analiza tržišta energije i izrada izvješća za upravu.',si:'Analiza trga energije in priprava poročil za vodstvo.',sr:'Analiza tržišta energije i izrada izveštaja za upravu.'},
+       reqs:{hr:'Ekonomski fakultet, 2+ godine iskustva, Excel/Power BI.',si:'Ekonomska fakulteta, 2+ leti izkušenj, Excel/Power BI.',sr:'Ekonomski fakultet, 2+ godine iskustva, Excel/Power BI.'},
+       benefits:{hr:'Bonus, službeni auto, fleksibilno radno vrijeme.',si:'Bonus, službeni avto, fleksibilen delovni čas.',sr:'Bonus, službeni auto, fleksibilno radno vreme.'} }
+    ]
+  },
+  {
+    id:'lek', name:'Lek d.d.', industry:'ind_pharma', city:'Ljubljana', country:'SI', flag:'🇸🇮',
+    rating:4.0, ratings:{management:3.8,culture:4.1,salary:4.2,balance:3.9,growth:3.8}, gazdaScore:7,
+    size:'3.000+', founded:1946, website:'lek.si', color:'#16A085',
+    description: {
+      hr:'Sandoz kompanija — dio Novartis grupe. Proizvođač generičkih lijekova.',
+      si:'Sandoz podjetje — del Novartis skupine. Proizvajalec generičnih zdravil.',
+      sr:'Sandoz kompanija — deo Novartis grupe. Proizvođač generičkih lekova.'
+    },
+    reviews: [
+      { id:'r10', title:{hr:'Multinacionalna kultura',si:'Multinacionalna kultura',sr:'Multinacionalna kultura'}, date:'2025-03-15', rating:4.2, position:{hr:'Istraživač',si:'Raziskovalec',sr:'Istraživač'}, status:'current',
+        pros:{hr:'Internacionalni timovi, dobra plaća, edukacije.',si:'Internacionalne ekipe, dobra plača, izobraževanja.',sr:'Internacionalni timovi, dobra plata, edukacije.'},
+        cons:{hr:'Korporativni procesi su ponekad spori.',si:'Korporativni procesi so včasih počasni.',sr:'Korporativni procesi su ponekad spori.'},
+        advice:{hr:'Više autonomije za lokalne timove.',si:'Več avtonomije za lokalne ekipe.',sr:'Više autonomije za lokalne timove.'},
+        helpful:18 }
+    ],
+    salaries: [
+      {position:{hr:'Istraživač',si:'Raziskovalec',sr:'Istraživač'}, avg:2600, min:2200, max:3200, reports:14},
+      {position:{hr:'QA Inženjer',si:'QA Inženir',sr:'QA Inženjer'}, avg:2000, min:1700, max:2400, reports:9}
+    ],
+    jobs: []
+  },
+  // CROATIA
+  {
+    id:'konzum', name:'Konzum d.d.', industry:'ind_retail', city:'Zagreb', country:'HR', flag:'🇭🇷',
+    rating:2.8, ratings:{management:2.3,culture:2.9,salary:2.5,balance:3.0,growth:2.3}, gazdaScore:3,
+    size:'8.000+', founded:1957, website:'konzum.hr', color:'#C0392B',
+    description: {
+      hr:'Najveći maloprodajni lanac u Hrvatskoj. Dio Fortenova grupe.',
+      si:'Največja maloprodajna veriga na Hrvaškem. Del Fortenova skupine.',
+      sr:'Najveći maloprodajni lanac u Hrvatskoj. Deo Fortenova grupe.'
+    },
+    reviews: [
+      { id:'r11', title:{hr:'Niske plaće, visoka očekivanja',si:'Nizke plače, visoka pričakovanja',sr:'Niske plate, visoka očekivanja'}, date:'2025-02-28', rating:2.5, position:{hr:'Blagajnica',si:'Blagajničarka',sr:'Blagajnica'}, status:'former',
+        pros:{hr:'Blizina posla (trgovine su svugdje). Kolege su super.',si:'Bližina dela (trgovine so povsod). Kolegi so super.',sr:'Blizina posla (prodavnice su svuda). Kolege su super.'},
+        cons:{hr:'Minimalna plaća, prekovremeni su norma, gazde u centralama ne znaju što se dešava na terenu. Pritisak je ogroman.',si:'Minimalna plača, nadure so norma, šefi v centralah ne vejo kaj se dogaja na terenu. Pritisk je ogromen.',sr:'Minimalna plata, prekovremeni su norma, gazde u centralama ne znaju šta se dešava na terenu. Pritisak je ogroman.'},
+        advice:{hr:'Plaće, plaće, plaće. I poštovanje.',si:'Plače, plače, plače. In spoštovanje.',sr:'Plate, plate, plate. I poštovanje.'},
+        helpful:42 },
+      { id:'r12', title:{hr:'Izbjegavajte ako možete',si:'Izognite se če lahko',sr:'Izbegavajte ako možete'}, date:'2025-01-05', rating:2.0, position:{hr:'Skladištar',si:'Skladiščnik',sr:'Magacioner'}, status:'former',
+        pros:{hr:'Naučiš se puno o logistici.',si:'Naučiš se veliko o logistiki.',sr:'Naučiš se puno o logistici.'},
+        cons:{hr:'Gazda mentalitet na svakom koraku. Noćne smjene bez adekvatne kompenzacije. Nepotizam u napredovanju.',si:'Gazda mentaliteta na vsakem koraku. Nočne izmene brez ustrezne kompenzacije. Nepotizem pri napredovanju.',sr:'Gazda mentalitet na svakom koraku. Noćne smene bez adekvatne kompenzacije. Nepotizam u napredovanju.'},
+        advice:{hr:'Kompletna reforma upravljanja ljudskim resursima.',si:'Popolna reforma upravljanja s človeškimi viri.',sr:'Kompletna reforma upravljanja ljudskim resursima.'},
+        helpful:56 },
+      { id:'r13', title:{hr:'Može biti gore',si:'Lahko bi bilo slabše',sr:'Može biti gore'}, date:'2024-09-18', rating:3.0, position:{hr:'Voditelj smjene',si:'Vodja izmene',sr:'Voditelj smene'}, status:'current',
+        pros:{hr:'Stabilno zaposlenje, redovna plaća, popusti.',si:'Stabilna zaposlitev, redna plača, popusti.',sr:'Stabilno zaposlenje, redovna plata, popusti.'},
+        cons:{hr:'Stres, nedostatak osoblja, stare procedure.',si:'Stres, pomanjkanje osebja, stari postopki.',sr:'Stres, nedostatak osoblja, stare procedure.'},
+        advice:{hr:'Zaposlite više ljudi i platite ih fer.',si:'Zaposlite več ljudi in jih pošteno plačajte.',sr:'Zaposlite više ljudi i platite ih fer.'},
+        helpful:19 }
+    ],
+    salaries: [
+      {position:{hr:'Blagajnica',si:'Blagajničarka',sr:'Blagajnica'}, avg:750, min:650, max:850, reports:45},
+      {position:{hr:'Skladištar',si:'Skladiščnik',sr:'Magacioner'}, avg:850, min:750, max:1000, reports:22},
+      {position:{hr:'Voditelj smjene',si:'Vodja izmene',sr:'Voditelj smene'}, avg:1100, min:950, max:1300, reports:15},
+      {position:{hr:'Voditelj trgovine',si:'Vodja trgovine',sr:'Voditelj prodavnice'}, avg:1350, min:1100, max:1600, reports:8}
+    ],
+    jobs: [
+      {id:'j4', title:{hr:'Blagajnik/ca',si:'Blagajnik/ca',sr:'Blagajnik/ca'}, type:'fulltime', salary:{min:650,max:850}, date:'2025-06-15',
+       desc:{hr:'Rad na blagajni u trgovini u Zagrebu. Smjenski rad.',si:'Delo na blagajni v trgovini v Zagrebu. Izmensko delo.',sr:'Rad na kasi u prodavnici u Zagrebu. Smenski rad.'},
+       reqs:{hr:'Završena srednja škola. Komunikativnost.',si:'Končana srednja šola. Komunikativnost.',sr:'Završena srednja škola. Komunikativnost.'},
+       benefits:{hr:'Popusti za zaposlenike, topli obrok.',si:'Popusti za zaposlene, topel obrok.',sr:'Popusti za zaposlene, topli obrok.'} }
+    ]
+  },
+  {
+    id:'rimac', name:'Rimac Automobili', industry:'ind_automotive', city:'Zagreb', country:'HR', flag:'🇭🇷',
+    rating:4.5, ratings:{management:4.3,culture:4.7,salary:4.5,balance:3.8,growth:4.8}, gazdaScore:9,
+    size:'2.000+', founded:2009, website:'rimac-automobili.com', color:'#8E44AD',
+    description: {      hr:'Hrvatski proizvođač električnih hiperautomobila i tehnologije. Mate Rimac je pokrenuo revoluciju.',
+      si:'Hrvaški proizvajalec električnih hiperavtomobilov in tehnologije. Mate Rimac je sprožil revolucijo.',
+      sr:'Hrvatski proizvođač električnih hiperautomobila i tehnologije. Mate Rimac je pokrenuo revoluciju.'
+    },
+    reviews: [
+      { id:'r14', title:{hr:'Najbolji poslodavac u Hrvatskoj',si:'Najboljši delodajalec na Hrvaškem',sr:'Najbolji poslodavac u Hrvatskoj'}, date:'2025-04-22', rating:4.8, position:{hr:'Software inženjer',si:'Programski inženir',sr:'Softver inženjer'}, status:'current',
+        pros:{hr:'Nevjerojatan tim, cutting-edge tehnologija, odlična plaća. Osjećaš se kao dio nečeg velikog. Mate inspirira.',si:'Neverjetna ekipa, najnovejša tehnologija, odlična plača. Počutiš se kot del nečesa velikega. Mate navdihuje.',sr:'Neverovatna ekipa, cutting-edge tehnologija, odlična plata. Osećaš se kao deo nečeg velikog. Mate inspiriše.'},
+        cons:{hr:'Tempo je intenzivan, ponekad se radi i vikendom kad je deadline. Ali se isplati.',si:'Tempo je intenziven, včasih se dela tudi ob vikendih ko je rok. Ampak se splača.',sr:'Tempo je intenzivan, ponekad se radi i vikendom kad je deadline. Ali se isplati.'},
+        advice:{hr:'Nastavite graditi budućnost — jedina primjedba je da ponekad treba usporiti.',si:'Nadaljujte z gradnjo prihodnosti — edina pripomba je da včasih je treba upočasniti.',sr:'Nastavite da gradite budućnost — jedina primedba je da ponekad treba usporiti.'},
+        helpful:67 },
+      { id:'r15', title:{hr:'Dream job u Hrvatskoj',si:'Sanjska služba na Hrvaškem',sr:'Dream job u Hrvatskoj'}, date:'2025-03-10', rating:4.5, position:{hr:'Mehanički inženjer',si:'Strojni inženir',sr:'Mašinski inženjer'}, status:'current',
+        pros:{hr:'Radite na hiperautomobilima! Plaća iznadprosječna, mlad i dinamičan tim.',si:'Delate na hiperavtomobilih! Plača nadpovprečna, mlada in dinamična ekipa.',sr:'Radite na hiperautomobilima! Plata iznadprosečna, mlad i dinamičan tim.'},
+        cons:{hr:'Brz rast tvrtke donosi organizacijske izazove.',si:'Hitra rast podjetja prinaša organizacijske izzive.',sr:'Brz rast firme donosi organizacijske izazove.'},
+        advice:{hr:'Struktura i procesi trebaju pratiti rast.',si:'Struktura in procesi morajo slediti rasti.',sr:'Struktura i procesi trebaju pratiti rast.'},
+        helpful:43 },
+      { id:'r16', title:{hr:'Inovativno okruženje',si:'Inovativno okolje',sr:'Inovativno okruženje'}, date:'2024-12-20', rating:4.3, position:{hr:'Battery inženjer',si:'Battery inženir',sr:'Battery inženjer'}, status:'current',
+        pros:{hr:'Top oprema, međunarodni tim, startup duh s resursima velike firme.',si:'Top oprema, mednarodni tim, startup duh z viri velikega podjetja.',sr:'Top oprema, međunarodni tim, startup duh sa resursima velike firme.'},
+        cons:{hr:'Ponekad nejasne odgovornosti u brzom rastu.',si:'Včasih nejasne odgovornosti v hitri rasti.',sr:'Ponekad nejasne odgovornosti u brzom rastu.'},
+        advice:{hr:'Dokumentacija procesa bi pomogla novim zaposlenicima.',si:'Dokumentacija procesov bi pomagala novim zaposlenim.',sr:'Dokumentacija procesa bi pomogla novim zaposlenima.'},
+        helpful:28 }
+    ],
+    salaries: [
+      {position:{hr:'Software inženjer',si:'Programski inženir',sr:'Softver inženjer'}, avg:3500, min:2800, max:4500, reports:35},
+      {position:{hr:'Mehanički inženjer',si:'Strojni inženir',sr:'Mašinski inženjer'}, avg:3000, min:2500, max:3800, reports:20},
+      {position:{hr:'Battery inženjer',si:'Battery inženir',sr:'Battery inženjer'}, avg:3200, min:2600, max:4000, reports:12},
+      {position:{hr:'Dizajner',si:'Oblikovalec',sr:'Dizajner'}, avg:2800, min:2200, max:3500, reports:8},
+      {position:{hr:'HR Specijalist',si:'HR Specialist',sr:'HR Specijalista'}, avg:2200, min:1800, max:2800, reports:5}
+    ],
+    jobs: [
+      {id:'j5', title:{hr:'Senior Software Engineer',si:'Senior Software Engineer',sr:'Senior Software Engineer'}, type:'fulltime', salary:{min:3200,max:4800}, date:'2025-06-18',
+       desc:{hr:'Razvoj embedded softvera za električne pogonske sustave.',si:'Razvoj embedded programske opreme za električne pogonske sisteme.',sr:'Razvoj embedded softvera za električne pogonske sisteme.'},
+       reqs:{hr:'5+ godina C/C++, iskustvo s embedded sustavima, poznavanje automotivnih standarda.',si:'5+ let C/C++, izkušnje z embedded sistemi, poznavanje avtomobilskih standardov.',sr:'5+ godina C/C++, iskustvo sa embedded sistemima, poznavanje automotivnih standarda.'},
+       benefits:{hr:'Stock opcije, fleksibilno radno vrijeme, edukacijski budget, teretana.',si:'Stock opcije, fleksibilen delovni čas, izobraževalni proračun, fitnes.',sr:'Stock opcije, fleksibilno radno vreme, edukacijski budžet, teretana.'} },
+      {id:'j6', title:{hr:'UX/UI Dizajner',si:'UX/UI Oblikovalec',sr:'UX/UI Dizajner'}, type:'fulltime', salary:{min:2500,max:3500}, date:'2025-06-12',
+       desc:{hr:'Dizajn korisničkog sučelja za infotainment sustav hiperautomobila.',si:'Oblikovanje uporabniškega vmesnika za infotainment sistem hiperavtomobila.',sr:'Dizajn korisničkog interfejsa za infotainment sistem hiperautomobila.'},
+       reqs:{hr:'3+ godine UX/UI iskustva, Figma, portfolio.',si:'3+ leta UX/UI izkušenj, Figma, portfolio.',sr:'3+ godine UX/UI iskustva, Figma, portfolio.'},
+       benefits:{hr:'Kreativan tim, moderna oprema, stock opcije.',si:'Kreativna ekipa, moderna oprema, stock opcije.',sr:'Kreativan tim, moderna oprema, stock opcije.'} }
+    ]
+  },
+  {
+    id:'infobip', name:'Infobip d.o.o.', industry:'ind_tech', city:'Zagreb', country:'HR', flag:'🇭🇷',
+    rating:4.2, ratings:{management:4.0,culture:4.4,salary:4.1,balance:4.0,growth:4.3}, gazdaScore:8,
+    size:'3.000+', founded:2006, website:'infobip.com', color:'#F39C12',
+    description: {
+      hr:'Globalna IT kompanija specijalizirana za komunikacijske platforme. Jedini hrvatski unicorn.',
+      si:'Globalno IT podjetje specializirano za komunikacijske platforme. Edini hrvaški unicorn.',
+      sr:'Globalna IT kompanija specijalizovana za komunikacione platforme. Jedini hrvatski unicorn.'
+    },
+    reviews: [
+      { id:'r17', title:{hr:'Hrvatski unicorn — zasluženo',si:'Hrvaški unicorn — zasluženo',sr:'Hrvatski unicorn — zasluženo'}, date:'2025-05-01', rating:4.5, position:{hr:'Backend developer',si:'Backend razvijalec',sr:'Backend developer'}, status:'current',
+        pros:{hr:'Remote friendly, odlične plaće za HR standarde, internacionalni klijenti, mlad tim.',si:'Remote friendly, odlične plače za HR standarde, internacionalne stranke, mlada ekipa.',sr:'Remote friendly, odlične plate za HR standarde, internacionalni klijenti, mlad tim.'},
+        cons:{hr:'Ponekad neorganiziranost u brzom rastu. Komunikacija između timova mogla bi biti bolja.',si:'Včasih neorganiziranost v hitri rasti. Komunikacija med ekipami bi lahko bila boljša.',sr:'Ponekad neorganizovanost u brzom rastu. Komunikacija između timova mogla bi biti bolja.'},
+        advice:{hr:'Standardizirajte procese kroz sve timove.',si:'Standardizirajte procese skozi vse ekipe.',sr:'Standardizujte procese kroz sve timove.'},
+        helpful:34 },
+      { id:'r18', title:{hr:'Dobra firma za developere',si:'Dobro podjetje za razvijalce',sr:'Dobra firma za developere'}, date:'2025-02-15', rating:4.0, position:{hr:'QA Engineer',si:'QA Inženir',sr:'QA Inženjer'}, status:'current',
+        pros:{hr:'Dobra kultura, team buildingi, mogućnost napredovanja.',si:'Dobra kultura, team buildingi, možnost napredovanja.',sr:'Dobra kultura, team buildingi, mogućnost napredovanja.'},
+        cons:{hr:'Workload može biti velik u peak periodima.',si:'Obremenitev je lahko velika v peak periodih.',sr:'Workload može biti velik u peak periodima.'},
+        advice:{hr:'Balansiranije raspoređivanje posla.',si:'Bolj uravnoteženo razporejanje dela.',sr:'Balansiranije raspoređivanje posla.'},
+        helpful:18 }
+    ],
+    salaries: [
+      {position:{hr:'Backend developer',si:'Backend razvijalec',sr:'Backend developer'}, avg:3000, min:2200, max:4000, reports:28},
+      {position:{hr:'Frontend developer',si:'Frontend razvijalec',sr:'Frontend developer'}, avg:2800, min:2000, max:3600, reports:22},
+      {position:{hr:'QA Engineer',si:'QA Inženir',sr:'QA Inženjer'}, avg:2200, min:1800, max:2800, reports:15},
+      {position:{hr:'Product Manager',si:'Product Manager',sr:'Product Manager'}, avg:3200, min:2500, max:4200, reports:8}
+    ],
+    jobs: [
+      {id:'j7', title:{hr:'Full Stack Developer',si:'Full Stack Razvijalec',sr:'Full Stack Developer'}, type:'fulltime', salary:{min:2500,max:3800}, date:'2025-06-05',
+       desc:{hr:'Razvoj komunikacijskih platformi za globalne klijente. React + Node.js stack.',si:'Razvoj komunikacijskih platform za globalne stranke. React + Node.js stack.',sr:'Razvoj komunikacionih platformi za globalne klijente. React + Node.js stack.'},
+       reqs:{hr:'3+ godine full stack iskustva, React, Node.js, SQL.',si:'3+ leta full stack izkušenj, React, Node.js, SQL.',sr:'3+ godine full stack iskustva, React, Node.js, SQL.'},
+       benefits:{hr:'Remote rad, stock opcije, edukacijski budget, team buildingi.',si:'Remote delo, stock opcije, izobraževalni proračun, team buildingi.',sr:'Remote rad, stock opcije, edukacijski budžet, team buildingi.'} }
+    ]
+  },
+  {
+    id:'podravka', name:'Podravka d.d.', industry:'ind_food', city:'Koprivnica', country:'HR', flag:'🇭🇷',
+    rating:3.6, ratings:{management:3.3,culture:3.7,salary:3.4,balance:3.8,growth:3.2}, gazdaScore:6,
+    size:'3.000+', founded:1947, website:'podravka.hr', color:'#E74C3C',
+    description:{hr:'Vodeća prehrambena kompanija u Hrvatskoj. Poznata po Vegeti.',si:'Vodilno prehransko podjetje na Hrvaškem. Poznano po Vegeti.',sr:'Vodeća prehrambena kompanija u Hrvatskoj. Poznata po Vegeti.'},
+    reviews:[
+      {id:'r19',title:{hr:'Vegeta tradicija',si:'Vegeta tradicija',sr:'Vegeta tradicija'},date:'2025-01-10',rating:3.5,position:{hr:'Tehnolog',si:'Tehnolog',sr:'Tehnolog'},status:'current',
+       pros:{hr:'Poznata marka, sigurnost posla, dobri timovi.',si:'Poznana znamka, varnost zaposlitve, dobre ekipe.',sr:'Poznata marka, sigurnost posla, dobri timovi.'},
+       cons:{hr:'Korporativna sporost, plaće ne prate inflaciju.',si:'Korporativna počasnost, plače ne sledijo inflaciji.',sr:'Korporativna sporost, plate ne prate inflaciju.'},
+       advice:{hr:'Modernizirajte sustave i podignite plaće.',si:'Modernizirajte sisteme in dvignite plače.',sr:'Modernizujte sisteme i podignite plate.'},helpful:11}
+    ],
+    salaries:[
+      {position:{hr:'Tehnolog',si:'Tehnolog',sr:'Tehnolog'},avg:1600,min:1300,max:1900,reports:12},
+      {position:{hr:'Operater',si:'Operater',sr:'Operater'},avg:1000,min:850,max:1200,reports:25}
+    ],
+    jobs:[]
+  },
+  {
+    id:'duro', name:'Đuro Đaković', industry:'ind_industrial', city:'Slavonski Brod', country:'HR', flag:'🇭🇷',
+    rating:2.4, ratings:{management:2.0,culture:2.5,salary:2.2,balance:2.8,growth:1.8}, gazdaScore:2,
+    size:'500+', founded:1921, website:'duro-dakovic.com', color:'#7f8c8d',
+    description:{hr:'Industrijsko poduzeće specijalizirano za metalne konstrukcije i vagone.',si:'Industrijsko podjetje specializirano za kovinske konstrukcije in vagone.',sr:'Industrijsko preduzeće specijalizovano za metalne konstrukcije i vagone.'},
+    reviews:[
+      {id:'r20',title:{hr:'Gazda iz prošlog stoljeća',si:'Gazda iz prejšnjega stoletja',sr:'Gazda iz prošlog veka'},date:'2025-02-01',rating:2.0,position:{hr:'Zavarivač',si:'Varilec',sr:'Zavarivač'},status:'former',
+       pros:{hr:'Naučiš zanat, kolege su solidarne.',si:'Naučiš se obrti, kolegi so solidarni.',sr:'Naučiš zanat, kolege su solidarne.'},
+       cons:{hr:'Plaće kasne, oprema zastarjela, gazda mentalitet — „budi sretan da uopće radiš". Nema razvoja karijere.',si:'Plače zamujajo, oprema zastarela, gazda mentaliteta — „bodi srečen da sploh delaš". Ni razvoja kariere.',sr:'Plate kasne, oprema zastarela, gazda mentalitet — „budi srećan da uopšte radiš". Nema razvoja karijere.'},
+       advice:{hr:'Investirajte u ljude i opremu ili zatvorite vrata.',si:'Investirajte v ljudi in opremo ali zaprite vrata.',sr:'Investirajte u ljude i opremu ili zatvorite vrata.'},helpful:38}
+    ],
+    salaries:[
+      {position:{hr:'Zavarivač',si:'Varilec',sr:'Zavarivač'},avg:900,min:750,max:1100,reports:14},
+      {position:{hr:'Inženjer',si:'Inženir',sr:'Inženjer'},avg:1400,min:1100,max:1700,reports:6}
+    ],
+    jobs:[]
+  },
+  // SERBIA
+  {
+    id:'telekom', name:'Telekom Srbija', industry:'ind_telecom', city:'Beograd', country:'RS', flag:'🇷🇸',
+    rating:2.9, ratings:{management:2.5,culture:3.0,salary:3.2,balance:3.0,growth:2.3}, gazdaScore:4,
+    size:'8.000+', founded:1997, website:'mts.rs', color:'#3498DB',
+    description:{hr:'Nacionalni telekomunikacijski operater Srbije.',si:'Nacionalni telekomunikacijski operater Srbije.',sr:'Nacionalni telekomunikacioni operater Srbije.'},
+    reviews:[
+      {id:'r21',title:{hr:'Državna firma — spori procesi',si:'Državno podjetje — počasni procesi',sr:'Državna firma — spori procesi'},date:'2025-03-20',rating:3.0,position:{hr:'Mrežni inženjer',si:'Mrežni inženir',sr:'Mrežni inženjer'},status:'current',
+       pros:{hr:'Stabilna plaća, radni sati su ok, nije pretjeran pritisak.',si:'Stabilna plača, delovni čas je ok, ni pretiranega pritiska.',sr:'Stabilna plata, radno vreme je ok, nije preteran pritisak.'},
+       cons:{hr:'Napredovanje po vezi, birokratski košmar, stara tehnologija. Politički utjecaj na zapošljavanje.',si:'Napredovanje po zvezi, birokratska mora, stara tehnologija. Politični vpliv na zaposlovanje.',sr:'Napredovanje po vezi, birokratski košmar, stara tehnologija. Politički uticaj na zapošljavanje.'},
+       advice:{hr:'Depolitizirajte kompaniju.',si:'Depolitizirajte podjetje.',sr:'Depolitizujte kompaniju.'},helpful:29}
+    ],
+    salaries:[
+      {position:{hr:'Mrežni inženjer',si:'Mrežni inženir',sr:'Mrežni inženjer'},avg:1400,min:1100,max:1800,reports:18},
+      {position:{hr:'Korisničko služba',si:'Uporabniška podpora',sr:'Korisnička služba'},avg:800,min:650,max:1000,reports:35}
+    ],
+    jobs:[{id:'j8',title:{hr:'Mrežni inženjer',si:'Mrežni inženir',sr:'Mrežni inženjer'},type:'fulltime',salary:{min:1200,max:1800},date:'2025-06-01',
+      desc:{hr:'Održavanje i razvoj telekomunikacijske mreže.',si:'Vzdrževanje in razvoj telekomunikacijskega omrežja.',sr:'Održavanje i razvoj telekomunikacione mreže.'},
+      reqs:{hr:'Diploma IT/telekomunikacija, CCNA certifikat.',si:'Diploma IT/telekomunikacij, CCNA certifikat.',sr:'Diploma IT/telekomunikacija, CCNA certifikat.'},
+      benefits:{hr:'Mobilni telefon, internet, penzijski fond.',si:'Mobilni telefon, internet, pokojninski sklad.',sr:'Mobilni telefon, internet, penzioni fond.'}}]
+  },
+  {
+    id:'nelt', name:'Nelt Group', industry:'ind_distribution', city:'Beograd', country:'RS', flag:'🇷🇸',
+    rating:3.4, ratings:{management:3.2,culture:3.5,salary:3.3,balance:3.5,growth:3.2}, gazdaScore:6,
+    size:'2.000+', founded:1992, website:'nelt.com', color:'#1abc9c',
+    description:{hr:'Vodeća distribucijska kompanija u Srbiji i regiji.',si:'Vodilno distribucijsko podjetje v Srbiji in regiji.',sr:'Vodeća distribuciona kompanija u Srbiji i regionu.'},
+    reviews:[
+      {id:'r22',title:{hr:'Solidna distribucija',si:'Solidna distribucija',sr:'Solidna distribucija'},date:'2025-02-25',rating:3.5,position:{hr:'Komercijalista',si:'Komercialist',sr:'Komercijalista'},status:'current',
+       pros:{hr:'Poznati brendovi u portfoliju, služebni auto, bonusi.',si:'Poznane blagovne znamke v portfoliu, službeni avto, bonusi.',sr:'Poznati brendovi u portfoliju, službeni auto, bonusi.'},
+       cons:{hr:'Visoki prodajni targeti, sezonski pritisci.',si:'Visoki prodajni cilji, sezonski pritiski.',sr:'Visoki prodajni targeti, sezonski pritisci.'},
+       advice:{hr:'Realniji kvartalni ciljevi.',si:'Realnejši kvartalni cilji.',sr:'Realniji kvartalni ciljevi.'},helpful:8}
+    ],
+    salaries:[
+      {position:{hr:'Komercijalista',si:'Komercialist',sr:'Komercijalista'},avg:1200,min:900,max:1600,reports:20},
+      {position:{hr:'Skladištar',si:'Skladiščnik',sr:'Magacioner'},avg:800,min:700,max:950,reports:16}
+    ],
+    jobs:[]
+  },
+  {
+    id:'nordeus', name:'Nordeus', industry:'ind_gaming', city:'Beograd', country:'RS', flag:'🇷🇸',
+    rating:4.3, ratings:{management:4.1,culture:4.6,salary:4.4,balance:4.2,growth:4.0}, gazdaScore:9,
+    size:'200+', founded:2010, website:'nordeus.com', color:'#9b59b6',
+    description:{hr:'Gaming studio poznat po Top Eleven. Dio Take-Two Interactive.',si:'Gaming studio poznan po Top Eleven. Del Take-Two Interactive.',sr:'Gaming studio poznat po Top Eleven. Deo Take-Two Interactive.'},
+    reviews:[
+      {id:'r23',title:{hr:'Gaming dream',si:'Gaming sanje',sr:'Gaming dream'},date:'2025-04-15',rating:4.5,position:{hr:'Game developer',si:'Game razvijalec',sr:'Game developer'},status:'current',
+       pros:{hr:'Odlična kultura, top plaća za Srbiju, ured koji izgleda kao iz filma. Besplatna hrana.',si:'Odlična kultura, top plača za Srbijo, pisarna ki izgleda kot iz filma. Brezplačna hrana.',sr:'Odlična kultura, top plata za Srbiju, kancelarija koja izgleda kao iz filma. Besplatna hrana.'},
+       cons:{hr:'Ponekad pritisak oko releasa. Kao dio Take-Two, neka autonomija se gubi.',si:'Včasih pritisk ob izidu igre. Kot del Take-Two, del avtonomije se izgublja.',sr:'Ponekad pritisak oko releasa. Kao deo Take-Two, neka autonomija se gubi.'},
+       advice:{hr:'Zadržite startup duh.',si:'Ohranite startup duha.',sr:'Zadržite startup duh.'},helpful:45}
+    ],
+    salaries:[
+      {position:{hr:'Game developer',si:'Game razvijalec',sr:'Game developer'},avg:3200,min:2500,max:4200,reports:18},
+      {position:{hr:'Game dizajner',si:'Game oblikovalec',sr:'Game dizajner'},avg:2800,min:2000,max:3500,reports:10}
+    ],
+    jobs:[{id:'j9',title:{hr:'Senior Unity Developer',si:'Senior Unity Razvijalec',sr:'Senior Unity Developer'},type:'fulltime',salary:{min:3000,max:4500},date:'2025-05-28',
+      desc:{hr:'Razvoj gameplay mehanika za Top Eleven.',si:'Razvoj gameplay mehanik za Top Eleven.',sr:'Razvoj gameplay mehanika za Top Eleven.'},
+      reqs:{hr:'4+ godine Unity, C#, poznavanje gaming industrije.',si:'4+ leta Unity, C#, poznavanje gaming industrije.',sr:'4+ godine Unity, C#, poznavanje gaming industrije.'},
+      benefits:{hr:'Besplatna hrana, gaming soba, fleksibilno radno vrijeme, gym.',si:'Brezplačna hrana, gaming soba, fleksibilen delovni čas, fitnes.',sr:'Besplatna hrana, gaming soba, fleksibilno radno vreme, teretana.'}}]
+  },
+  {
+    id:'comtrade', name:'Comtrade Group', industry:'ind_tech', city:'Beograd', country:'RS', flag:'🇷🇸',
+    rating:3.7, ratings:{management:3.5,culture:3.8,salary:3.6,balance:3.7,growth:3.6}, gazdaScore:7,
+    size:'1.500+', founded:1991, website:'comtrade.com', color:'#2980B9',
+    description:{hr:'IT kompanija koja pruža softverska rješenja i usluge.',si:'IT podjetje ki nudi programske rešitve in storitve.',sr:'IT kompanija koja pruža softverska rešenja i usluge.'},
+    reviews:[
+      {id:'r24',title:{hr:'Dobar IT izbor u Srbiji',si:'Dobra IT izbira v Srbiji',sr:'Dobar IT izbor u Srbiji'},date:'2025-03-05',rating:3.8,position:{hr:'Java developer',si:'Java razvijalec',sr:'Java developer'},status:'current',
+       pros:{hr:'Raznovrsni projekti, dobri kolege, mogućnost rada na međunarodnim projektima.',si:'Raznovrstni projekti, dobri kolegi, možnost dela na mednarodnih projektih.',sr:'Raznovrsni projekti, dobre kolege, mogućnost rada na međunarodnim projektima.'},
+       cons:{hr:'Plaća mogla bi biti veća za senior pozicije.',si:'Plača bi lahko bila višja za senior pozicije.',sr:'Plata mogla bi biti veća za senior pozicije.'},
+       advice:{hr:'Prilagodite plaće tržištu.',si:'Prilagodite plače trgu.',sr:'Prilagodite plate tržištu.'},helpful:14}
+    ],
+    salaries:[
+      {position:{hr:'Java developer',si:'Java razvijalec',sr:'Java developer'},avg:2200,min:1600,max:3000,reports:24},
+      {position:{hr:'DevOps inženjer',si:'DevOps inženir',sr:'DevOps inženjer'},avg:2500,min:1800,max:3200,reports:10}
+    ],
+    jobs:[]
+  },
+  {
+    id:'mkgroup', name:'MK Group', industry:'ind_agri', city:'Novi Sad', country:'RS', flag:'🇷🇸',
+    rating:3.1, ratings:{management:2.8,culture:3.2,salary:3.0,balance:3.3,growth:2.8}, gazdaScore:5,
+    size:'3.000+', founded:1983, website:'mkgroup.rs', color:'#27AE60',
+    description:{hr:'Agro-industrijski holding s operacijama u Srbiji i regiji.',si:'Agro-industrijski holding z operacijami v Srbiji in regiji.',sr:'Agro-industrijski holding sa operacijama u Srbiji i regionu.'},
+    reviews:[
+      {id:'r25',title:{hr:'Sezonski posao, stalni izazovi',si:'Sezonsko delo, stalni izzivi',sr:'Sezonski posao, stalni izazovi'},date:'2025-01-28',rating:3.0,position:{hr:'Agronom',si:'Agronom',sr:'Agronom'},status:'current',
+       pros:{hr:'Rad na otvorenom, stabilna firma, dobre mašine.',si:'Delo na prostem, stabilno podjetje, dobri stroji.',sr:'Rad na otvorenom, stabilna firma, dobre mašine.'},
+       cons:{hr:'Sezonski pritisak je ogroman, gazde na farmama su old school.',si:'Sezonski pritisk je ogromen, gazde na kmetijah so old school.',sr:'Sezonski pritisak je ogroman, gazde na farmama su old school.'},
+       advice:{hr:'Modernizirajte pristup zaposlenicima na terenu.',si:'Modernizirajte pristop do zaposlenih na terenu.',sr:'Modernizujte pristup zaposlenima na terenu.'},helpful:7}
+    ],
+    salaries:[
+      {position:{hr:'Agronom',si:'Agronom',sr:'Agronom'},avg:1100,min:900,max:1400,reports:12},
+      {position:{hr:'Radnik u proizvodnji',si:'Delavec v proizvodnji',sr:'Radnik u proizvodnji'},avg:750,min:600,max:900,reports:30}
+    ],
+    jobs:[]
+  },
+  // BOSNIA & HERZEGOVINA
+  {
+    id:'bhtelecom', name:'BH Telecom', industry:'ind_telecom', city:'Sarajevo', country:'BA', flag:'🇧🇦',
+    rating:3.0, ratings:{management:2.7,culture:3.1,salary:3.2,balance:3.2,growth:2.5}, gazdaScore:4,
+    size:'3.000+', founded:1992, website:'bhtelecom.ba', color:'#3498DB',
+    description:{hr:'Vodeći telekomunikacijski operater u Bosni i Hercegovini.',si:'Vodilni telekomunikacijski operater v Bosni in Hercegovini.',sr:'Vodeći telekomunikacioni operater u Bosni i Hercegovini.'},
+    reviews:[
+      {id:'r26',title:{hr:'Državna firma, sve što to nosi',si:'Državno podjetje, vse kar to prinese',sr:'Državna firma, sve što to nosi'},date:'2025-02-10',rating:3.0,position:{hr:'Sistemski administrator',si:'Sistemski administrator',sr:'Sistemski administrator'},status:'current',
+       pros:{hr:'Redovna plaća, normalno radno vrijeme, nema prekovremenih.',si:'Redna plača, normalen delovni čas, ni nadur.',sr:'Redovna plata, normalno radno vreme, nema prekovremenih.'},
+       cons:{hr:'Napredovanje po stranačkoj liniji, zastarjela infrastruktura, spora birokracija.',si:'Napredovanje po strankarski liniji, zastarela infrastruktura, počasna birokracija.',sr:'Napredovanje po stranačkoj liniji, zastarela infrastruktura, spora birokratija.'},
+       advice:{hr:'Zapošljavajte po kompetencijama, ne po stranačkoj knjižici.',si:'Zaposlujte po kompetencah, ne po strankarski izkaznici.',sr:'Zapošljavajte po kompetencijama, ne po stranačkoj knjižici.'},helpful:22}
+    ],
+    salaries:[
+      {position:{hr:'Sistemski administrator',si:'Sistemski administrator',sr:'Sistemski administrator'},avg:1300,min:1000,max:1600,reports:11},
+      {position:{hr:'Prodavač',si:'Prodajalec',sr:'Prodavac'},avg:800,min:650,max:1000,reports:20}
+    ],
+    jobs:[]
+  },
+  {
+    id:'asagroup', name:'ASA Group', industry:'ind_automotive', city:'Sarajevo', country:'BA', flag:'🇧🇦',
+    rating:3.3, ratings:{management:3.0,culture:3.4,salary:3.2,balance:3.5,growth:3.0}, gazdaScore:5,
+    size:'2.500+', founded:1999, website:'asa.ba', color:'#E67E22',
+    description:{hr:'Diversificirana grupacija s fokusom na automobilsku industriju.',si:'Diversificirana skupina s fokusom na avtomobilsko industrijo.',sr:'Diversifikovana grupacija sa fokusom na automobilsku industriju.'},
+    reviews:[
+      {id:'r27',title:{hr:'Bosanski standard',si:'Bosanski standard',sr:'Bosanski standard'},date:'2025-01-15',rating:3.5,position:{hr:'Prodajni savjetnik',si:'Prodajni svetovalec',sr:'Prodajni savetnik'},status:'current',
+       pros:{hr:'Poznati auto brendovi, provizije mogu biti dobre.',si:'Poznane avtomobilske znamke, provizije so lahko dobre.',sr:'Poznati auto brendovi, provizije mogu biti dobre.'},
+       cons:{hr:'Menadžment je tradicionalan, komunikacija top-down.',si:'Menedžment je tradicionalen, komunikacija top-down.',sr:'Menadžment je tradicionalan, komunikacija top-down.'},
+       advice:{hr:'Više transparentnosti u odlučivanju.',si:'Več transparentnosti pri odločanju.',sr:'Više transparentnosti u odlučivanju.'},helpful:9}
+    ],
+    salaries:[
+      {position:{hr:'Prodajni savjetnik',si:'Prodajni svetovalec',sr:'Prodajni savetnik'},avg:1100,min:800,max:1500,reports:14},
+      {position:{hr:'Serviser',si:'Serviser',sr:'Serviser'},avg:900,min:750,max:1100,reports:18}
+    ],
+    jobs:[{id:'j10',title:{hr:'Auto serviser',si:'Avtomehanik',sr:'Auto serviser'},type:'fulltime',salary:{min:800,max:1200},date:'2025-06-08',
+      desc:{hr:'Servisiranje vozila u ovlaštenom VW servisu.',si:'Servisiranje vozil v pooblaščenem VW servisu.',sr:'Servisiranje vozila u ovlašćenom VW servisu.'},
+      reqs:{hr:'KV mehaničar, min. 2 godine iskustva.',si:'KV mehanik, min. 2 leti izkušenj.',sr:'KV mehaničar, min. 2 godine iskustva.'},
+      benefits:{hr:'Obuka na novim modelima, topli obrok, regres.',si:'Usposabljanje na novih modelih, topel obrok, regres.',sr:'Obuka na novim modelima, topli obrok, regres.'}}]
+  },
+  {
+    id:'prevent', name:'Prevent Group', industry:'ind_textile', city:'Visoko', country:'BA', flag:'🇧🇦',
+    rating:2.6, ratings:{management:2.2,culture:2.8,salary:2.4,balance:2.9,growth:2.2}, gazdaScore:3,
+    size:'5.000+', founded:1999, website:'prevent.ba', color:'#C0392B',
+    description:{hr:'Tekstilna kompanija — dobavljač za europske auto proizvođače.',si:'Tekstilno podjetje — dobavitelj za evropske avtomobilske proizvajalce.',sr:'Tekstilna kompanija — dobavljač za evropske auto proizvođače.'},
+    reviews:[
+      {id:'r28',title:{hr:'Tvornica snova — ali ne u dobrom smislu',si:'Tovarna sanj — a ne v dobrem pomenu',sr:'Fabrika snova — ali ne u dobrom smislu'},date:'2025-03-12',rating:2.5,position:{hr:'Radnica u proizvodnji',si:'Delavka v proizvodnji',sr:'Radnica u proizvodnji'},status:'former',
+       pros:{hr:'Posao blizu kuće, kolege drže zajedno.',si:'Delo blizu doma, kolegice držijo skupaj.',sr:'Posao blizu kuće, kolege drže zajedno.'},
+       cons:{hr:'Gazda mentalitet najgore vrste. Smjenski rad po 12 sati, plaća minimalna. Žene se tretiraju kao strojevi. Nema bolovanja bez problema.',si:'Gazda mentaliteta najslabše vrste. Izmensko delo po 12 ur, plača minimalna. Ženske se obravnavajo kot stroji. Ni bolniške brez problemov.',sr:'Gazda mentalitet najgore vrste. Smenski rad po 12 sati, plata minimalna. Žene se tretiraju kao mašine. Nema bolovanja bez problema.'},
+       advice:{hr:'Poštujte ljudska prava svojih radnika.',si:'Spoštujte človeške pravice svojih delavcev.',sr:'Poštujte ljudska prava svojih radnika.'},helpful:61}
+    ],
+    salaries:[
+      {position:{hr:'Radnica u proizvodnji',si:'Delavka v proizvodnji',sr:'Radnica u proizvodnji'},avg:550,min:450,max:700,reports:40},
+      {position:{hr:'Kontrolor kvalitete',si:'Kontrolor kakovosti',sr:'Kontrolor kvaliteta'},avg:700,min:600,max:850,reports:12}
+    ],
+    jobs:[]
+  },
+  {
+    id:'bekto', name:'Bekto Precisa', industry:'ind_manufacturing', city:'Goražde', country:'BA', flag:'🇧🇦',
+    rating:3.8, ratings:{management:3.6,culture:3.9,salary:3.5,balance:3.8,growth:3.7}, gazdaScore:7,
+    size:'500+', founded:1979, website:'bekto-precisa.ba', color:'#2980B9',
+    description:{hr:'Precizna proizvodnja — komponente za auto i medicinsku industriju.',si:'Precizna proizvodnja — komponente za avto in medicinsko industrijo.',sr:'Precizna proizvodnja — komponente za auto i medicinsku industriju.'},
+    reviews:[
+      {id:'r29',title:{hr:'Iznenađujuće dobro za BiH',si:'Presenetljivo dobro za BiH',sr:'Iznenađujuće dobro za BiH'},date:'2025-04-01',rating:4.0,position:{hr:'CNC operater',si:'CNC operater',sr:'CNC operater'},status:'current',
+       pros:{hr:'Moderna oprema, fer gazda, investiraju u ljude. Rijedak primjer dobre prakse u BiH.',si:'Moderna oprema, pošten gazda, investirajo v ljudi. Redek primer dobre prakse v BiH.',sr:'Moderna oprema, fer gazda, investiraju u ljude. Redak primer dobre prakse u BiH.'},
+       cons:{hr:'Lokacija — Goražde nije baš metropola.',si:'Lokacija — Goražde ni ravno metropola.',sr:'Lokacija — Goražde nije baš metropola.'},
+       advice:{hr:'Nastavite ovako, primjer ste regiji.',si:'Nadaljujte tako, zgled ste regiji.',sr:'Nastavite ovako, primer ste regionu.'},helpful:17}
+    ],
+    salaries:[
+      {position:{hr:'CNC operater',si:'CNC operater',sr:'CNC operater'},avg:1200,min:1000,max:1500,reports:15},
+      {position:{hr:'Inženjer kvalitete',si:'Inženir kakovosti',sr:'Inženjer kvaliteta'},avg:1500,min:1200,max:1800,reports:6}
+    ],
+    jobs:[]
+  },
+  {
+    id:'bingo', name:'Bingo d.o.o.', industry:'ind_retail', city:'Tuzla', country:'BA', flag:'🇧🇦',
+    rating:2.7, ratings:{management:2.3,culture:2.8,salary:2.5,balance:2.9,growth:2.2}, gazdaScore:3,
+    size:'6.000+', founded:1993, website:'bfranchise.ba', color:'#E74C3C',
+    description:{hr:'Najveći domaći maloprodajni lanac u BiH.',si:'Največja domača maloprodajna veriga v BiH.',sr:'Najveći domaći maloprodajni lanac u BiH.'},
+    reviews:[
+      {id:'r30',title:{hr:'Tipični balkanski gazda',si:'Tipični balkanski gazda',sr:'Tipični balkanski gazda'},date:'2025-02-20',rating:2.5,position:{hr:'Blagajnica',si:'Blagajničarka',sr:'Blagajnica'},status:'former',
+       pros:{hr:'Redovna plaća, kolege su ok.',si:'Redna plača, kolegice so ok.',sr:'Redovna plata, kolege su ok.'},
+       cons:{hr:'Gazda mentalitet — radiš prekovremeno besplatno ili „nađi drugi posao". Kontrola kamere neprestano. Nema sindikata.',si:'Gazda mentaliteta — delaš nadure zastonj ali „najdi drugo službo". Nadzor s kamerami neprestano. Ni sindikata.',sr:'Gazda mentalitet — radiš prekovremeno besplatno ili „nađi drugi posao". Kontrola kamerama neprestano. Nema sindikata.'},
+       advice:{hr:'Formirajte sindikat. Plaćajte prekovremene. Prestanite špijunirati radnike.',si:'Oblikujte sindikat. Plačajte nadure. Prenehajte vohuniti za delavci.',sr:'Formirajte sindikat. Plaćajte prekovremene. Prestanite da špijunirate radnike.'},helpful:47}
+    ],
+    salaries:[
+      {position:{hr:'Blagajnica',si:'Blagajničarka',sr:'Blagajnica'},avg:550,min:450,max:700,reports:38},
+      {position:{hr:'Mesni majstor',si:'Mesar',sr:'Mesar'},avg:700,min:600,max:850,reports:14}
+    ],
+    jobs:[]
+  }
+];
+
+// Cities by country
+const CITIES = {
+  SI:['Ljubljana','Maribor','Celje','Kranj','Novo Mesto','Velenje','Koper'],
+  HR:['Zagreb','Split','Rijeka','Osijek','Zadar','Slavonski Brod','Koprivnica','Dubrovnik'],
+  RS:['Beograd','Novi Sad','Niš','Kragujevac','Subotica'],
+  BA:['Sarajevo','Banja Luka','Tuzla','Zenica','Mostar','Goražde','Visoko']
+};
+
+// ===========================================
+// APP STATE & HELPERS
+// ===========================================
+let lang = localStorage.getItem('gazda_lang') || 'hr';
+let currentRoute = '';
+const PER_PAGE = 9;
+
+function t(key) { return (T[lang] && T[lang][key]) || (T.hr[key]) || key; }
+function tObj(obj) { return (obj && obj[lang]) || (obj && obj.hr) || ''; }
+
+function getAllJobs() {
+  let jobs = [];
+  companies.forEach(c => {
+    (c.jobs||[]).forEach(j => { jobs.push({...j, companyId:c.id, companyName:c.name, companyRating:c.rating, city:c.city, country:c.country, flag:c.flag}); });
+  });
+  const custom = JSON.parse(localStorage.getItem('gazda_jobs')||'[]');
+  custom.forEach(j=>jobs.push(j));
+  return jobs;
+}
+
+function getAllSalaries() {
+  let sals = [];
+  companies.forEach(c => {
+    (c.salaries||[]).forEach(s => { sals.push({...s, companyId:c.id, companyName:c.name, city:c.city, country:c.country}); });
+  });
+  const custom = JSON.parse(localStorage.getItem('gazda_salaries')||'[]');
+  custom.forEach(s=>sals.push(s));
+  return sals;
+}
+
+function getCompanyReviews(companyId) {
+  const c = companies.find(x=>x.id===companyId);
+  if(!c) return [];
+  const custom = JSON.parse(localStorage.getItem('gazda_reviews')||'[]').filter(r=>r.companyId===companyId);
+  return [...(c.reviews||[]), ...custom];
+}
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('gazda_lang', l);
+  renderNav();
+  renderFooter();
+  route();
+}
+
+// ===========================================
+// NAVIGATION
+// ===========================================
+function renderNav() {
+  const links = [
+    {href:'#/home', key:'nav_home'},
+    {href:'#/companies', key:'nav_companies'},
+    {href:'#/jobs', key:'nav_jobs'},
+    {href:'#/salaries', key:'nav_salaries'},
+    {href:'#/review', key:'nav_review'}
+  ];
+  const navEl = document.getElementById('navLinks');
+  navEl.innerHTML = links.map(l=>`<a href="${l.href}" class="${currentRoute===l.href.slice(1)?'active':''}">${t(l.key)}</a>`).join('');
+
+  // Language switcher
+  const ls = document.getElementById('langSwitcher');
+  ls.innerHTML = ['hr','si','sr'].map(l=>`<button class="lang-btn ${lang===l?'active':''}" onclick="setLang('${l}')">${l==='hr'?'🇭🇷 HR':l==='si'?'🇸🇮 SI':'🇷🇸 SR'}</button>`).join('');
+
+  // Employer button
+  document.querySelector('.employer-btn').textContent = t('nav_employers');
+
+  // Mobile menu
+  const mm = document.getElementById('mobileMenu');
+  mm.innerHTML = links.map(l=>`<a href="${l.href}" class="mobile-link" onclick="closeMobile()">${t(l.key)}</a>`).join('') +
+    `<a href="#/post-job" class="mobile-link" onclick="closeMobile()">${t('nav_employers')}</a>`;
+}
+
+document.getElementById('hamburgerBtn').addEventListener('click', ()=>{
+  const mm = document.getElementById('mobileMenu');
+  mm.style.display = mm.style.display==='flex'?'none':'flex';
+});
+function closeMobile() { document.getElementById('mobileMenu').style.display='none'; }
+
+// ===========================================
+// FOOTER
+// ===========================================
+function renderFooter() {
+  document.getElementById('footerEl').innerHTML = `
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:12px"><div class="logo-icon">G</div><span>GAZDA</span></div>
+        <p style="color:var(--text-light);font-size:0.9rem">${t('footer_about_desc')}</p>
+      </div>
+      <div class="footer-col">
+        <h4>${t('footer_links')}</h4>
+        <a href="#/companies">${t('nav_companies')}</a>
+        <a href="#/jobs">${t('nav_jobs')}</a>
+        <a href="#/salaries">${t('nav_salaries')}</a>
+        <a href="#/review">${t('nav_review')}</a>
+        <a href="#/about">${t('footer_about')}</a>
+      </div>
+      <div class="footer-col">
+        <h4>${t('footer_countries')}</h4>
+        <span>🇸🇮 ${t('country_si')}</span>
+        <span>🇭🇷 ${t('country_hr')}</span>
+        <span>🇷🇸 ${t('country_rs')}</span>
+        <span>🇧🇦 ${t('country_ba')}</span>
+      </div>
+      <div class="footer-col">
+        <h4>${t('footer_contact')}</h4>
+        <span>📧 ${t('footer_contact_email')}</span>
+      </div>
+    </div>
+    <div class="footer-bottom">${t('footer_copyright')}</div>
+  </div>`;
+}
+
+// ===========================================
+// ROUTER
+// ===========================================
+function route() {
+  const hash = location.hash || '#/home';
+  currentRoute = hash.slice(1);
+  const app = document.getElementById('app');
+  closeMobile();
+
+  if(hash==='#/home'||hash===''||hash==='#/') renderHome(app);
+  else if(hash==='#/companies') renderCompanies(app);
+  else if(hash.startsWith('#/company/')) renderCompany(app, hash.split('/')[2]);
+  else if(hash==='#/jobs') renderJobs(app);
+  else if(hash==='#/salaries') renderSalaries(app);
+  else if(hash==='#/review') renderReviewForm(app);
+  else if(hash==='#/post-job') renderPostJob(app);
+  else if(hash==='#/about') renderAbout(app);
+  else renderHome(app);
+
+  renderNav();
+  window.scrollTo(0,0);
+}
+
+window.addEventListener('hashchange', route);
+
+// ===========================================
+// PAGE RENDERERS
+// ===========================================
+
+// --- HOME ---
+function renderHome(app) {
+  const sorted = [...companies].sort((a,b)=>b.rating-a.rating);
+  const recent = [...companies].sort(()=>Math.random()-0.5).slice(0,6);
+  const top = sorted.slice(0,6);
+  const worst = [...companies].sort((a,b)=>a.rating-b.rating).slice(0,3);
+
+  app.innerHTML = `
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>${t('hero_title')}</h1>
+      <p class="hero-sub">${t('hero_tagline')}</p>
+      <div class="hero-search">
+        <input type="text" id="heroSearch" placeholder="${t('hero_search_placeholder')}" class="hero-input">
+        <select id="heroCity" class="hero-select">
+          <option value="">${t('hero_location_all')}</option>
+          ${Object.entries(CITIES).flatMap(([k,v])=>v.map(c=>`<option value="${c}">${c}</option>`)).join('')}
+        </select>
+        <button class="hero-btn" onclick="doHeroSearch()">${t('hero_search_btn')}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-bar">
+    <div class="container stats-row">
+      <div class="stat"><span class="stat-num" data-target="15847">0</span><span class="stat-label">${t('stat_reviews')}</span></div>
+      <div class="stat"><span class="stat-num" data-target="3241">0</span><span class="stat-label">${t('stat_companies')}</span></div>
+      <div class="stat"><span class="stat-num" data-target="4">0</span><span class="stat-label">${t('stat_countries')}</span></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">${t('how_title')}</h2>
+      <p class="section-sub">${t('how_subtitle')}</p>
+      <div class="how-grid">
+        <div class="how-card"><div class="how-icon">🔍</div><h3>${t('how_step1_title')}</h3><p>${t('how_step1_desc')}</p></div>
+        <div class="how-card"><div class="how-icon">📖</div><h3>${t('how_step2_title')}</h3><p>${t('how_step2_desc')}</p></div>
+        <div class="how-card"><div class="how-icon">✅</div><h3>${t('how_step3_title')}</h3><p>${t('how_step3_desc')}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">${t('recent_title')}</h2>
+      <p class="section-sub">${t('recent_subtitle')}</p>
+      <div class="cards-grid">${recent.map(c=>companyCard(c)).join('')}</div>
+    </div>
+  </section>
+
+  <!-- TOP RATED -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">${t('top_title')}</h2>
+      <p class="section-sub">${t('top_subtitle')}</p>
+      <div class="cards-grid">${top.map(c=>companyCard(c)).join('')}</div>
+    </div>
+  </section>
+
+  <!-- WORST -->
+  <section class="section section-worst">
+    <div class="container">
+      <h2 class="section-title" style="color:var(--accent)">${t('worst_title')}</h2>
+      <p class="section-sub">${t('worst_subtitle')}</p>
+      <div class="cards-grid">${worst.map(c=>companyCard(c)).join('')}</div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2>${t('cta_title')}</h2>
+      <p>${t('cta_subtitle')}</p>
+      <a href="#/review" class="cta-btn">${t('cta_btn')}</a>
+    </div>
+  </section>`;
+
+  animateCounters();
+}
+
+function companyCard(c) {
+  const revCount = getCompanyReviews(c.id).length;
+  return `
+  <a href="#/company/${c.id}" class="company-card">
+    <div class="cc-top">
+      <div class="cc-logo" style="background:${c.color}">${getInitials(c.name)}</div>
+      <div class="cc-info">
+        <h3>${c.name}</h3>
+        <span class="cc-industry">${t(c.industry)}</span>
+        <span class="cc-loc">${c.flag} ${c.city}</span>
+      </div>
+    </div>
+    <div class="cc-ratings">
+      <div class="cc-stars" style="color:${ratingColor(c.rating)}">${starsHtml(c.rating)} <strong>${c.rating.toFixed(1)}</strong></div>
+      <span class="cc-reviews">${revCount} ${t('reviews_word')}</span>
+    </div>
+    <div class="cc-gazda">
+      <span class="gazda-badge ${gazdaClass(c.gazdaScore)}">${c.gazdaScore}/10</span>
+      <span class="gazda-label ${gazdaLabelClass(c.gazdaScore)}">${gazdaLabelText(c.gazdaScore)}</span>
+    </div>
+  </a>`;
+}
+
+function doHeroSearch() {
+  const q = document.getElementById('heroSearch').value.trim();
+  location.hash = '#/companies';
+  setTimeout(()=>{
+    const s = document.getElementById('searchCompanies');
+    if(s) { s.value = q; s.dispatchEvent(new Event('input')); }
+  },100);
+}
+
+function animateCounters() {
+  document.querySelectorAll('.stat-num').forEach(el=>{
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const step = Math.max(1, Math.floor(target/60));
+    const timer = setInterval(()=>{
+      current += step;
+      if(current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current.toLocaleString();
+    }, 20);
+  });
+}
+
+// --- COMPANIES ---
+function renderCompanies(app) {
+  app.innerHTML = `
+  <section class="page-header"><div class="container"><h1>${t('companies_title')}</h1><p>${t('companies_subtitle')}</p></div></section>
+  <section class="section"><div class="container">
+    <div class="filters-bar">
+      <input type="text" id="searchCompanies" class="filter-input" placeholder="${t('search_companies')}">
+      <select id="filterCountry" class="filter-select"><option value="">${t('filter_all')}</option><option value="SI">🇸🇮 ${t('country_si')}</option><option value="HR">🇭🇷 ${t('country_hr')}</option><option value="RS">🇷🇸 ${t('country_rs')}</option><option value="BA">🇧🇦 ${t('country_ba')}</option></select>
+      <select id="filterIndustry" class="filter-select"><option value="">${t('filter_all')}</option>${[...new Set(companies.map(c=>c.industry))].map(i=>`<option value="${i}">${t(i)}</option>`).join('')}</select>
+      <select id="sortCompanies" class="filter-select"><option value="rating">${t('sort_rating')}</option><option value="reviews">${t('sort_reviews')}</option><option value="name">${t('sort_name')}</option></select>
+    </div>
+    <div id="companiesGrid" class="cards-grid"></div>
+    <div id="companiesPag" class="pagination"></div>
+  </div></section>`;
+
+  let page = 1;
+  function update() {
+    let list = [...companies];
+    const q = document.getElementById('searchCompanies').value.toLowerCase();
+    const country = document.getElementById('filterCountry').value;
+    const ind = document.getElementById('filterIndustry').value;
+    const sort = document.getElementById('sortCompanies').value;
+    if(q) list = list.filter(c=>c.name.toLowerCase().includes(q)||c.city.toLowerCase().includes(q));
+    if(country) list = list.filter(c=>c.country===country);
+    if(ind) list = list.filter(c=>c.industry===ind);
+    if(sort==='rating') list.sort((a,b)=>b.rating-a.rating);
+    else if(sort==='reviews') list.sort((a,b)=>getCompanyReviews(b.id).length-getCompanyReviews(a.id).length);
+    else if(sort==='name') list.sort((a,b)=>a.name.localeCompare(b.name));
+    const total = Math.ceil(list.length/PER_PAGE);
+    if(page>total) page=1;
+    const paged = list.slice((page-1)*PER_PAGE, page*PER_PAGE);
+    document.getElementById('companiesGrid').innerHTML = paged.length?paged.map(c=>companyCard(c)).join(''):`<p class="no-results">${t('no_results')}</p>`;
+    document.getElementById('companiesPag').innerHTML = total>1?Array.from({length:total},(_,i)=>`<button class="pag-btn ${i+1===page?'active':''}" onclick="window._compPage(${i+1})">${i+1}</button>`).join(''):'';
+  }
+  window._compPage = (p)=>{ page=p; update(); };
+  ['searchCompanies','filterCountry','filterIndustry','sortCompanies'].forEach(id=>{
+    document.getElementById(id).addEventListener('input',()=>{ page=1; update(); });
+    document.getElementById(id).addEventListener('change',()=>{ page=1; update(); });
+  });
+  update();
+}
+
+// --- COMPANY PROFILE ---
+function renderCompany(app, id) {
+  const c = companies.find(x=>x.id===id);
+  if(!c) { app.innerHTML = '<div class="container mt-20"><h2>Company not found</h2></div>'; return; }
+  const reviews = getCompanyReviews(id);
+  const ratingCategories = [
+    {key:'management',label:'rating_management'},{key:'culture',label:'rating_culture'},
+    {key:'salary',label:'rating_salary'},{key:'balance',label:'rating_balance'},{key:'growth',label:'rating_growth'}
+  ];
+
+  app.innerHTML = `
+  <section class="company-header" style="border-top:4px solid ${c.color}">
+    <div class="container">
+      <div class="ch-top">
+        <div class="cc-logo cc-logo-lg" style="background:${c.color}">${getInitials(c.name)}</div>
+        <div class="ch-info">
+          <h1>${c.name}</h1>
+          <div class="ch-meta"><span>${t(c.industry)}</span><span>${c.flag} ${c.city}</span><span>${reviews.length} ${t('reviews_word')}</span></div>
+          <div class="ch-rating-row">
+            <span class="ch-stars" style="color:${ratingColor(c.rating)}">${starsHtml(c.rating)} <strong>${c.rating.toFixed(1)}</strong></span>
+          </div>
+        </div>
+        <a href="#/review?company=${c.id}" class="btn-primary">${t('write_review')}</a>
+      </div>
+      <div class="ch-scores">
+        <div class="gazda-score-box">
+          <div class="gazda-circle ${gazdaClass(c.gazdaScore)}"><span class="gazda-num">${c.gazdaScore}</span><span class="gazda-of">/10</span></div>
+          <div class="gazda-info">
+            <strong>${t('gazda_score_title')}</strong>
+            <span>${t('gazda_score_question')}</span>
+            <span class="gazda-label-lg ${gazdaLabelClass(c.gazdaScore)}">${gazdaLabelText(c.gazdaScore)}</span>
+          </div>
+        </div>
+        <div class="rating-bars">
+          ${ratingCategories.map(rc=>`
+          <div class="rb-row">
+            <span class="rb-label">${t(rc.label)}</span>
+            <div class="rb-bar"><div class="rb-fill" style="width:${(c.ratings[rc.key]/5*100)}%;background:${ratingColor(c.ratings[rc.key])}"></div></div>
+            <span class="rb-val">${c.ratings[rc.key].toFixed(1)}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section"><div class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="reviews">${t('reviews_tab')} (${reviews.length})</button>
+      <button class="tab" data-tab="salaries">${t('salaries_tab')} (${(c.salaries||[]).length})</button>
+      <button class="tab" data-tab="jobs">${t('jobs_tab')} (${(c.jobs||[]).length})</button>
+      <button class="tab" data-tab="about">${t('about_tab')}</button>
+    </div>
+    <div id="tabContent"></div>
+  </div></section>`;
+
+  function showTab(tab) {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelector(`.tab[data-tab="${tab}"]`).classList.add('active');
+    const tc = document.getElementById('tabContent');
+    if(tab==='reviews') {
+      tc.innerHTML = reviews.length ? reviews.map(r=>`
+        <div class="review-card">
+          <div class="rc-header">
+            <div class="rc-stars" style="color:${ratingColor(r.rating)}">${starsHtml(r.rating)}</div>
+            <h3>${tObj(r.title)}</h3>
+            <span class="rc-meta">${tObj(r.position)} · ${r.status==='current'?t('review_current'):t('review_former')} · ${r.date}</span>
+          </div>
+          <div class="rc-body">
+            <div class="rc-section"><strong>${t('review_pros')}</strong><p>${tObj(r.pros)}</p></div>
+            <div class="rc-section"><strong>${t('review_cons')}</strong><p>${tObj(r.cons)}</p></div>
+            <div class="rc-section"><strong>${t('review_advice')}</strong><p>${tObj(r.advice)}</p></div>
+          </div>
+          <div class="rc-footer"><button class="helpful-btn" onclick="this.querySelector('span').textContent=parseInt(this.querySelector('span').textContent)+1">👍 ${t('review_helpful')} (<span>${r.helpful||0}</span>)</button></div>
+        </div>`).join('') : `<p class="no-results">${t('no_results')}</p>`;
+    } else if(tab==='salaries') {
+      tc.innerHTML = `<table class="salary-table"><thead><tr><th>${t('salary_table_role')}</th><th>${t('salary_table_avg')}</th><th>${t('salary_table_range')}</th><th>${t('salary_table_reports')}</th></tr></thead><tbody>${(c.salaries||[]).map(s=>`<tr><td>${tObj(s.position)}</td><td><strong>€${s.avg}</strong>/${t('monthly')}</td><td>€${s.min} - €${s.max}</td><td>${s.reports} ${t('salary_reports')}</td></tr>`).join('')}</tbody></table>`;
+    } else if(tab==='jobs') {
+      tc.innerHTML = (c.jobs||[]).length ? (c.jobs||[]).map(j=>`
+        <div class="job-card">
+          <div class="jc-header"><h3>${tObj(j.title)}</h3><span class="jc-type">${t('type_'+j.type)}</span></div>
+          <div class="jc-meta"><span>📍 ${c.city}</span>${j.salary?`<span>💰 €${j.salary.min} - €${j.salary.max}/${t('monthly')}</span>`:''}<span>📅 ${j.date}</span></div>
+          <p class="jc-desc">${tObj(j.desc)}</p>
+          <div class="jc-details"><strong>${t('requirements')}:</strong> ${tObj(j.reqs)}</div>
+          <div class="jc-details"><strong>${t('benefits')}:</strong> ${tObj(j.benefits)}</div>
+          <button class="btn-primary">${t('apply')}</button>
+        </div>`).join('') : `<p class="no-results">${t('no_results')}</p>`;
+    } else if(tab==='about') {
+      tc.innerHTML = `
+        <div class="about-grid">
+          <div class="about-info"><h3>${t('about_company')}</h3><p>${tObj(c.description)}</p></div>
+          <div class="about-meta">
+            <div class="am-row"><strong>${t('founded')}:</strong><span>${c.founded}</span></div>
+            <div class="am-row"><strong>${t('company_size')}:</strong><span>${c.size} ${t('employees')}</span></div>
+            <div class="am-row"><strong>${t('industry')}:</strong><span>${t(c.industry)}</span></div>
+            <div class="am-row"><strong>${t('location')}:</strong><span>${c.flag} ${c.city}</span></div>
+            <div class="am-row"><strong>${t('website')}:</strong><span>${c.website}</span></div>
+          </div>
+        </div>`;
+    }
+  }
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+  showTab('reviews');
+}
+
+// --- JOBS ---
+function renderJobs(app) {
+  const allJobs = getAllJobs();
+  app.innerHTML = `
+  <section class="page-header"><div class="container"><h1>${t('jobs_title')}</h1><p>${t('jobs_subtitle')}</p></div></section>
+  <section class="section"><div class="container">
+    <div class="filters-bar">
+      <input type="text" id="searchJobs" class="filter-input" placeholder="${t('search_jobs')}">
+      <select id="filterJobCountry" class="filter-select"><option value="">${t('filter_all')}</option><option value="SI">🇸🇮 ${t('country_si')}</option><option value="HR">🇭🇷 ${t('country_hr')}</option><option value="RS">🇷🇸 ${t('country_rs')}</option><option value="BA">🇧🇦 ${t('country_ba')}</option></select>
+      <select id="filterJobType" class="filter-select"><option value="">${t('type_all')}</option><option value="fulltime">${t('type_fulltime')}</option><option value="parttime">${t('type_parttime')}</option><option value="contract">${t('type_contract')}</option></select>
+    </div>
+    <div id="jobsGrid" class="jobs-list"></div>
+  </div></section>`;
+
+  function update() {
+    let list = [...allJobs];
+    const q = document.getElementById('searchJobs').value.toLowerCase();
+    const country = document.getElementById('filterJobCountry').value;
+    const type = document.getElementById('filterJobType').value;
+    if(q) list = list.filter(j=>tObj(j.title).toLowerCase().includes(q)||j.companyName.toLowerCase().includes(q));
+    if(country) list = list.filter(j=>j.country===country);
+    if(type) list = list.filter(j=>j.type===type);
+    document.getElementById('jobsGrid').innerHTML = list.length ? list.map(j=>`
+      <div class="job-card">
+        <div class="jc-header">
+          <h3>${tObj(j.title)}</h3>
+          <a href="#/company/${j.companyId}" class="jc-company">${j.companyName} <span class="jc-rating" style="color:${ratingColor(j.companyRating)}">${starsHtml(j.companyRating)} ${j.companyRating.toFixed(1)}</span></a>
+        </div>
+        <div class="jc-meta"><span>📍 ${j.flag} ${j.city}</span>${j.salary?`<span>💰 €${j.salary.min} - €${j.salary.max}/${t('monthly')}</span>`:''}<span>📅 ${j.date}</span><span class="jc-type">${t('type_'+j.type)}</span></div>
+        <p class="jc-desc">${tObj(j.desc)}</p>
+        <button class="btn-primary">${t('apply')}</button>
+      </div>`).join('') : `<p class="no-results">${t('no_results')}</p>`;
+  }
+  ['searchJobs','filterJobCountry','filterJobType'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', update);
+    document.getElementById(id).addEventListener('change', update);
+  });
+  update();
+}
+
+// --- SALARIES ---
+function renderSalaries(app) {
+  const allSal = getAllSalaries();
+  // Aggregate by position
+  const byPos = {};
+  allSal.forEach(s=>{
+    const pos = tObj(s.position);
+    if(!byPos[pos]) byPos[pos] = {position:pos, total:0, sum:0, min:Infinity, max:0, reports:0, cities:new Set()};
+    byPos[pos].sum += s.avg * s.reports;
+    byPos[pos].total += s.reports;
+    byPos[pos].reports += s.reports;
+    byPos[pos].min = Math.min(byPos[pos].min, s.min);
+    byPos[pos].max = Math.max(byPos[pos].max, s.max);
+    byPos[pos].cities.add(s.city);
+  });
+  let salList = Object.values(byPos).map(s=>({...s, avg:Math.round(s.sum/s.total)})).sort((a,b)=>b.avg-a.avg);
+
+  app.innerHTML = `
+  <section class="page-header"><div class="container"><h1>${t('salaries_title')}</h1><p>${t('salaries_subtitle')}</p></div></section>
+  <section class="section"><div class="container">
+    <input type="text" id="searchSalary" class="filter-input" placeholder="${t('search_salaries')}" style="margin-bottom:20px;max-width:400px">
+    <h3 style="margin-bottom:16px">${t('salary_all_title')}</h3>
+    <table class="salary-table"><thead><tr><th>${t('salary_table_role')}</th><th>${t('salary_table_avg')}</th><th>${t('salary_table_range')}</th><th>${t('salary_table_reports')}</th><th>${t('salary_table_location')}</th></tr></thead><tbody id="salaryBody"></tbody></table>
+    <div style="margin-top:30px;text-align:center"><button class="btn-secondary" onclick="showSalaryReport()">${t('report_salary')}</button></div>
+    <div id="salaryReportForm" class="hidden"></div>
+  </div></section>`;
+
+  function update() {
+    const q = document.getElementById('searchSalary').value.toLowerCase();
+    let filtered = q ? salList.filter(s=>s.position.toLowerCase().includes(q)) : salList;
+    document.getElementById('salaryBody').innerHTML = filtered.map(s=>`
+      <tr><td><strong>${s.position}</strong></td><td>€${s.avg}/${t('monthly')}</td><td>€${s.min} - €${s.max}</td><td>${s.reports}</td><td>${[...s.cities].slice(0,3).join(', ')}</td></tr>`).join('');
+  }
+  document.getElementById('searchSalary').addEventListener('input', update);
+  update();
+}
+
+function showSalaryReport() {
+  const el = document.getElementById('salaryReportForm');
+  el.classList.toggle('hidden');
+  if(!el.classList.contains('hidden')) {
+    el.innerHTML = `
+    <div class="form-card" style="margin-top:20px">
+      <h3>${t('salary_report_title')}</h3>
+      <div class="form-group"><label>${t('sr_company')}</label><input type="text" id="srCompany" class="form-input"></div>
+      <div class="form-group"><label>${t('sr_position')}</label><input type="text" id="srPosition" class="form-input"></div>
+      <div class="form-group"><label>${t('sr_salary')}</label><input type="number" id="srSalary" class="form-input"></div>
+      <div class="form-group"><label>${t('sr_city')}</label><input type="text" id="srCity" class="form-input"></div>
+      <button class="btn-primary" onclick="submitSalary()">${t('sr_submit')}</button>
+    </div>`;
+  }
+}
+
+function submitSalary() {
+  const sal = {
+    position:{hr:document.getElementById('srPosition').value,si:document.getElementById('srPosition').value,sr:document.getElementById('srPosition').value},
+    avg:parseInt(document.getElementById('srSalary').value)||0,
+    min:parseInt(document.getElementById('srSalary').value)||0,
+    max:parseInt(document.getElementById('srSalary').value)||0,
+    reports:1, companyName:document.getElementById('srCompany').value,
+    city:document.getElementById('srCity').value, country:''
+  };
+  const existing = JSON.parse(localStorage.getItem('gazda_salaries')||'[]');
+  existing.push(sal);
+  localStorage.setItem('gazda_salaries', JSON.stringify(existing));
+  document.getElementById('salaryReportForm').innerHTML = `<div class="success-msg">${t('sr_success')}</div>`;
+}
+
+// --- WRITE REVIEW ---
+function renderReviewForm(app) {
+  const params = new URLSearchParams(location.hash.split('?')[1]||'');
+  const preselect = params.get('company')||'';
+  let step = 1;
+  let formData = { companyId:preselect, position:'', status:'current', startDate:'', endDate:'',
+    ratings:{management:3,culture:3,salary:3,balance:3,growth:3}, gazdaScore:5,
+    title:'', pros:'', cons:'', advice:'' };
+
+  function render() {
+    app.innerHTML = `
+    <section class="page-header"><div class="container"><h1>${t('review_form_title')}</h1></div></section>
+    <section class="section"><div class="container">
+      <div class="stepper">
+        ${[1,2,3,4,5].map(s=>`<div class="step ${s===step?'active':''} ${s<step?'done':''}"><span>${s}</span><label>${t('step_'+['company','info','ratings','review','confirm'][s-1])}</label></div>`).join('<div class="step-line"></div>')}
+      </div>
+      <div class="form-card" id="stepContent"></div>
+    </div></section>`;
+    renderStep();
+  }
+
+  function renderStep() {
+    const sc = document.getElementById('stepContent');
+    if(step===1) {
+      sc.innerHTML = `
+        <h3>${t('step1_title')}</h3>
+        <input type="text" id="companySearch" class="form-input" placeholder="${t('search_company')}" value="">
+        <div id="companyList" class="company-list">${companies.map(c=>`<div class="cl-item ${formData.companyId===c.id?'selected':''}" data-id="${c.id}"><div class="cc-logo cc-logo-sm" style="background:${c.color}">${getInitials(c.name)}</div><span>${c.name}</span><span class="cl-loc">${c.flag} ${c.city}</span></div>`).join('')}</div>
+        <div class="form-actions"><button class="btn-primary" onclick="window._rvNext()" ${!formData.companyId?'disabled':''}>${t('btn_next')}</button></div>`;
+      document.getElementById('companySearch').addEventListener('input', e=>{
+        const q = e.target.value.toLowerCase();
+        document.querySelectorAll('.cl-item').forEach(el=>{
+          el.style.display = el.querySelector('span').textContent.toLowerCase().includes(q)?'':'none';
+        });
+      });
+      document.querySelectorAll('.cl-item').forEach(el=>el.addEventListener('click',()=>{
+        document.querySelectorAll('.cl-item').forEach(x=>x.classList.remove('selected'));
+        el.classList.add('selected');
+        formData.companyId = el.dataset.id;
+        sc.querySelector('.btn-primary').disabled = false;
+      }));
+    } else if(step===2) {
+      sc.innerHTML = `
+        <h3>${t('step2_title')}</h3>
+        <div class="form-group"><label>${t('your_position')}</label><input type="text" id="rvPosition" class="form-input" value="${formData.position}"></div>
+        <div class="form-group"><label>${t('employment_status')}</label><select id="rvStatus" class="form-input"><option value="current" ${formData.status==='current'?'selected':''}>${t('status_current')}</option><option value="former" ${formData.status==='former'?'selected':''}>${t('status_former')}</option></select></div>
+        <div class="form-actions"><button class="btn-secondary" onclick="window._rvBack()">${t('btn_back')}</button><button class="btn-primary" onclick="window._rvNext()">${t('btn_next')}</button></div>`;
+    } else if(step===3) {
+      const cats = [{key:'management',label:'rating_management'},{key:'culture',label:'rating_culture'},{key:'salary',label:'rating_salary'},{key:'balance',label:'rating_balance'},{key:'growth',label:'rating_growth'}];
+      sc.innerHTML = `
+        <h3>${t('step3_title')}</h3>
+        <p>${t('rate_categories')}</p>
+        ${cats.map(c=>`
+        <div class="rating-input">
+          <label>${t(c.label)}</label>
+          <div class="star-select" data-key="${c.key}">${[1,2,3,4,5].map(n=>`<span class="ss ${n<=formData.ratings[c.key]?'active':''}" data-val="${n}">★</span>`).join('')}</div>
+          <span class="ri-val">${formData.ratings[c.key]}</span>
+        </div>`).join('')}
+        <div class="gazda-slider-section">
+          <h3>${t('gazda_slider_title')}</h3>
+          <p>${t('gazda_slider_desc')}</p>
+          <div class="gs-row">
+            <input type="range" id="gazdaSlider" min="1" max="10" value="${formData.gazdaScore}" class="gazda-range">
+            <div class="gazda-circle ${gazdaClass(formData.gazdaScore)}" id="gazdaPreview"><span class="gazda-num">${formData.gazdaScore}</span><span class="gazda-of">/10</span></div>
+          </div>
+          <span class="gazda-label-lg ${gazdaLabelClass(formData.gazdaScore)}" id="gazdaPreviewLabel">${gazdaLabelText(formData.gazdaScore)}</span>
+        </div>
+        <div class="form-actions"><button class="btn-secondary" onclick="window._rvBack()">${t('btn_back')}</button><button class="btn-primary" onclick="window._rvNext()">${t('btn_next')}</button></div>`;
+      // Star select handlers
+      document.querySelectorAll('.star-select').forEach(ss=>{
+        ss.querySelectorAll('.ss').forEach(star=>star.addEventListener('click',()=>{
+          const val = parseInt(star.dataset.val);
+          const key = ss.dataset.key;
+          formData.ratings[key] = val;
+          ss.querySelectorAll('.ss').forEach((s,i)=>s.classList.toggle('active',i<val));
+          ss.parentElement.querySelector('.ri-val').textContent = val;
+        }));
+      });
+      document.getElementById('gazdaSlider').addEventListener('input', e=>{
+        formData.gazdaScore = parseInt(e.target.value);
+        const preview = document.getElementById('gazdaPreview');
+        preview.className = 'gazda-circle '+gazdaClass(formData.gazdaScore);
+        preview.querySelector('.gazda-num').textContent = formData.gazdaScore;
+        const label = document.getElementById('gazdaPreviewLabel');
+        label.className = 'gazda-label-lg '+gazdaLabelClass(formData.gazdaScore);
+        label.textContent = gazdaLabelText(formData.gazdaScore);
+      });
+    } else if(step===4) {
+      sc.innerHTML = `
+        <h3>${t('step4_title')}</h3>
+        <div class="form-group"><label>${t('review_title_label')}</label><input type="text" id="rvTitle" class="form-input" value="${formData.title}"></div>
+        <div class="form-group"><label>${t('review_pros_label')}</label><textarea id="rvPros" class="form-input" rows="3">${formData.pros}</textarea></div>
+        <div class="form-group"><label>${t('review_cons_label')}</label><textarea id="rvCons" class="form-input" rows="3">${formData.cons}</textarea></div>
+        <div class="form-group"><label>${t('review_advice_label')}</label><textarea id="rvAdvice" class="form-input" rows="3">${formData.advice}</textarea></div>
+        <div class="form-actions"><button class="btn-secondary" onclick="window._rvBack()">${t('btn_back')}</button><button class="btn-primary" onclick="window._rvNext()">${t('btn_next')}</button></div>`;
+    } else if(step===5) {
+      const c = companies.find(x=>x.id===formData.companyId);
+      const avgRating = Object.values(formData.ratings).reduce((a,b)=>a+b,0)/5;
+      sc.innerHTML = `
+        <h3>${t('confirm_title')}</h3>
+        <div class="confirm-grid">
+          <div class="cg-row"><strong>${t('confirm_company')}:</strong><span>${c?c.name:''}</span></div>
+          <div class="cg-row"><strong>${t('confirm_position')}:</strong><span>${formData.position}</span></div>
+          <div class="cg-row"><strong>${t('confirm_status')}:</strong><span>${formData.status==='current'?t('status_current'):t('status_former')}</span></div>
+          <div class="cg-row"><strong>${t('confirm_ratings')}:</strong><span style="color:${ratingColor(avgRating)}">${starsHtml(avgRating)} ${avgRating.toFixed(1)}</span></div>
+          <div class="cg-row"><strong>${t('confirm_gazda')}:</strong><span class="gazda-badge ${gazdaClass(formData.gazdaScore)}">${formData.gazdaScore}/10</span> <span class="gazda-label ${gazdaLabelClass(formData.gazdaScore)}">${gazdaLabelText(formData.gazdaScore)}</span></div>
+          <div class="cg-row"><strong>${t('review_title_label')}:</strong><span>${formData.title}</span></div>
+          <div class="cg-section"><strong>${t('review_pros')}</strong><p>${formData.pros}</p></div>
+          <div class="cg-section"><strong>${t('review_cons')}</strong><p>${formData.cons}</p></div>
+          <div class="cg-section"><strong>${t('review_advice')}</strong><p>${formData.advice}</p></div>
+        </div>
+        <div class="form-actions"><button class="btn-secondary" onclick="window._rvBack()">${t('btn_back')}</button><button class="btn-primary" onclick="window._rvSubmit()">${t('btn_submit')}</button></div>`;
+    }
+  }
+
+  window._rvNext = ()=>{
+    if(step===2) { formData.position=document.getElementById('rvPosition').value; formData.status=document.getElementById('rvStatus').value; }
+    if(step===4) { formData.title=document.getElementById('rvTitle').value; formData.pros=document.getElementById('rvPros').value; formData.cons=document.getElementById('rvCons').value; formData.advice=document.getElementById('rvAdvice').value; }
+    if(step<5) { step++; render(); }
+  };
+  window._rvBack = ()=>{ if(step>1) { step--; render(); } };
+  window._rvSubmit = ()=>{
+    const avgRating = Object.values(formData.ratings).reduce((a,b)=>a+b,0)/5;
+    const review = {
+      id:'user_'+Date.now(), companyId:formData.companyId,
+      title:{hr:formData.title,si:formData.title,sr:formData.title},
+      date:new Date().toISOString().slice(0,10), rating:avgRating,
+      position:{hr:formData.position,si:formData.position,sr:formData.position},
+      status:formData.status,
+      pros:{hr:formData.pros,si:formData.pros,sr:formData.pros},
+      cons:{hr:formData.cons,si:formData.cons,sr:formData.cons},
+      advice:{hr:formData.advice,si:formData.advice,sr:formData.advice},
+      helpful:0
+    };
+    const existing = JSON.parse(localStorage.getItem('gazda_reviews')||'[]');
+    existing.push(review);
+    localStorage.setItem('gazda_reviews', JSON.stringify(existing));
+    app.innerHTML = `
+    <section class="section text-center" style="padding:80px 20px">
+      <div class="success-box">
+        <div class="success-icon">✅</div>
+        <h2>${t('success_title')}</h2>
+        <p>${t('success_msg')}</p>
+        <a href="#/company/${formData.companyId}" class="btn-primary">${t('success_btn')}</a>
+      </div>
+    </section>`;
+  };
+  render();
+}
+
+// --- POST JOB ---
+function renderPostJob(app) {
+  app.innerHTML = `
+  <section class="page-header"><div class="container"><h1>${t('post_job_title')}</h1><p>${t('post_job_subtitle')}</p></div></section>
+  <section class="section"><div class="container" style="max-width:700px">
+    <div class="form-card">
+      <div class="form-group"><label>${t('pj_company')}</label><input type="text" id="pjCompany" class="form-input"></div>
+      <div class="form-group"><label>${t('pj_title')}</label><input type="text" id="pjTitle" class="form-input"></div>
+      <div class="form-group"><label>${t('pj_location')}</label><input type="text" id="pjLocation" class="form-input"></div>
+      <div class="form-group"><label>${t('pj_type')}</label><select id="pjType" class="form-input"><option value="fulltime">${t('type_fulltime')}</option><option value="parttime">${t('type_parttime')}</option><option value="contract">${t('type_contract')}</option></select></div>
+      <div class="form-row"><div class="form-group"><label>${t('pj_salary_min')}</label><input type="number" id="pjSalMin" class="form-input"></div><div class="form-group"><label>${t('pj_salary_max')}</label><input type="number" id="pjSalMax" class="form-input"></div></div>
+      <div class="form-group"><label>${t('pj_description')}</label><textarea id="pjDesc" class="form-input" rows="4"></textarea></div>
+      <div class="form-group"><label>${t('pj_requirements')}</label><textarea id="pjReqs" class="form-input" rows="3"></textarea></div>
+      <div class="form-group"><label>${t('pj_benefits')}</label><textarea id="pjBens" class="form-input" rows="3"></textarea></div>
+      <div class="form-group"><label>${t('pj_contact')}</label><input type="email" id="pjEmail" class="form-input"></div>
+      <div class="sponsor-note">${t('pj_sponsor_note')}</div>
+      <button class="btn-primary" onclick="submitJob()">${t('pj_publish')}</button>
+    </div>
+  </div></section>`;
+}
+
+function submitJob() {
+  const job = {
+    id:'custom_'+Date.now(),
+    title:{hr:document.getElementById('pjTitle').value,si:document.getElementById('pjTitle').value,sr:document.getElementById('pjTitle').value},
+    type:document.getElementById('pjType').value,
+    salary:{min:parseInt(document.getElementById('pjSalMin').value)||0,max:parseInt(document.getElementById('pjSalMax').value)||0},
+    date:new Date().toISOString().slice(0,10),
+    desc:{hr:document.getElementById('pjDesc').value,si:document.getElementById('pjDesc').value,sr:document.getElementById('pjDesc').value},
+    reqs:{hr:document.getElementById('pjReqs').value,si:document.getElementById('pjReqs').value,sr:document.getElementById('pjReqs').value},
+    benefits:{hr:document.getElementById('pjBens').value,si:document.getElementById('pjBens').value,sr:document.getElementById('pjBens').value},
+    companyName:document.getElementById('pjCompany').value,
+    city:document.getElementById('pjLocation').value,
+    companyRating:0, country:'', flag:'🏢', companyId:''
+  };
+  const existing = JSON.parse(localStorage.getItem('gazda_jobs')||'[]');
+  existing.push(job);
+  localStorage.setItem('gazda_jobs', JSON.stringify(existing));
+  document.querySelector('.form-card').innerHTML = `<div class="success-box text-center"><div class="success-icon">✅</div><h2>${t('pj_success_title')}</h2><p>${t('pj_success_msg')}</p><a href="#/jobs" class="btn-primary">${t('nav_jobs')}</a></div>`;
+}
+
+// --- ABOUT ---
+function renderAbout(app) {
+  app.innerHTML = `
+  <section class="page-header"><div class="container"><h1>${t('about_title')}</h1><p>${t('about_subtitle')}</p></div></section>
+  <section class="section"><div class="container" style="max-width:800px">
+    <div class="about-block"><h2>${t('about_problem_title')}</h2><p>${t('about_problem_text')}</p></div>
+    <div class="about-block"><h2>${t('about_solution_title')}</h2><p>${t('about_solution_text')}</p></div>
+    <div class="about-block">
+      <h2>${t('about_countries_title')}</h2>
+      <div class="country-flags">
+        <div class="cf-item"><span class="cf-flag">🇸🇮</span><span>${t('country_si')}</span></div>
+        <div class="cf-item"><span class="cf-flag">🇭🇷</span><span>${t('country_hr')}</span></div>
+        <div class="cf-item"><span class="cf-flag">🇷🇸</span><span>${t('country_rs')}</span></div>
+        <div class="cf-item"><span class="cf-flag">🇧🇦</span><span>${t('country_ba')}</span></div>
+      </div>
+    </div>
+    <div class="about-block">
+      <h2>${t('about_contribute_title')}</h2>
+      <ul class="contribute-list">
+        <li>${t('about_contribute_1')}</li>
+        <li>${t('about_contribute_2')}</li>
+        <li>${t('about_contribute_3')}</li>
+      </ul>
+    </div>
+    <div class="about-block">
+      <h2>${t('about_future_title')}</h2>
+      <div class="future-grid">
+        <div class="future-card"><h3>${t('about_future_1_title')}</h3><p>${t('about_future_1_desc')}</p></div>
+        <div class="future-card"><h3>${t('about_future_2_title')}</h3><p>${t('about_future_2_desc')}</p></div>
+        <div class="future-card"><h3>${t('about_future_3_title')}</h3><p>${t('about_future_3_desc')}</p></div>
+      </div>
+    </div>
+  </div></section>`;
+}
+
+// ===========================================
+// INIT
+// ===========================================
+renderNav();
+renderFooter();
+route();
+</script>
+</body>
+</html>
