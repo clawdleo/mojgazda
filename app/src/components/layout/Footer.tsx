@@ -26,7 +26,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/employers" className="hover:text-white transition-colors">Besplatan profil</Link></li>
               <li><Link href="/employers/premium" className="hover:text-white transition-colors">Premium</Link></li>
-              <li><Link href="/employers/jobs" className="hover:text-white transition-colors">Objavi posao</Link></li>
+              <li><Link href="/post-job" className="hover:text-white transition-colors">Objavi posao</Link></li>
             </ul>
           </div>
           <div>
