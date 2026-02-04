@@ -1,24 +1,33 @@
-# MojGazda 🏆
+# 🏢 MojGazda — Upoznaj svog gazdu
 
-The Glassdoor of the Balkans. Anonymous employer reviews, salary transparency, and the GAZDA Score.
+**Glassdoor for the Balkans.** Anonymous employer reviews, salary transparency, and the GAZDA Score — everything you need to know before accepting a job.
 
-## Stack
-- **Framework:** Next.js 14 (App Router, TypeScript)
-- **Styling:** Tailwind CSS
-- **Backend:** Supabase (PostgreSQL, Auth, Storage)
-- **Hosting:** Vercel
+🇸🇮 Slovenia · 🇭🇷 Croatia · 🇷🇸 Serbia · 🇧🇦 Bosnia & Herzegovina
+
+## Features
+
+- 🔍 **Company profiles** with detailed reviews and ratings
+- 💰 **Salary explorer** — transparent salary data by position and location
+- 📊 **GAZDA Score** — unique 1-10 boss behavior rating
+- 💼 **Job board** with employer transparency scores
+- ✍️ **Anonymous reviews** — write freely without fear
+- 🌍 **Multi-country** — covering the entire Balkan region
+
+## Tech Stack
+
+- **Frontend:** Next.js 14, TypeScript, Tailwind CSS
+- **Backend:** Supabase (PostgreSQL + Auth + RLS)
+- **Hosting:** Render
 
 ## Getting Started
 
 ```bash
 npm install
-cp .env.local.example .env.local
-# Fill in your Supabase credentials
 npm run dev
 ```
 
-## Countries
-🇸🇮 Slovenia | 🇭🇷 Croatia | 🇷🇸 Serbia | 🇧🇦 BiH
+Open [http://localhost:3000](http://localhost:3000)
 
 ## License
-Proprietary — MojGazda d.o.o.
+
+© 2026 MojGazda d.o.o. All rights reserved.
