@@ -45,6 +45,12 @@ export function Header() {
             >
               Napiši recenziju
             </Link>
+            <Link
+              href="/prijava"
+              className="hidden sm:inline-block px-4 py-2 border border-brand-500 text-brand-500 rounded-lg hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors font-medium text-sm"
+            >
+              Prijavi se
+            </Link>
             <button className="text-gray-500 hover:text-gray-700 text-sm">
               🇭🇷
             </button>
@@ -79,6 +85,13 @@ export function Header() {
               className="block px-3 py-2 mt-2 bg-brand-500 text-white rounded-lg text-center font-medium"
             >
               Napiši recenziju ✍️
+            </Link>
+            <Link
+              href="/prijava"
+              onClick={() => setMobileOpen(false)}
+              className="block px-3 py-2 mt-1 border border-brand-500 text-brand-500 rounded-lg text-center font-medium"
+            >
+              Prijavi se
             </Link>
           </nav>
         )}

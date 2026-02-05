@@ -33,8 +33,9 @@ export function Footer() {
             <h4 className="text-white font-medium mb-3 text-sm">Pravne informacije</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="hover:text-white transition-colors">O nama</Link></li>
-              <li><Link href="/privacy" className="hover:text-white transition-colors">Privatnost</Link></li>
-              <li><Link href="/terms" className="hover:text-white transition-colors">Uvjeti korištenja</Link></li>
+              <li><Link href="/privatnost" className="hover:text-white transition-colors">Politika privatnosti</Link></li>
+              <li><Link href="/uvjeti" className="hover:text-white transition-colors">Uvjeti korištenja</Link></li>
+              <li><Link href="/kolacici" className="hover:text-white transition-colors">Politika kolačića</Link></li>
             </ul>
           </div>
         </div>
