@@ -6,10 +6,12 @@ import Link from "next/link";
 import { GazdaScore } from "@/components/ui/GazdaScore";
 import { StarRating } from "@/components/ui/StarRating";
 import { ReviewCard } from "@/components/review/ReviewCard";
+import { RedFlags } from "@/components/company/RedFlags";
 import { getCompanyBySlug, getCompanyColor, getAllCompanies } from "@/lib/demo-data";
 import { demoJobs } from "@/lib/jobs";
+import { getInterviewsByCompany } from "@/lib/interviews";
 
-type Tab = "reviews" | "salaries" | "jobs" | "about";
+type Tab = "reviews" | "salaries" | "jobs" | "interviews" | "about";
 type ReviewSort = "newest" | "highest" | "lowest" | "helpful";
 
 const countryNames: Record<string, string> = {
@@ -93,10 +95,16 @@ export default function CompanyContent() {
     return demoJobs.filter((j) => j.company_slug === slug);
   }, [slug]);
 
+  // Interviews for this company
+  const companyInterviews = useMemo(() => {
+    return getInterviewsByCompany(slug);
+  }, [slug]);
+
   const tabs: { key: Tab; label: string; count?: number }[] = [
     { key: "reviews", label: "📝 Recenzije", count: reviews.length },
     { key: "salaries", label: "💰 Plaće", count: salaries.length },
     { key: "jobs", label: "💼 Poslovi", count: companyJobs.length },
+    { key: "interviews", label: "🎯 Intervjui", count: companyInterviews.length },
     { key: "about", label: "ℹ️ O firmi" },
   ];
 
@@ -322,6 +330,70 @@ export default function CompanyContent() {
             </>
           )}
 
+          {/* Interviews Tab */}
+          {tab === "interviews" && (
+            <>
+              <h2 className="text-xl font-bold">🎯 Iskustva s intervjua</h2>
+              {companyInterviews.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-4xl mb-3">🎯</p>
+                  <p className="text-gray-500">Još nema iskustava s intervjua za {company.name}.</p>
+                  <Link href="/intervjui" className="inline-block mt-4 text-brand-500 hover:underline text-sm">
+                    Pogledaj sva iskustva →
+                  </Link>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {companyInterviews.map((interview) => (
+                    <div
+                      key={interview.id}
+                      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="font-semibold text-lg">{interview.job_title}</h3>
+                          <p className="text-sm text-gray-500">{interview.department}</p>
+                        </div>
+                        <span className={`text-2xl ${
+                          interview.experience === "positive" ? "text-green-500" :
+                          interview.experience === "negative" ? "text-red-500" : "text-amber-500"
+                        }`}>
+                          {interview.experience === "positive" ? "😊" :
+                           interview.experience === "negative" ? "😞" : "😐"}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          interview.difficulty === "easy" ? "bg-green-100 text-green-700" :
+                          interview.difficulty === "hard" ? "bg-red-100 text-red-700" :
+                          "bg-amber-100 text-amber-700"
+                        }`}>
+                          {interview.difficulty === "easy" ? "Lako" :
+                           interview.difficulty === "hard" ? "Teško" : "Srednje"}
+                        </span>
+                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs">
+                          ⏱️ {interview.duration_days} dana
+                        </span>
+                        {interview.got_offer && (
+                          <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">
+                            ✓ Dobio/la ponudu
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                        {interview.interview_process}
+                      </p>
+                      <div className="bg-brand-50 dark:bg-brand-900/20 rounded-lg p-3 mt-3">
+                        <p className="text-xs font-medium text-brand-700 dark:text-brand-400 mb-1">💡 Savjet</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{interview.tips}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
           {/* About Tab */}
           {tab === "about" && (
             <div className="space-y-6">
@@ -389,6 +461,9 @@ export default function CompanyContent() {
 
         {/* Sidebar */}
         <div className="space-y-6">
+          {/* Red Flags */}
+          <RedFlags reviews={reviews} companyName={company.name} />
+
           {/* Rating Breakdown */}
           {ratingBreakdown.length > 0 && (
             <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">

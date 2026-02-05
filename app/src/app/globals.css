@@ -18,6 +18,18 @@
   }
 }
 
+@layer utilities {
+  /* Pulse once animation for new activity items */
+  @keyframes pulse-once {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.95; transform: scale(1.01); background-color: rgb(20 184 166 / 0.05); }
+  }
+
+  .animate-pulse-once {
+    animation: pulse-once 0.5s ease-out;
+  }
+}
+
 @layer components {
   /* GAZDA Score Ring */
   .gazda-score-ring {

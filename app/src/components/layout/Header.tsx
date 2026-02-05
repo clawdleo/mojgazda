@@ -10,6 +10,8 @@ export function Header() {
     { href: "/companies", label: "Tvrtke" },
     { href: "/jobs", label: "Poslovi" },
     { href: "/salaries", label: "Plaće" },
+    { href: "/intervjui", label: "Intervjui" },
+    { href: "/usporedi", label: "Usporedi" },
     { href: "/about", label: "O nama" },
   ];
 

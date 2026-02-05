@@ -6,6 +6,8 @@ import Link from "next/link";
 import { GazdaScore } from "@/components/ui/GazdaScore";
 import { StarRating } from "@/components/ui/StarRating";
 import { ReviewCard } from "@/components/review/ReviewCard";
+import { LiveActivityFeed } from "@/components/home/LiveActivityFeed";
+import { SalaryCalculator } from "@/components/salary/SalaryCalculator";
 import {
   getTopCompanies,
   getWorstCompanies,
@@ -88,6 +90,60 @@ export default function Home() {
             <div className="text-3xl font-bold text-brand-600">{stats.countries}</div>
             <div className="text-gray-500 text-sm">Države</div>
           </div>
+        </div>
+      </section>
+
+      {/* Live Activity + Salary Calculator */}
+      <section className="py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <LiveActivityFeed />
+          <SalaryCalculator />
+        </div>
+      </section>
+
+      {/* Quick Actions */}
+      <section className="py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link
+            href="/usporedi"
+            className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 
+                       dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 transition-all 
+                       text-center group"
+          >
+            <span className="text-3xl mb-2 block group-hover:scale-110 transition-transform">⚖️</span>
+            <h3 className="font-semibold text-sm">Usporedi tvrtke</h3>
+            <p className="text-xs text-gray-500 mt-1">Rame uz rame</p>
+          </Link>
+          <Link
+            href="/intervjui"
+            className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 
+                       dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 transition-all 
+                       text-center group"
+          >
+            <span className="text-3xl mb-2 block group-hover:scale-110 transition-transform">🎯</span>
+            <h3 className="font-semibold text-sm">Iskustva s intervjua</h3>
+            <p className="text-xs text-gray-500 mt-1">Pripremi se bolje</p>
+          </Link>
+          <Link
+            href="/salaries"
+            className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 
+                       dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 transition-all 
+                       text-center group"
+          >
+            <span className="text-3xl mb-2 block group-hover:scale-110 transition-transform">💰</span>
+            <h3 className="font-semibold text-sm">Istraži plaće</h3>
+            <p className="text-xs text-gray-500 mt-1">Transparentni podaci</p>
+          </Link>
+          <Link
+            href="/review"
+            className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 
+                       dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 transition-all 
+                       text-center group"
+          >
+            <span className="text-3xl mb-2 block group-hover:scale-110 transition-transform">✍️</span>
+            <h3 className="font-semibold text-sm">Napiši recenziju</h3>
+            <p className="text-xs text-gray-500 mt-1">100% anonimno</p>
+          </Link>
         </div>
       </section>
 
