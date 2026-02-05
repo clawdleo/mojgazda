@@ -34,16 +34,16 @@ export default function Home() {
       {/* Hero */}
       <section className="py-16 md:py-24 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-          Upoznaj svog{" "}
+          Transparentnost na{" "}
           <span className="text-brand-500 relative">
-            gazdu
+            radnom mjestu
             <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" fill="none">
               <path d="M1 5.5Q50 1 100 5T199 3" stroke="#14b8a6" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-          Anonimne recenzije poslodavaca, plaće i GAZDA Score —
+          Anonimne recenzije poslodavaca, plaće i GAZDA Score -
           sve što trebaš znati prije nego prihvatiš posao. 🇸🇮 🇭🇷 🇷🇸 🇧🇦
         </p>
 
@@ -94,7 +94,7 @@ export default function Home() {
       {/* Top Rated */}
       <section className="py-12">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold">🏆 Najbolje ocjenjeni gazde</h2>
+          <h2 className="text-2xl font-bold">Najbolje ocjenjeni</h2>
           <Link href="/companies" className="text-brand-500 hover:underline text-sm font-medium">
             Pogledaj sve →
           </Link>
@@ -141,7 +141,7 @@ export default function Home() {
       <section className="py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-bold">⚠️ Najgore ocjenjeni gazde</h2>
+            <h2 className="text-2xl font-bold">Najgore ocjenjeni</h2>
             <p className="text-gray-500 text-sm mt-1">Transparentnost je naša misija — i loši poslodavci zaslužuju biti vidljivi.</p>
           </div>
           <Link href="/companies" className="text-brand-500 hover:underline text-sm font-medium">
@@ -186,7 +186,7 @@ export default function Home() {
       {/* Recent Reviews */}
       <section className="py-12">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold">📝 Najnovije recenzije</h2>
+          <h2 className="text-2xl font-bold">Najnovije recenzije</h2>
           <Link href="/review" className="text-brand-500 hover:underline text-sm font-medium">
             Napiši svoju →
           </Link>
@@ -203,7 +203,7 @@ export default function Home() {
       {/* CTA */}
       <section className="py-16 text-center bg-brand-50 dark:bg-brand-900/20 rounded-2xl my-12 px-8">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Imaš iskustvo? Podijeli ga anonimno. 🤫
+          Imaš iskustvo? Podijeli ga anonimno.
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-xl mx-auto">
           Pomozi drugima da donesu bolju odluku o zaposlenju.
@@ -214,7 +214,7 @@ export default function Home() {
           className="inline-block px-8 py-3 bg-brand-500 text-white rounded-lg hover:bg-brand-600
                     transition-colors font-medium text-lg"
         >
-          Napiši recenziju ✍️
+          Napiši recenziju
         </Link>
       </section>
 
@@ -223,16 +223,16 @@ export default function Home() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-2xl font-bold mb-4">🏢 Za poslodavce</h2>
+              <h2 className="text-2xl font-bold mb-4">Za poslodavce</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Vaša reputacija kao poslodavca je važna. MojGazda vam pomaže razumjeti što zaposlenici
+                Vaša reputacija kao poslodavca je važna. Gazda vam pomaže razumjeti što zaposlenici
                 misle, odgovoriti na recenzije i privući najbolje talente u regiji.
               </p>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
-                <li>✅ Besplatan profil tvrtke</li>
-                <li>✅ Odgovarajte na recenzije zaposlenika</li>
-                <li>✅ Objavite oglase za posao</li>
-                <li>✅ Analitika i izvještaji o employer brandu</li>
+                <li>Besplatan profil tvrtke</li>
+                <li>Odgovarajte na recenzije zaposlenika</li>
+                <li>Objavite oglase za posao</li>
+                <li>Analitika i izvještaji o employer brandu</li>
               </ul>
               <Link
                 href="/post-job"
@@ -243,7 +243,6 @@ export default function Home() {
               </Link>
             </div>
             <div className="text-center">
-              <div className="text-8xl">🎯</div>
               <p className="text-gray-500 text-sm mt-4">Pronađite najbolje ljude za vaš tim</p>
             </div>
           </div>

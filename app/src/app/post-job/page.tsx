@@ -170,7 +170,7 @@ export default function PostJobPage() {
         <p className="font-medium text-amber-800 dark:text-amber-300 mb-1">⭐ Želite istaknut oglas?</p>
         <p className="text-amber-700 dark:text-amber-400">
           Promovirani oglasi su 5x vidljiviji. Kontaktirajte nas na{" "}
-          <span className="font-medium">oglasi@mojgazda.com</span> za detalje.
+          <span className="font-medium">oglasi@gazda.si</span> za detalje.
         </p>
       </div>
 

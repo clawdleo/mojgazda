@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politika privatnosti — MojGazda",
-  description: "Saznajte kako MojGazda prikuplja, koristi i štiti vaše osobne podatke.",
+  title: "Politika privatnosti - Gazda",
+  description: "Saznajte kako Gazda prikuplja, koristi i štiti vaše osobne podatke.",
 };
 
 export default function PrivatnostPage() {
@@ -30,9 +30,9 @@ export default function PrivatnostPage() {
                 1. Uvod
               </h2>
               <p>
-                MojGazda d.o.o. (&quot;mi&quot;, &quot;nas&quot;, &quot;MojGazda&quot;) posvećen je zaštiti vaše privatnosti. 
+                Gazda d.o.o. (&quot;mi&quot;, &quot;nas&quot;, &quot;Gazda&quot;) posvećen je zaštiti vaše privatnosti. 
                 Ova Politika privatnosti objašnjava kako prikupljamo, koristimo, pohranjujemo i štitimo 
-                vaše osobne podatke kada koristite našu web stranicu mojgazda.com (&quot;Usluga&quot;) i sve 
+                vaše osobne podatke kada koristite našu web stranicu gazda.si (&quot;Usluga&quot;) i sve 
                 povezane servise.
               </p>
               <p>
@@ -50,8 +50,8 @@ export default function PrivatnostPage() {
                 Voditelj obrade vaših osobnih podataka je:
               </p>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mt-2 text-sm">
-                <p className="font-medium text-gray-900 dark:text-white">MojGazda d.o.o.</p>
-                <p>Email: <a href="mailto:info@mojgazda.com" className="text-brand-500 hover:text-brand-600">info@mojgazda.com</a></p>
+                <p className="font-medium text-gray-900 dark:text-white">Gazda d.o.o.</p>
+                <p>Email: <a href="mailto:info@gazda.si" className="text-brand-500 hover:text-brand-600">info@gazda.si</a></p>
               </div>
             </section>
 
@@ -112,7 +112,7 @@ export default function PrivatnostPage() {
                   🔒 Vaše recenzije su anonimne.
                 </p>
                 <p className="text-sm">
-                  MojGazda nikada neće javno povezati vaš korisnički račun s vašim recenzijama, 
+                  Gazda nikada neće javno povezati vaš korisnički račun s vašim recenzijama, 
                   ocjenama ili podacima o plaćama. Vaš identitet nikada neće biti otkriven poslodavcima 
                   ili trećim stranama. Recenzije se prikazuju isključivo s generičkim oznakama 
                   (npr. &quot;Bivši zaposlenik&quot;, &quot;Trenutni zaposlenik&quot;) bez ikakvih podataka koji bi 
@@ -156,10 +156,10 @@ export default function PrivatnostPage() {
                 sljedećih pravnih osnova iz Opće uredbe o zaštiti podataka (GDPR):
               </p>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Izvršenje ugovora</strong> (čl. 6(1)(b) GDPR) — obrada je nužna za pružanje Usluge kojoj pristupate registracijom.</li>
-                <li><strong>Privola</strong> (čl. 6(1)(a) GDPR) — za neobavezne kolačiće i marketinšku komunikaciju.</li>
-                <li><strong>Legitimni interes</strong> (čl. 6(1)(f) GDPR) — za sprječavanje zlouporabe, poboljšanje Usluge i analitiku.</li>
-                <li><strong>Zakonska obveza</strong> (čl. 6(1)(c) GDPR) — za ispunjavanje pravnih zahtjeva.</li>
+                <li><strong>Izvršenje ugovora</strong> (čl. 6(1)(b) GDPR) - obrada je nužna za pružanje Usluge kojoj pristupate registracijom.</li>
+                <li><strong>Privola</strong> (čl. 6(1)(a) GDPR) - za neobavezne kolačiće i marketinšku komunikaciju.</li>
+                <li><strong>Legitimni interes</strong> (čl. 6(1)(f) GDPR) - za sprječavanje zlouporabe, poboljšanje Usluge i analitiku.</li>
+                <li><strong>Zakonska obveza</strong> (čl. 6(1)(c) GDPR) - za ispunjavanje pravnih zahtjeva.</li>
               </ul>
             </section>
 
@@ -170,9 +170,9 @@ export default function PrivatnostPage() {
               </h2>
               <p className="mb-2">Vaše osobne podatke ne prodajemo. Možemo ih dijeliti sa:</p>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Pružatelji usluga</strong> — hosting, email servisi, analitika (npr. Vercel, Google Analytics) koji obrađuju podatke u naše ime uz ugovorne obveze zaštite.</li>
-                <li><strong>Pravna tijela</strong> — samo kada to zahtijeva zakon, sudski nalog ili u slučaju zaštite naših prava.</li>
-                <li><strong>Poslodavci</strong> — nikada ne dobivaju pristup vašim osobnim podacima. Vide samo anonimizirane, agregirane podatke.</li>
+                <li><strong>Pružatelji usluga</strong> - hosting, email servisi, analitika (npr. Vercel, Google Analytics) koji obrađuju podatke u naše ime uz ugovorne obveze zaštite.</li>
+                <li><strong>Pravna tijela</strong> - samo kada to zahtijeva zakon, sudski nalog ili u slučaju zaštite naših prava.</li>
+                <li><strong>Poslodavci</strong> - nikada ne dobivaju pristup vašim osobnim podacima. Vide samo anonimizirane, agregirane podatke.</li>
               </ul>
             </section>
 
@@ -199,10 +199,10 @@ export default function PrivatnostPage() {
                 9. Zadržavanje podataka
               </h2>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Podaci o računu</strong> — pohranjujemo dok ne zatražite brisanje računa.</li>
-                <li><strong>Recenzije</strong> — ostaju vidljive nakon brisanja računa, ali se potpuno anonimiziraju (ukida se svaka interna veza s računom).</li>
-                <li><strong>Tehnički podaci</strong> — brišu se nakon 26 mjeseci.</li>
-                <li><strong>Komunikacija</strong> — čuvamo do 3 godine od zadnjeg kontakta.</li>
+                <li><strong>Podaci o računu</strong> - pohranjujemo dok ne zatražite brisanje računa.</li>
+                <li><strong>Recenzije</strong> - ostaju vidljive nakon brisanja računa, ali se potpuno anonimiziraju (ukida se svaka interna veza s računom).</li>
+                <li><strong>Tehnički podaci</strong> - brišu se nakon 26 mjeseci.</li>
+                <li><strong>Komunikacija</strong> - čuvamo do 3 godine od zadnjeg kontakta.</li>
               </ul>
             </section>
 
@@ -213,18 +213,18 @@ export default function PrivatnostPage() {
               </h2>
               <p className="mb-2">Pod GDPR-om imate sljedeća prava:</p>
               <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Pravo pristupa</strong> — možete zatražiti kopiju svih podataka koje imamo o vama.</li>
-                <li><strong>Pravo ispravka</strong> — možete zatražiti ispravku netočnih podataka.</li>
-                <li><strong>Pravo brisanja (&quot;pravo na zaborav&quot;)</strong> — možete zatražiti brisanje svojih osobnih podataka.</li>
-                <li><strong>Pravo ograničenja obrade</strong> — možete zatražiti ograničenje načina na koji koristimo vaše podatke.</li>
-                <li><strong>Pravo prenosivosti</strong> — možete zatražiti da vam pošaljemo vaše podatke u strojno čitljivom formatu.</li>
-                <li><strong>Pravo prigovora</strong> — možete prigovoriti obradi podataka na temelju legitimnog interesa.</li>
-                <li><strong>Pravo povlačenja privole</strong> — možete u svakom trenutku povući privolu bez utjecaja na zakonitost dotadašnje obrade.</li>
+                <li><strong>Pravo pristupa</strong> - možete zatražiti kopiju svih podataka koje imamo o vama.</li>
+                <li><strong>Pravo ispravka</strong> - možete zatražiti ispravku netočnih podataka.</li>
+                <li><strong>Pravo brisanja (&quot;pravo na zaborav&quot;)</strong> - možete zatražiti brisanje svojih osobnih podataka.</li>
+                <li><strong>Pravo ograničenja obrade</strong> - možete zatražiti ograničenje načina na koji koristimo vaše podatke.</li>
+                <li><strong>Pravo prenosivosti</strong> - možete zatražiti da vam pošaljemo vaše podatke u strojno čitljivom formatu.</li>
+                <li><strong>Pravo prigovora</strong> - možete prigovoriti obradi podataka na temelju legitimnog interesa.</li>
+                <li><strong>Pravo povlačenja privole</strong> - možete u svakom trenutku povući privolu bez utjecaja na zakonitost dotadašnje obrade.</li>
               </ul>
               <p className="mt-3">
                 Za ostvarivanje bilo kojeg prava kontaktirajte nas na{" "}
-                <a href="mailto:info@mojgazda.com" className="text-brand-500 hover:text-brand-600">
-                  info@mojgazda.com
+                <a href="mailto:info@gazda.si" className="text-brand-500 hover:text-brand-600">
+                  info@gazda.si
                 </a>
                 . Odgovoriti ćemo u roku od 30 dana.
               </p>
@@ -282,9 +282,9 @@ export default function PrivatnostPage() {
                 kontaktirajte nas:
               </p>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mt-3 text-sm">
-                <p className="font-medium text-gray-900 dark:text-white">MojGazda d.o.o.</p>
-                <p>Email: <a href="mailto:info@mojgazda.com" className="text-brand-500 hover:text-brand-600">info@mojgazda.com</a></p>
-                <p>Web: <a href="https://mojgazda.com" className="text-brand-500 hover:text-brand-600">mojgazda.com</a></p>
+                <p className="font-medium text-gray-900 dark:text-white">Gazda d.o.o.</p>
+                <p>Email: <a href="mailto:info@gazda.si" className="text-brand-500 hover:text-brand-600">info@gazda.si</a></p>
+                <p>Web: <a href="https://gazda.si" className="text-brand-500 hover:text-brand-600">gazda.si</a></p>
               </div>
             </section>
 

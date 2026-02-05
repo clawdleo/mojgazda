@@ -20,7 +20,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold">
-              moj<span className="text-brand-500">gazda</span>
+              <span className="text-brand-500">Gazda</span>
             </span>
           </Link>
 
@@ -84,7 +84,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="block px-3 py-2 mt-2 bg-brand-500 text-white rounded-lg text-center font-medium"
             >
-              Napiši recenziju ✍️
+              Napiši recenziju
             </Link>
             <Link
               href="/prijava"

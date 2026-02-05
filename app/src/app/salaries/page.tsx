@@ -69,7 +69,7 @@ export default function SalariesPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">💰 Plaće u regiji</h1>
+        <h1 className="text-3xl font-bold mb-2">Plaće u regiji</h1>
         <p className="text-gray-500">
           Usporedi plaće po pozicijama i lokacijama. Transparentni podaci temeljeni na anonimnim prijavama zaposlenika.
         </p>
@@ -94,13 +94,13 @@ export default function SalariesPage() {
           className="px-6 py-3 bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition-colors 
                      font-medium whitespace-nowrap"
         >
-          📊 Prijavi svoju plaću
+          Prijavi svoju plaću
         </button>
       </div>
 
       {/* Popular Roles Grid */}
       <section className="mb-12">
-        <h2 className="text-xl font-bold mb-4">🔥 Popularne pozicije</h2>
+        <h2 className="text-xl font-bold mb-4">Popularne pozicije</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {popularRoles.map((role) => (
             <button
@@ -248,7 +248,7 @@ export default function SalariesPage() {
 
         {filteredSalaries.length === 0 && (
           <div className="text-center py-16 text-gray-400">
-            <p className="text-4xl mb-4">📊</p>
+            <p className="text-4xl mb-4"></p>
             <p className="text-lg font-medium">Nema podataka</p>
             <p className="text-sm mt-1">Pokušaj s drugačijim pretraživanjem ili filterima.</p>
           </div>
@@ -277,7 +277,7 @@ export default function SalariesPage() {
 
       {/* CTA */}
       <div className="mt-8 bg-brand-50 dark:bg-brand-900/20 rounded-2xl p-8 text-center">
-        <h2 className="text-2xl font-bold mb-3">Znaš li koliko vrijediš? 💪</h2>
+        <h2 className="text-2xl font-bold mb-3">Znaš li koliko vrijediš?</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-lg mx-auto">
           Prijavi svoju plaću anonimno i pomozi drugima da pregovaraju bolje uvjete. 
           Zajedno stvaramo transparentnije tržište rada.
@@ -287,7 +287,7 @@ export default function SalariesPage() {
           className="px-8 py-3 bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition-colors 
                      font-medium text-lg"
         >
-          Prijavi plaću — anonimno 🔒
+          Prijavi plaću - anonimno
         </button>
       </div>
 
@@ -304,7 +304,7 @@ export default function SalariesPage() {
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 
                            dark:border-gray-700">
-              <h2 className="text-xl font-bold">📊 Prijavi svoju plaću</h2>
+              <h2 className="text-xl font-bold">Prijavi svoju plaću</h2>
               <button
                 onClick={() => setShowReportForm(false)}
                 className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 

@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
-  title: "MojGazda — Upoznaj svog gazdu",
+  title: "Gazda - Transparentnost na radnom mjestu",
   description:
     "Anonimne recenzije poslodavaca, plaće i ocjene šefova u Sloveniji, Hrvatskoj, Srbiji i BiH. Saznaj kakav je tvoj gazda prije nego prihvatiš posao.",
   keywords: [

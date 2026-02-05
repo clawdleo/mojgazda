@@ -39,7 +39,7 @@ export function GazdaScore({ score, size = "md", showLabel = false }: GazdaScore
         style={{
           background: `conic-gradient(${color} ${pct}%, #e5e7eb ${pct}%)`,
         }}
-        title={`GAZDA Score: ${score}/10 — ${label}`}
+        title={`GAZDA Score: ${score}/10 - ${label}`}
       >
         <div
           className={`absolute ${s.inner} bg-white dark:bg-gray-800 rounded-full`}

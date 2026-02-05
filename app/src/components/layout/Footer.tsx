@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-white font-semibold mb-4">
-              moj<span className="text-brand-400">gazda</span>
+              <span className="text-brand-400">Gazda</span>
             </h3>
             <p className="text-sm">
               Transparentnost na radnom mjestu za Balkan.
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 flex justify-between items-center text-xs">
-          <p>© 2026 MojGazda d.o.o. Sva prava pridržana.</p>
+          <p>© 2026 Gazda d.o.o. Sva prava pridržana.</p>
           <div className="flex gap-3">
             <span>🇸🇮 Slovenija</span>
             <span>🇭🇷 Hrvatska</span>

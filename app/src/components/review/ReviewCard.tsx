@@ -22,7 +22,7 @@ export function ReviewCard({ review, showCompany, companyName }: ReviewCardProps
           <div className="flex items-center gap-3 mt-1">
             <StarRating rating={review.rating_overall} size="sm" />
             <span className="text-sm text-gray-500">
-              GAZDA: <strong className="text-brand-600">{review.gazda_rating}/10</strong>
+              GAZDA Score <strong className="text-brand-600">{review.gazda_rating}/10</strong>
             </span>
           </div>
         </div>

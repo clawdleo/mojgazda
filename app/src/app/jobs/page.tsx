@@ -27,7 +27,7 @@ const jobTypes = [
 const remotePolicies: Record<string, string> = {
   remote: "🏠 Remote",
   hybrid: "🔄 Hybrid",
-  onsite: "🏢 U uredu",
+  onsite: "U uredu",
 };
 
 function getTimeAgo(dateStr: string): string {
@@ -99,7 +99,7 @@ export default function JobsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">💼 Pronađi posao</h1>
+        <h1 className="text-3xl font-bold mb-2">Pronađi posao</h1>
         <p className="text-gray-500">
           Pregledaj oglase s transparentnim ocjenama poslodavaca — znaš što te čeka prije nego se prijaviš.
         </p>
@@ -108,7 +108,7 @@ export default function JobsPage() {
       {/* Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <div className="relative flex-1">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></span>
           <input
             type="text"
             placeholder="Pozicija, tvrtka ili ključna riječ..."
@@ -165,7 +165,7 @@ export default function JobsPage() {
 
           {/* Industry */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">🏢 Industrija</h3>
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Industrija</h3>
             <select
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value)}
@@ -180,7 +180,7 @@ export default function JobsPage() {
 
           {/* Job Type */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">📋 Tip posla</h3>
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Tip posla</h3>
             <select
               value={selectedJobType}
               onChange={(e) => setSelectedJobType(e.target.value)}
@@ -196,7 +196,7 @@ export default function JobsPage() {
           {/* Min Salary */}
           <div>
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-              💰 Min. plaća: {salaryMin > 0 ? `€${salaryMin}` : "Sve"}
+              Min. plaća: {salaryMin > 0 ? `€${salaryMin}` : "Sve"}
             </h3>
             <input
               type="range"
@@ -296,7 +296,7 @@ export default function JobsPage() {
                       </span>
                       {job.salary_min && job.salary_max && (
                         <span className="flex items-center gap-1 text-green-600 font-medium">
-                          💰 €{job.salary_min.toLocaleString()} – €{job.salary_max.toLocaleString()}/mj.
+                          €{job.salary_min.toLocaleString()} - €{job.salary_max.toLocaleString()}/mj.
                         </span>
                       )}
                     </div>
@@ -320,7 +320,7 @@ export default function JobsPage() {
 
             {filteredJobs.length === 0 && (
               <div className="text-center py-16 text-gray-400">
-                <p className="text-4xl mb-4">🔍</p>
+                <p className="text-4xl mb-4"></p>
                 <p className="text-lg font-medium">Nema rezultata</p>
                 <p className="text-sm mt-1">Pokušaj s drugačijim filterima ili ključnim riječima.</p>
               </div>
@@ -371,12 +371,12 @@ export default function JobsPage() {
                   {remotePolicies[selectedJob.remote_policy]}
                 </span>
                 <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
-                  🏢 {selectedJob.company_industry}
+                  {selectedJob.company_industry}
                 </span>
                 {selectedJob.salary_min && selectedJob.salary_max && (
                   <span className="px-3 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-700 
                                    dark:text-green-400 rounded-full text-sm font-medium">
-                    💰 €{selectedJob.salary_min.toLocaleString()} – €{selectedJob.salary_max.toLocaleString()}/mj.
+                    €{selectedJob.salary_min.toLocaleString()} - €{selectedJob.salary_max.toLocaleString()}/mj.
                   </span>
                 )}
                 <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 rounded-full text-sm">
@@ -427,7 +427,7 @@ export default function JobsPage() {
                   <div>
                     <p className="font-semibold text-sm">GAZDA Score: {selectedJob.company_score}/10</p>
                     <p className="text-xs text-gray-500">
-                      Ocjena temeljena na recenzijama zaposlenika na MojGazda platformi.
+                      Ocjena temeljena na recenzijama zaposlenika na Gazda platformi.
                     </p>
                   </div>
                 </div>

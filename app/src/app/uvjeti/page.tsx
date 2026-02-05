@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Uvjeti korištenja — MojGazda",
-  description: "Uvjeti korištenja platforme MojGazda za recenzije poslodavaca.",
+  title: "Uvjeti korištenja - Gazda",
+  description: "Uvjeti korištenja platforme Gazda za recenzije poslodavaca.",
 };
 
 export default function UvjetiPage() {
@@ -30,8 +30,8 @@ export default function UvjetiPage() {
                 1. O usluzi
               </h2>
               <p>
-                MojGazda (&quot;Usluga&quot;, &quot;Platforma&quot;) je online platforma koju pruža MojGazda d.o.o. 
-                (&quot;mi&quot;, &quot;nas&quot;, &quot;MojGazda&quot;) koja omogućuje zaposlenicima i bivšim zaposlenicima da 
+                Gazda (&quot;Usluga&quot;, &quot;Platforma&quot;) je online platforma koju pruža Gazda d.o.o. 
+                (&quot;mi&quot;, &quot;nas&quot;, &quot;Gazda&quot;) koja omogućuje zaposlenicima i bivšim zaposlenicima da 
                 anonimno dijele recenzije, ocjene i podatke o plaćama svojih poslodavaca u regiji 
                 Slovenije, Hrvatske, Srbije i Bosne i Hercegovine.
               </p>
@@ -58,34 +58,34 @@ export default function UvjetiPage() {
             {/* 3 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                3. Obveze korisnika — pisanje recenzija
+                3. Obveze korisnika - pisanje recenzija
               </h2>
               <p className="mb-3">
-                Objavljivanjem recenzije na MojGazda platformi jamčite i obvezujete se da:
+                Objavljivanjem recenzije na Gazda platformi jamčite i obvezujete se da:
               </p>
               <ol className="list-decimal pl-5 space-y-2">
                 <li>
-                  <strong>Istinitost</strong> — vaša recenzija temelji se na stvarnom iskustvu rada kod 
+                  <strong>Istinitost</strong> - vaša recenzija temelji se na stvarnom iskustvu rada kod 
                   navedenog poslodavca. Recenzija odražava vaše iskreno mišljenje i stvarno iskustvo.
                 </li>
                 <li>
-                  <strong>Aktualnost</strong> — jasno naznačujete jeste li trenutni ili bivši zaposlenik 
+                  <strong>Aktualnost</strong> - jasno naznačujete jeste li trenutni ili bivši zaposlenik 
                   i okvirno razdoblje zaposlenja.
                 </li>
                 <li>
-                  <strong>Bez klevete i laži</strong> — nećete objavljivati namjerno lažne, zlonamjerne 
+                  <strong>Bez klevete i laži</strong> - nećete objavljivati namjerno lažne, zlonamjerne 
                   ili klevetnički sadržaj. Konstruktivna kritika je dobrodošla; lažne optužbe nisu.
                 </li>
                 <li>
-                  <strong>Bez osobnih podataka</strong> — nećete otkrivati imena kolega, menadžera ili 
+                  <strong>Bez osobnih podataka</strong> - nećete otkrivati imena kolega, menadžera ili 
                   drugih osoba bez njihove privole. Koristite generičke opise (npr. &quot;moj nadređeni&quot;).
                 </li>
                 <li>
-                  <strong>Bez poslovnih tajni</strong> — nećete otkrivati povjerljive poslovne informacije, 
+                  <strong>Bez poslovnih tajni</strong> - nećete otkrivati povjerljive poslovne informacije, 
                   poslovne tajne ili zaštićene podatke.
                 </li>
                 <li>
-                  <strong>Jedna recenzija po poslodavcu</strong> — možete napisati jednu recenziju po 
+                  <strong>Jedna recenzija po poslodavcu</strong> - možete napisati jednu recenziju po 
                   poslodavcu, s mogućnošću ažuriranja postojeće.
                 </li>
               </ol>
@@ -99,19 +99,19 @@ export default function UvjetiPage() {
               <p className="mb-3">Poslodavci koji su navedeni na platformi imaju sljedeća prava:</p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong>Besplatan profil</strong> — svaki poslodavac može besplatno zatražiti upravljanje 
+                  <strong>Besplatan profil</strong> - svaki poslodavac može besplatno zatražiti upravljanje 
                   profilom svoje tvrtke (ažuriranje opisa, logotipa, osnovnih informacija).
                 </li>
                 <li>
-                  <strong>Odgovor na recenzije</strong> — poslodavci mogu javno odgovoriti na pojedine 
+                  <strong>Odgovor na recenzije</strong> - poslodavci mogu javno odgovoriti na pojedine 
                   recenzije. Odgovori su jasno označeni kao &quot;Odgovor poslodavca&quot;.
                 </li>
                 <li>
-                  <strong>Prijava neprimjerenog sadržaja</strong> — poslodavci mogu prijaviti recenzije 
+                  <strong>Prijava neprimjerenog sadržaja</strong> - poslodavci mogu prijaviti recenzije 
                   za koje smatraju da krše ove Uvjete. Svaka prijava se ručno pregledava.
                 </li>
                 <li>
-                  <strong>Poslodavci ne mogu</strong> — zahtijevati identitet recenzenta, plaćati za 
+                  <strong>Poslodavci ne mogu</strong> - zahtijevati identitet recenzenta, plaćati za 
                   uklanjanje negativnih recenzija, niti na bilo koji način utjecati na sustav ocjenjivanja.
                 </li>
               </ul>
@@ -123,19 +123,19 @@ export default function UvjetiPage() {
                 5. Moderiranje sadržaja
               </h2>
               <p className="mb-3">
-                MojGazda provodi aktivno moderiranje kako bi osigurao kvalitetu i pouzdanost 
+                Gazda provodi aktivno moderiranje kako bi osigurao kvalitetu i pouzdanost 
                 sadržaja na platformi:
               </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong>Automatska provjera</strong> — sve recenzije prolaze automatsku provjeru 
+                  <strong>Automatska provjera</strong> - sve recenzije prolaze automatsku provjeru 
                   za otkrivanje spam sadržaja, uvredljivog jezika i potencijalno klevetnički sadržaja.
                 </li>
                 <li>
-                  <strong>Ručna provjera</strong> — prijavljene recenzije ručno pregledava naš tim moderatora.
+                  <strong>Ručna provjera</strong> - prijavljene recenzije ručno pregledava naš tim moderatora.
                 </li>
                 <li>
-                  <strong>Uklanjanje sadržaja</strong> — zadržavamo pravo ukloniti sadržaj koji krši ove 
+                  <strong>Uklanjanje sadržaja</strong> - zadržavamo pravo ukloniti sadržaj koji krši ove 
                   Uvjete, uključujući ali ne ograničavajući se na:
                   <ul className="list-disc pl-5 mt-1 space-y-1">
                     <li>Klevetnički ili namjerno lažan sadržaj</li>
@@ -146,8 +146,8 @@ export default function UvjetiPage() {
                   </ul>
                 </li>
                 <li>
-                  <strong>Žalba</strong> — ako je vaša recenzija uklonjena, imate pravo na žalbu putem 
-                  emaila na info@mojgazda.com. Žalba se razmatra u roku od 14 radnih dana.
+                  <strong>Žalba</strong> - ako je vaša recenzija uklonjena, imate pravo na žalbu putem 
+                  emaila na info@gazda.si. Žalba se razmatra u roku od 14 radnih dana.
                 </li>
               </ul>
             </section>
@@ -159,18 +159,18 @@ export default function UvjetiPage() {
               </h2>
               <ul className="list-disc pl-5 space-y-2">
                 <li>
-                  <strong>Naš sadržaj</strong> — logotip MojGazda, dizajn platforme, algoritmi ocjenjivanja 
-                  i sav prateći softver vlasništvo su MojGazda d.o.o. Zabranjeno je kopiranje, 
+                  <strong>Naš sadržaj</strong> - logotip Gazda, dizajn platforme, algoritmi ocjenjivanja 
+                  i sav prateći softver vlasništvo su Gazda d.o.o. Zabranjeno je kopiranje, 
                   distribucija ili preinaka bez pisanog dopuštenja.
                 </li>
                 <li>
-                  <strong>Vaš sadržaj</strong> — zadržavate autorska prava na svoje recenzije. 
+                  <strong>Vaš sadržaj</strong> - zadržavate autorska prava na svoje recenzije. 
                   Objavljivanjem sadržaja na platformi dajete nam neekskluzivnu, besplatnu, 
                   trajnu i globalnu licencu za prikazivanje, distribuiranje i korištenje vašeg sadržaja 
                   u sklopu Usluge.
                 </li>
                 <li>
-                  <strong>Agregirani podaci</strong> — imamo pravo koristiti agregirane, anonimizirane 
+                  <strong>Agregirani podaci</strong> - imamo pravo koristiti agregirane, anonimizirane 
                   podatke (prosječne ocjene, statistike plaća) u komercijalnim izvještajima i analizama.
                 </li>
               </ul>
@@ -199,7 +199,7 @@ export default function UvjetiPage() {
                 8. Ograničenje odgovornosti
               </h2>
               <p>
-                MojGazda je platforma za dijeljenje korisničkog sadržaja. Ne jamčimo za istinitost, 
+                Gazda je platforma za dijeljenje korisničkog sadržaja. Ne jamčimo za istinitost, 
                 točnost ili potpunost korisničkih recenzija i podataka o plaćama.
               </p>
               <ul className="list-disc pl-5 space-y-2 mt-3">
@@ -228,7 +228,7 @@ export default function UvjetiPage() {
                 9. Obeštećenje
               </h2>
               <p>
-                Pristajete da ćete MojGazda d.o.o. obeštetiti i braniti od svih zahtjeva, 
+                Pristajete da ćete Gazda d.o.o. obeštetiti i braniti od svih zahtjeva, 
                 odgovornosti, šteta i troškova (uključujući razumne odvjetničke naknade) koji 
                 proizlaze iz vašeg korištenja Usluge, kršenja ovih Uvjeta ili kršenja prava 
                 trećih strana.
@@ -297,9 +297,9 @@ export default function UvjetiPage() {
                 Za sva pitanja vezana uz ove Uvjete korištenja:
               </p>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mt-3 text-sm">
-                <p className="font-medium text-gray-900 dark:text-white">MojGazda d.o.o.</p>
-                <p>Email: <a href="mailto:info@mojgazda.com" className="text-brand-500 hover:text-brand-600">info@mojgazda.com</a></p>
-                <p>Web: <a href="https://mojgazda.com" className="text-brand-500 hover:text-brand-600">mojgazda.com</a></p>
+                <p className="font-medium text-gray-900 dark:text-white">Gazda d.o.o.</p>
+                <p>Email: <a href="mailto:info@gazda.si" className="text-brand-500 hover:text-brand-600">info@gazda.si</a></p>
+                <p>Web: <a href="https://gazda.si" className="text-brand-500 hover:text-brand-600">gazda.si</a></p>
               </div>
             </section>
 

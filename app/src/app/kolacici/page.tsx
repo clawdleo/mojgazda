@@ -2,8 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politika kolačića — MojGazda",
-  description: "Saznajte koje kolačiće koristi MojGazda i kako njima upravljati.",
+  title: "Politika kolačića - Gazda",
+  description: "Saznajte koje kolačiće koristi Gazda i kako njima upravljati.",
 };
 
 export default function KolaciciPage() {
@@ -44,7 +44,7 @@ export default function KolaciciPage() {
                 2. Kako koristimo kolačiće
               </h2>
               <p>
-                MojGazda koristi kolačiće za sljedeće svrhe:
+                Gazda koristi kolačiće za sljedeće svrhe:
               </p>
               <ul className="list-disc pl-5 space-y-1 mt-2">
                 <li>Omogućavanje osnovnog funkcioniranja stranice</li>
@@ -128,17 +128,17 @@ export default function KolaciciPage() {
                     <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                       <tr>
                         <td className="py-2 pr-4 font-mono text-xs">_ga</td>
-                        <td className="py-2 pr-4">Google Analytics — razlikovanje posjetitelja</td>
+                        <td className="py-2 pr-4">Google Analytics - razlikovanje posjetitelja</td>
                         <td className="py-2">2 godine</td>
                       </tr>
                       <tr>
                         <td className="py-2 pr-4 font-mono text-xs">_ga_*</td>
-                        <td className="py-2 pr-4">Google Analytics 4 — pohrana stanja sesije</td>
+                        <td className="py-2 pr-4">Google Analytics 4 - pohrana stanja sesije</td>
                         <td className="py-2">2 godine</td>
                       </tr>
                       <tr>
                         <td className="py-2 pr-4 font-mono text-xs">_gid</td>
-                        <td className="py-2 pr-4">Google Analytics — razlikovanje posjetitelja</td>
+                        <td className="py-2 pr-4">Google Analytics - razlikovanje posjetitelja</td>
                         <td className="py-2">24 sata</td>
                       </tr>
                     </tbody>
@@ -269,9 +269,9 @@ export default function KolaciciPage() {
                 Ako imate pitanja o našoj upotrebi kolačića, kontaktirajte nas:
               </p>
               <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mt-3 text-sm">
-                <p className="font-medium text-gray-900 dark:text-white">MojGazda d.o.o.</p>
-                <p>Email: <a href="mailto:info@mojgazda.com" className="text-brand-500 hover:text-brand-600">info@mojgazda.com</a></p>
-                <p>Web: <a href="https://mojgazda.com" className="text-brand-500 hover:text-brand-600">mojgazda.com</a></p>
+                <p className="font-medium text-gray-900 dark:text-white">Gazda d.o.o.</p>
+                <p>Email: <a href="mailto:info@gazda.si" className="text-brand-500 hover:text-brand-600">info@gazda.si</a></p>
+                <p>Web: <a href="https://gazda.si" className="text-brand-500 hover:text-brand-600">gazda.si</a></p>
               </div>
             </section>
 
